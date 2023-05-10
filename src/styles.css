@@ -1,0 +1,94 @@
+img {
+	align-self: center;
+	margin-left: 50px;
+	margin-right: 20px;
+	height: 100px;
+}
+
+h1 {
+	font-family: 'Press Start 2P';
+	font-size:50px;
+	margin-right: 50px;
+	margin-left: 50px;
+}
+
+nav ul {
+	text-align: center;
+	margin-left: 5px;
+	padding: 0;
+	list-style: none;
+}
+  
+nav ul li {
+	display: flex;
+	margin-bottom: 15px;
+}
+  
+nav ul li a {
+	display: block;
+	border: 1px solid #ccc;
+	border-radius: 10px;
+	background-color: #f9f9f9;
+	width: 150px;
+	align-items: center;
+	padding: 10px 0px;
+	text-decoration: none;
+	color: #333;
+}
+
+nav ul li a:hover {
+	background-color: #ccc;
+}
+
+footer {
+	display: flex;
+	justify-content: center;
+}
+
+.header-div {
+	display: flex;
+	justify-content: center;
+	text-align: center;
+}
+
+.content-div {
+	display: flex;
+}
+
+.data-div {
+	margin-left: 10px;
+	width: 90%;
+	padding: 5px 5px 5px 5px;
+}
+
+.list-item {
+	border-radius: 10px;
+	padding: 20px;
+	margin-bottom: 10px;
+}
+
+.sub-list-item {
+	padding-left: 20px;
+	padding-top: 10px;
+}
+
+.rocket {
+	border: 1px solid #aaddff;
+	background-color: #bbddff;
+}
+
+.crewman {
+	border: 1px solid #ddaaff;
+	background-color: #ddbbff;
+}
+
+.crew {
+	border: 1px solid #ddffaa;
+	background-color: #ddffbb;
+}
+
+.launch {
+	border: 1px solid #ffddaa;
+	background-color: #ffddbb;
+}
+  
