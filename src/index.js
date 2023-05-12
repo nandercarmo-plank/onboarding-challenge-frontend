@@ -1,12 +1,12 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-	var rocketList = document.getElementById("rocketList");
-	var crewmanList = document.getElementById("crewmanList");
-	var crewList = document.getElementById("crewList");
-	var launchList = document.getElementById("launchList");
+	var rocketList = document.getElementById("rocketListHome");
+	var crewmanList = document.getElementById("crewmanListHome");
+	var crewList = document.getElementById("crewListHome");
+	var launchList = document.getElementById("launchListHome");
 
-	renderRocketList(rocketList);
-	renderCrewmanList(crewmanList);
-	renderCrewList(crewList);
-	renderLaunchList(launchList);
+	renderRocketList(rocketList, "../assets/", false);
+	renderCrewmanList(crewmanList, "../assets/", false);
+	renderCrewList(crewList, "../assets/", false);
+	renderLaunchList(launchList, "../assets/", false);
 });
