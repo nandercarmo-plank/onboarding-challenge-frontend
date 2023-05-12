@@ -55,12 +55,42 @@
 		<div class="data-div">
 			<div class="data-header-div">
 				<h1>Crewman</h1>
-				<a href="">
+				<a href="#" id="add-crewman-button">
 					<h4>Add</h4>
 					<img src="../../assets/add-circle-button-fill.svg">
 				</a>
 			</div>
 			<div id="crewmanList"></div>
+		</div>
+	</div>
+	<div class="modal" id="add-crewman-modal">
+		<div class="modal-content">
+			<span class="close" id="add-crewman-modal-close-button">&times;</span>
+			<h2>Add Crewman</h2>
+			<form id="add-crewman-modal-form">
+				<label for="name">Name:</label>
+				<input type="text" id="add-crewman-form-name" name="name" required>
+				<label for="patent">Patent:</label>
+				<input type="text" id="add-crewman-form-patent" name="patent" required>
+				<button type="submit">
+					<h4>Add</h4>
+				</button>
+			</form>
+		</div>
+	</div>
+	<div class="modal" id="update-crewman-modal">
+		<div class="modal-content">
+			<span class="close" id="update-crewman-modal-close-button">&times;</span>
+			<h2>Update Crewman</h2>
+			<form id="update-crewman-modal-form">
+				<label for="name">Name:</label>
+				<input type="text" id="update-crewman-form-name" name="name" required>
+				<label for="patent">Patent:</label>
+				<input type="text" id="update-crewman-form-patent" name="patent" required>
+				<button type="submit">
+					<h4>Update</h4>
+				</button>
+			</form>
 		</div>
 	</div>
 </body>

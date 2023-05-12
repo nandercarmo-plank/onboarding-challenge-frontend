@@ -1,5 +1,23 @@
+const crewmanList = document.getElementById("crewmanList");
+const addCrewmanButton = document.getElementById("add-crewman-button");
+const closeAddCrewmanModalButton = document.getElementById("add-crewman-modal-close-button");
+const closeUpdateCrewmanModalButton = document.getElementById("update-crewman-modal-close-button");
+const addCrewmanModal = document.getElementById("add-crewman-modal");
+const updateCrewmanModal = document.getElementById("update-crewman-modal");
+const addCrewmanModalForm = document.getElementById("add-crewman-modal-form");
+const updateCrewmanModalForm = document.getElementById("update-crewman-modal-form");
+
+let updateCrewmanId;
+
 document.addEventListener("DOMContentLoaded", () => {
-	var crewmanList = document.getElementById("crewmanList");
+
+	if (addCrewmanButton) addCrewmanButton.addEventListener("click", () => addCrewmanModal.style.display = "block");
+	if (closeAddCrewmanModalButton) closeAddCrewmanModalButton.addEventListener("click", () => addCrewmanModal.style.display = "none");
+	if (addCrewmanModalForm) addCrewmanModalForm.addEventListener("submit", (event) => addCrewman(event));
+
+	if (closeUpdateCrewmanModalButton) closeUpdateCrewmanModalButton.addEventListener("click", () => updateCrewmanModal.style.display = "none");
+	if (updateCrewmanModalForm) updateCrewmanModalForm.addEventListener("submit", (event) => updateCrewman(event));
+
 	renderCrewmanList(crewmanList);
 });
 
@@ -10,13 +28,19 @@ function renderCrewmanList(crewmanListDiv, path = "../../assets/", shouldRenderB
 
 		fetch("http://localhost:80/crewman")
 			.then(response => response.json())
-			.then(data => data.forEach(crewman => renderCrewman(
-				crewmanListDiv,
-				crewman,
-				["list-item", "crewman"],
-				path,
-				shouldRenderButtons
-			))).catch(error => handleRequestError(error, crewmanListDiv, "crewman"));
+			.then(data => {
+
+				data.sort((a, b) => a.id - b.id);
+
+				data.forEach(crewman => renderCrewman(
+					crewmanListDiv,
+					crewman,
+					["list-item", "crewman"],
+					path,
+					shouldRenderButtons
+				));
+
+			}).catch(error => handleRequestError(error, crewmanListDiv, "crewman"));
 	}
 }
 
@@ -43,7 +67,7 @@ function renderCrewman(parentDiv, crewman, crewmanClasses, path, shouldRenderBut
 		const image1 = document.createElement("img");
 		image1.src = path + "edit-button.svg";
 		image1.classList.add("button-icon");
-		image1.onclick = () => console.log(`Edit crewman ${crewman.id}`);
+		image1.onclick = () => editUpdateCrewmanModal(crewman);
 
 		imagesDiv.appendChild(image1);
 	}
@@ -77,6 +101,70 @@ function handleRequestError(error, parentDiv, colorClass) {
 	}
 }
 
+function addCrewman(event) {
+
+	event.preventDefault();
+
+	const createCrewman = {
+		name: `${document.getElementById("add-crewman-form-name").value}`,
+		patent: `${document.getElementById("add-crewman-form-patent").value}`
+	};
+
+	fetch(`http://localhost:80/crewman`, {
+		method: 'POST',
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify(createCrewman)
+	}).then(async response => {
+
+		if (response.ok) {
+
+			const crewmanList = document.getElementById("crewmanList");
+			renderCrewmanList(crewmanList);
+
+			addCrewmanModal.style.display = "none";
+
+		} else {
+			const data = await response.json();
+			alert(`Could not create crewman:\n\n${data.message}`);
+		}
+
+	}).catch(error => alert('Sorry, an error ocurred:\n' + error));
+}
+
+function updateCrewman(event) {
+
+	event.preventDefault();
+
+	const createCrewman = {
+		name: `${document.getElementById("update-crewman-form-name").value}`,
+		patent: `${document.getElementById("update-crewman-form-patent").value}`
+	};
+
+	fetch(`http://localhost:80/crewman/${updateCrewmanId}`, {
+		method: 'PUT',
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify(createCrewman)
+	}).then(async response => {
+
+		if (response.ok) {
+
+			const crewmanList = document.getElementById("crewmanList");
+			renderCrewmanList(crewmanList);
+
+			updateCrewmanModal.style.display = "none";
+
+		} else {
+			const data = await response.json();
+			alert(`Could not update crewman\n\n${data.message}`);
+		}
+
+	}).catch(error => alert('Sorry, an error ocurred:\n' + error));
+}
+
 function deleteCrewman(crewman) {
 
 	const crewmanId = crewman.id;
@@ -100,4 +188,21 @@ function deleteCrewman(crewman) {
 			}
 
 		}).catch(error => alert('An error ocurred:\n' + error));
+}
+
+function editUpdateCrewmanModal(crewman) {
+	updateCrewmanId = crewman.id;
+	document.getElementById("update-crewman-form-name").value = crewman.name;
+	document.getElementById("update-crewman-form-patent").value = crewman.patent;
+	updateCrewmanModal.style.display = "block";
+}
+
+function handleRequestError(error, parentDiv, colorClass) {
+	if (parentDiv) {
+		const childDiv = document.createElement("div");
+		childDiv.classList.add("list-item");
+		childDiv.classList.add(colorClass);
+		childDiv.innerHTML = "<strong>Error: </strong> " + error.message;
+		parentDiv.appendChild(childDiv);
+	}
 }

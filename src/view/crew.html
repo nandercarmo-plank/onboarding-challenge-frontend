@@ -55,12 +55,42 @@
 		<div class="data-div">
 			<div class="data-header-div">
 				<h1>Crew</h1>
-				<a href="">
+				<a href="#" id="add-crew-button">
 					<h4>Add</h4>
 					<img src="../../assets/add-circle-button-fill.svg">
 				</a>
 			</div>
 			<div id="crewList"></div>
+		</div>
+	</div>
+	<div class="modal" id="add-crew-modal">
+		<div class="modal-content">
+			<span class="close" id="add-crew-modal-close-button">&times;</span>
+			<h2>Add Crew</h2>
+			<form id="add-crew-modal-form">
+				<label for="name">Name:</label>
+				<input type="text" id="add-crew-form-name" name="name" required>
+				<label for="crewmans">Crewmans:</label>
+				<input type="text" id="add-crew-form-crewmans" name="crewmans" required>
+				<button type="submit">
+					<h4>Add</h4>
+				</button>
+			</form>
+		</div>
+	</div>
+	<div class="modal" id="update-crew-modal">
+		<div class="modal-content">
+			<span class="close" id="update-crew-modal-close-button">&times;</span>
+			<h2>Update Crew</h2>
+			<form id="update-crew-modal-form">
+				<label for="name">Name:</label>
+				<input type="text" id="update-crew-form-name" name="name" required>
+				<label for="crewmans">Crewmans:</label>
+				<input type="text" id="update-crew-form-crewmans" name="crewmans" required>
+				<button type="submit">
+					<h4>Update</h4>
+				</button>
+			</form>
 		</div>
 	</div>
 </body>

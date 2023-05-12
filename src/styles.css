@@ -158,6 +158,12 @@ footer {
 	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
 }
 
+
+.data-header-div a:hover {
+	cursor: pointer;
+	background-color: #47b155 ;
+}
+
 .data-header-div a img {
 	display: flex;
 	align-self: center;
@@ -288,6 +294,21 @@ footer {
 	border-radius: 10px;
 }
 
+.modal-content form select {
+	margin-bottom: 20px;
+	font-size: 18px;
+	padding: 10px 30px 10px 10px;
+	border: 1px solid #AAA;
+	border-radius: 10px;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	background-color: white;
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M6 9.2l3.6-4.8H2.4L6 9.2z' fill='black'/%3E%3C/svg%3E");
+	background-repeat: no-repeat;
+	background-position: right 10px center;
+}
+
 .modal-content form button {
 	align-self: center;
 	width: 140px;
@@ -303,6 +324,11 @@ footer {
 
 .modal-content form button h4 {
 	margin: 0px;
+}
+
+.modal-content form button:hover {
+	cursor: pointer;
+	background-color: #47b155 ;
 }
 
 .close {

@@ -1,12 +1,22 @@
 const rocketList = document.getElementById("rocketList");
 const addRocketButton = document.getElementById("add-rocket-button");
 const closeAddRocketModalButton = document.getElementById("add-rocket-modal-close-button");
-const modal = document.getElementById("add-rocket-modal");
+const closeUpdateRocketModalButton = document.getElementById("update-rocket-modal-close-button");
+const addRocketModal = document.getElementById("add-rocket-modal");
+const updateRocketModal = document.getElementById("update-rocket-modal");
+const addRocketModalForm = document.getElementById("add-rocket-modal-form");
+const updateRocketModalForm = document.getElementById("update-rocket-modal-form");
+
+let updateRocketId;
 
 document.addEventListener("DOMContentLoaded", () => {
 
-	addRocketButton.addEventListener("click", () => modal.style.display = "block");
-	closeAddRocketModalButton.addEventListener("click", () => modal.style.display = "none");
+	if (addRocketButton) addRocketButton.addEventListener("click", () => addRocketModal.style.display = "block");
+	if (closeAddRocketModalButton) closeAddRocketModalButton.addEventListener("click", () => addRocketModal.style.display = "none");
+	if (addRocketModalForm) addRocketModalForm.addEventListener("submit", (event) => addRocket(event));
+
+	if (closeUpdateRocketModalButton) closeUpdateRocketModalButton.addEventListener("click", () => updateRocketModal.style.display = "none");
+	if (updateRocketModalForm) updateRocketModalForm.addEventListener("submit", (event) => updateRocket(event));
 
 	renderRocketList(rocketList);
 });
@@ -18,13 +28,19 @@ function renderRocketList(rocketListDiv, path = "../../assets/", shouldRenderBut
 
 		fetch("http://localhost:80/rocket")
 			.then(response => response.json())
-			.then(data => data.forEach(rocket => renderRocket(
-				rocketListDiv,
-				rocket,
-				["list-item", "rocket"],
-				path,
-				shouldRenderButtons
-			))).catch(error => handleRequestError(error, rocketListDiv, "rocket"));
+			.then(data => {
+
+				data.sort((a, b) => a.id - b.id);
+
+				data.forEach(rocket => renderRocket(
+					rocketListDiv,
+					rocket,
+					["list-item", "rocket"],
+					path,
+					shouldRenderButtons
+				));
+
+			}).catch(error => handleRequestError(error, rocketListDiv, "rocket"));
 	}
 }
 
@@ -52,7 +68,7 @@ function renderRocket(parentDiv, rocket, rocketClasses, path, shouldRenderButton
 
 		image1.src = path + "edit-button.svg";
 		image1.classList.add("button-icon");
-		image1.onclick = () => console.log(`Edit rocket ${rocket.id}`);
+		image1.onclick = () => editUpdateRocketModal(rocket);
 
 		imagesDiv.appendChild(image1);
 	}
@@ -74,17 +90,70 @@ function renderRocket(parentDiv, rocket, rocketClasses, path, shouldRenderButton
 	}
 
 	parentDiv.appendChild(containterDiv);
+}
+
+function addRocket(event) {
+
+	event.preventDefault();
+
+	const createRocket = {
+		name: `${document.getElementById("add-rocket-form-name").value}`
+	};
+
+	fetch(`http://localhost:80/rocket`, {
+		method: 'POST',
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify(createRocket)
+	}).then(async response => {
+
+		if (response.ok) {
+
+			const rocketList = document.getElementById("rocketList");
+			renderRocketList(rocketList);
+
+			addRocketModal.style.display = "none";
+
+		} else {
+			const data = await response.json();
+			alert(`Could not create rocket\n\n${data.message}`);
+		}
+
+	}).catch(error => alert('Sorry, an error ocurred:\n' + error));
 
 }
 
-function handleRequestError(error, parentDiv, colorClass) {
-	if (parentDiv) {
-		const childDiv = document.createElement("div");
-		childDiv.classList.add("list-item");
-		childDiv.classList.add(colorClass);
-		childDiv.innerHTML = "<strong>Error: </strong> " + error.message;
-		parentDiv.appendChild(childDiv);
-	}
+function updateRocket(event) {
+
+	event.preventDefault();
+
+	const createRocket = {
+		name: `${document.getElementById("update-rocket-form-name").value}`
+	};
+
+	fetch(`http://localhost:80/rocket/${updateRocketId}`, {
+		method: 'PUT',
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify(createRocket)
+	}).then(async response => {
+
+		if (response.ok) {
+
+			const rocketList = document.getElementById("rocketList");
+			renderRocketList(rocketList);
+
+			updateRocketModal.style.display = "none";
+
+		} else {
+			const data = await response.json();
+			alert(`Could not update rocket:\n\n${data.message}`);
+		}
+
+	}).catch(error => alert('Sorry, an error ocurred:\n' + error));
+
 }
 
 function deleteRocket(rocket) {
@@ -106,8 +175,24 @@ function deleteRocket(rocket) {
 
 			} else {
 				const data = await response.json();
-				alert(`Can not delete the rocket of id ${rocketId}:\n\n${data.message}`);
+				alert(`Could not delete the rocket of id ${rocketId}:\n\n${data.message}`);
 			}
 
-		}).catch(error => alert('An error ocurred:\n' + error));
+		}).catch(error => alert('Sorry, an error ocurred:\n' + error));
+}
+
+function editUpdateRocketModal(rocket) {
+	updateRocketId = rocket.id;
+	document.getElementById("update-rocket-form-name").value = rocket.name
+	updateRocketModal.style.display = "block";
+}
+
+function handleRequestError(error, parentDiv, colorClass) {
+	if (parentDiv) {
+		const childDiv = document.createElement("div");
+		childDiv.classList.add("list-item");
+		childDiv.classList.add(colorClass);
+		childDiv.innerHTML = "<strong>Error: </strong> " + error.message;
+		parentDiv.appendChild(childDiv);
+	}
 }

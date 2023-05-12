@@ -55,12 +55,60 @@
 		<div class="data-div">
 			<div class="data-header-div">
 				<h1>Launch</h1>
-				<a href="">
+				<a href="#" id="add-launch-button">
 					<h4>Add</h4>
 					<img src="../../assets/add-circle-button-fill.svg">
 				</a>
 			</div>
 			<div id="launchList"></div>
+		</div>
+	</div>
+	<div class="modal" id="add-launch-modal">
+		<div class="modal-content">
+			<span class="close" id="add-launch-modal-close-button">&times;</span>
+			<h2>Add Launch</h2>
+			<form id="add-launch-modal-form">
+				<label for="launch-code">Launch code:</label>
+				<input type="text" id="add-launch-form-launch-code" name="launch-code" required>
+				<label for="date">Date:</label>
+				<input type="date" id="add-launch-form-date" name="date" required>
+				<label for="success">Success status:</label>
+				<select name="success" id="add-launch-form-success">
+					<option value="true">Succeed</option>
+					<option value="false">Failed</option>
+				</select>
+				<label for="rocket">Rocket ID:</label>
+				<input type="number" id="add-launch-form-rocket" name="rocket" required>
+				<label for="crew">Crew ID:</label>
+				<input type="number" id="add-launch-form-crew" name="crew" required>
+				<button type="submit">
+					<h4>Add</h4>
+				</button>
+			</form>
+		</div>
+	</div>
+	<div class="modal" id="update-launch-modal">
+		<div class="modal-content">
+			<span class="close" id="update-launch-modal-close-button">&times;</span>
+			<h2>Update Launch</h2>
+			<form id="update-launch-modal-form">
+				<label for="launch-code">Launch code:</label>
+				<input type="text" id="update-launch-form-launch-code" name="launch-code" required>
+				<label for="date">Date:</label>
+				<input type="date" id="update-launch-form-date" name="date" required>
+				<label for="success">Success status:</label>
+				<select name="success" id="update-launch-form-success">
+					<option value="true">Succeed</option>
+					<option value="false">Failed</option>
+				</select>
+				<label for="rocket">Rocket ID:</label>
+				<input type="number" id="update-launch-form-rocket" name="rocket" required>
+				<label for="crew">Crew ID:</label>
+				<input type="number" id="update-launch-form-crew" name="crew" required>
+				<button type="submit">
+					<h4>Update</h4>
+				</button>
+			</form>
 		</div>
 	</div>
 </body>

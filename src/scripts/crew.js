@@ -1,5 +1,23 @@
+const crewList = document.getElementById("crewList");
+const addCrewButton = document.getElementById("add-crew-button");
+const closeAddCrewModalButton = document.getElementById("add-crew-modal-close-button");
+const closeUpdateCrewModalButton = document.getElementById("update-crew-modal-close-button");
+const addCrewModal = document.getElementById("add-crew-modal");
+const updateCrewModal = document.getElementById("update-crew-modal");
+const addCrewModalForm = document.getElementById("add-crew-modal-form");
+const updateCrewModalForm = document.getElementById("update-crew-modal-form");
+
+let updateCrewId;
+
 document.addEventListener("DOMContentLoaded", () => {
-	var crewList = document.getElementById("crewList");
+
+	if (addCrewButton) addCrewButton.addEventListener("click", () => addCrewModal.style.display = "block");
+	if (closeAddCrewModalButton) closeAddCrewModalButton.addEventListener("click", () => addCrewModal.style.display = "none");
+	if (addCrewModalForm) addCrewModalForm.addEventListener("submit", (event) => addCrew(event));
+
+	if (closeUpdateCrewModalButton) closeUpdateCrewModalButton.addEventListener("click", () => updateCrewModal.style.display = "none");
+	if (updateCrewModalForm) updateCrewModalForm.addEventListener("submit", (event) => updateCrew(event));
+
 	renderCrewList(crewList);
 });
 
@@ -10,13 +28,19 @@ function renderCrewList(crewListDiv, path = "../../assets/", shouldRenderButtons
 
 		fetch("http://localhost:80/crew")
 			.then(response => response.json())
-			.then(data => data.forEach(crew => renderCrew(
-				crewListDiv,
-				crew,
-				["list-item", "crew"],
-				path,
-				shouldRenderButtons
-			))).catch(error => handleRequestError(error, crewListDiv, "crew"));
+			.then(data => {
+
+				data.sort((a, b) => a.id - b.id);
+
+				data.forEach(crew => renderCrew(
+					crewListDiv,
+					crew,
+					["list-item", "crew"],
+					path,
+					shouldRenderButtons
+				));
+
+			}).catch(error => handleRequestError(error, crewListDiv, "crew"));
 	}
 }
 
@@ -49,7 +73,7 @@ function renderCrew(parentDiv, crew, crewClasses, path, shouldRenderButtons) {
 		const image1 = document.createElement("img");
 		image1.src = path + "edit-button.svg";
 		image1.classList.add("button-icon");
-		image1.onclick = () => console.log(`Edit crew ${crew.id}`);
+		image1.onclick = () => editUpdateCrewModal(crew);
 
 		imagesDiv.appendChild(image1);
 	}
@@ -73,14 +97,68 @@ function renderCrew(parentDiv, crew, crewClasses, path, shouldRenderButtons) {
 	parentDiv.appendChild(containterDiv);
 }
 
-function handleRequestError(error, parentDiv, colorClass) {
-	if (parentDiv) {
-		var childDiv = document.createElement("div");
-		childDiv.classList.add("list-item");
-		childDiv.classList.add(colorClass);
-		childDiv.innerHTML = "<strong>Error: </strong> " + error.message;
-		parentDiv.appendChild(childDiv);
-	}
+async function addCrew(event) {
+
+	event.preventDefault();
+
+	const createCrew = {
+		name: `${document.getElementById("add-crew-form-name").value}`,
+		crewmans: await JSON.parse(`[${document.getElementById("add-crew-form-crewmans").value}]`)
+	};
+
+	fetch(`http://localhost:80/crew`, {
+		method: 'POST',
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify(createCrew)
+	}).then(async response => {
+
+		if (response.ok) {
+
+			const crewList = document.getElementById("crewList");
+			renderCrewList(crewList);
+
+			addCrewModal.style.display = "none";
+
+		} else {
+			const data = await response.json();
+			alert(`Could not delete the crew of id ${crewId}:\n\n${data.message}`);
+		}
+
+	}).catch(error => alert('Sorry, an error ocurred:\n' + error));
+}
+
+async function updateCrew(event) {
+
+	event.preventDefault();
+
+	const createCrew = {
+		name: `${document.getElementById("update-crew-form-name").value}`,
+		crewmans: await JSON.parse(`[${document.getElementById("update-crew-form-crewmans").value}]`)
+	};
+
+	fetch(`http://localhost:80/crew/${updateCrewId}`, {
+		method: 'PUT',
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify(createCrew)
+	}).then(async response => {
+
+		if (response.ok) {
+
+			const crewList = document.getElementById("crewList");
+			renderCrewList(crewList);
+
+			updateCrewModal.style.display = "none";
+
+		} else {
+			const data = await response.json();
+			alert(`Could not delete the crew of id ${crewId}:\n\n${data.message}`);
+		}
+
+	}).catch(error => alert('Sorry, an error ocurred:\n' + error));
 }
 
 function deleteCrew(crew) {
@@ -106,4 +184,21 @@ function deleteCrew(crew) {
 			}
 
 		}).catch(error => alert('An error ocurred:\n' + error));
+}
+
+function editUpdateCrewModal(crew) {
+	updateCrewId = crew.id;
+	document.getElementById("update-crew-form-name").value = crew.name;
+	document.getElementById("update-crew-form-crewmans").value = crew.crewmans.map(crewman => crewman.id).join(", ");
+	updateCrewModal.style.display = "block";
+}
+
+function handleRequestError(error, parentDiv, colorClass) {
+	if (parentDiv) {
+		var childDiv = document.createElement("div");
+		childDiv.classList.add("list-item");
+		childDiv.classList.add(colorClass);
+		childDiv.innerHTML = "<strong>Error: </strong> " + error.message;
+		parentDiv.appendChild(childDiv);
+	}
 }
