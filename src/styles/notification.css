@@ -1,0 +1,33 @@
+.notification {
+	display: flex;
+	position: fixed;
+	justify-content: center;
+	align-items: center;
+	right: 0px;
+	top: -100%;
+	width: 200px;
+	height: 75px;
+	border-radius: 10px;
+	margin: 15px;
+	padding: 5px;
+	filter: opacity(90%);
+	color: #fff;
+	font-weight: bold;
+	text-align: center;
+	transition: top 0.25s ease;
+}
+
+.notification:hover {
+	filter: brightness(70%);
+	filter: opacity(100%);
+}
+
+.error-notification {
+	border: 1px solid rgb(219, 70, 70);
+	background-color: rgb(255, 105, 105);
+}
+
+.success-notification {
+	border: 1px solid rgb(123, 203, 123);
+	background-color: #6edf7d;
+}

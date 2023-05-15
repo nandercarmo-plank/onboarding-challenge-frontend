@@ -6,17 +6,20 @@ const addCrewmanModal = document.getElementById("add-crewman-modal");
 const updateCrewmanModal = document.getElementById("update-crewman-modal");
 const addCrewmanModalForm = document.getElementById("add-crewman-modal-form");
 const updateCrewmanModalForm = document.getElementById("update-crewman-modal-form");
+const crewmanNotification = document.getElementById("crewman-notification");
 
 let updateCrewmanId;
 
 document.addEventListener("DOMContentLoaded", () => {
 
-	if (addCrewmanButton) addCrewmanButton.addEventListener("click", () => addCrewmanModal.style.display = "block");
-	if (closeAddCrewmanModalButton) closeAddCrewmanModalButton.addEventListener("click", () => addCrewmanModal.style.display = "none");
+	if (addCrewmanButton) addCrewmanButton.addEventListener("click", () => addCrewmanModal.style.visibility = "visible");
+	if (closeAddCrewmanModalButton) closeAddCrewmanModalButton.addEventListener("click", () => addCrewmanModal.style.visibility = "hidden");
 	if (addCrewmanModalForm) addCrewmanModalForm.addEventListener("submit", (event) => addCrewman(event));
 
-	if (closeUpdateCrewmanModalButton) closeUpdateCrewmanModalButton.addEventListener("click", () => updateCrewmanModal.style.display = "none");
+	if (closeUpdateCrewmanModalButton) closeUpdateCrewmanModalButton.addEventListener("click", () => updateCrewmanModal.style.visibility = "hidden");
 	if (updateCrewmanModalForm) updateCrewmanModalForm.addEventListener("submit", (event) => updateCrewman(event));
+
+	if (crewmanNotification) crewmanNotification.addEventListener("click", () => { crewmanNotification.style.top = "-100%"; });
 
 	renderCrewmanList(crewmanList);
 });
@@ -40,7 +43,7 @@ function renderCrewmanList(crewmanListDiv, path = "../../assets/", shouldRenderB
 					shouldRenderButtons
 				));
 
-			}).catch(error => handleRequestError(error, crewmanListDiv, "crewman"));
+			}).catch(() => errorNotification(crewmanNotification, "crewman-notification", "Sorry, an error ocurred!"));
 	}
 }
 
@@ -91,16 +94,6 @@ function renderCrewman(parentDiv, crewman, crewmanClasses, path, shouldRenderBut
 	parentDiv.appendChild(containterDiv);
 }
 
-function handleRequestError(error, parentDiv, colorClass) {
-	if (parentDiv) {
-		var childDiv = document.createElement("div");
-		childDiv.classList.add("list-item");
-		childDiv.classList.add(colorClass);
-		childDiv.innerHTML = "<strong>Error: </strong> " + error.message;
-		parentDiv.appendChild(childDiv);
-	}
-}
-
 function addCrewman(event) {
 
 	event.preventDefault();
@@ -123,14 +116,13 @@ function addCrewman(event) {
 			const crewmanList = document.getElementById("crewmanList");
 			renderCrewmanList(crewmanList);
 
-			addCrewmanModal.style.display = "none";
+			addCrewmanModal.style.visibility = "hidden";
 
-		} else {
-			const data = await response.json();
-			alert(`Could not create crewman:\n\n${data.message}`);
-		}
+			successNotification(crewmanNotification, "crewman-notification", "Crewman added!");
 
-	}).catch(error => alert('Sorry, an error ocurred:\n' + error));
+		} else errorNotification(crewmanNotification, "crewman-notification", "Sorry, crewman could not be added!");
+
+	}).catch(() => errorNotification(crewmanNotification, "crewman-notification", "Sorry, an error ocurred!"));
 }
 
 function updateCrewman(event) {
@@ -155,14 +147,13 @@ function updateCrewman(event) {
 			const crewmanList = document.getElementById("crewmanList");
 			renderCrewmanList(crewmanList);
 
-			updateCrewmanModal.style.display = "none";
+			updateCrewmanModal.style.visibility = "hidden";
 
-		} else {
-			const data = await response.json();
-			alert(`Could not update crewman\n\n${data.message}`);
-		}
+			successNotification(crewmanNotification, "crewman-notification", "Crewman updated!");
 
-	}).catch(error => alert('Sorry, an error ocurred:\n' + error));
+		} else errorNotification(crewmanNotification, "crewman-notification", "Sorry, crewman could not be updated!");
+
+	}).catch(() => errorNotification(crewmanNotification, "crewman-notification", "Sorry, an error ocurred!"));
 }
 
 function deleteCrewman(crewman) {
@@ -182,27 +173,16 @@ function deleteCrewman(crewman) {
 				renderCrewmanList(crewmanListHome, false);
 				renderCrewmanList(crewmanList);
 
-			} else {
-				const data = await response.json();
-				alert(`Can not delete the crewman of id ${crewmanId}:\n\n${data.message}`);
-			}
+				successNotification(crewmanNotification, "crewman-notification", "Crewman deleted!");
 
-		}).catch(error => alert('An error ocurred:\n' + error));
+			} else errorNotification(crewmanNotification, "crewman-notification", "Sorry, crewman could not be deleted!");
+
+		}).catch(() => errorNotification(crewmanNotification, "crewman-notification", "Sorry, an error ocurred!"));
 }
 
 function editUpdateCrewmanModal(crewman) {
 	updateCrewmanId = crewman.id;
 	document.getElementById("update-crewman-form-name").value = crewman.name;
 	document.getElementById("update-crewman-form-patent").value = crewman.patent;
-	updateCrewmanModal.style.display = "block";
-}
-
-function handleRequestError(error, parentDiv, colorClass) {
-	if (parentDiv) {
-		const childDiv = document.createElement("div");
-		childDiv.classList.add("list-item");
-		childDiv.classList.add(colorClass);
-		childDiv.innerHTML = "<strong>Error: </strong> " + error.message;
-		parentDiv.appendChild(childDiv);
-	}
+	updateCrewmanModal.style.visibility = "visible";
 }

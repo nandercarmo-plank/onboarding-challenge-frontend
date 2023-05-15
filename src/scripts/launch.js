@@ -6,17 +6,20 @@ const addLaunchModal = document.getElementById("add-launch-modal");
 const updateLaunchModal = document.getElementById("update-launch-modal");
 const addLaunchModalForm = document.getElementById("add-launch-modal-form");
 const updateLaunchModalForm = document.getElementById("update-launch-modal-form");
+const launchNotification = document.getElementById("launch-notification");
 
 let updateLaunchId;
 
 document.addEventListener("DOMContentLoaded", () => {
 
-	if (addLaunchButton) addLaunchButton.addEventListener("click", () => addLaunchModal.style.display = "block");
-	if (closeAddLaunchModalButton) closeAddLaunchModalButton.addEventListener("click", () => addLaunchModal.style.display = "none");
+	if (addLaunchButton) addLaunchButton.addEventListener("click", () => addLaunchModal.style.visibility = "visible");
+	if (closeAddLaunchModalButton) closeAddLaunchModalButton.addEventListener("click", () => addLaunchModal.style.visibility = "hidden");
 	if (addLaunchModalForm) addLaunchModalForm.addEventListener("submit", (event) => addLaunch(event));
 
-	if (closeUpdateLaunchModalButton) closeUpdateLaunchModalButton.addEventListener("click", () => updateLaunchModal.style.display = "none");
+	if (closeUpdateLaunchModalButton) closeUpdateLaunchModalButton.addEventListener("click", () => updateLaunchModal.style.visibility = "hidden");
 	if (updateLaunchModalForm) updateLaunchModalForm.addEventListener("submit", (event) => updateLaunch(event));
+
+	if (launchNotification) launchNotification.addEventListener("click", () => { launchNotification.style.top = "-100%"; });
 
 	renderLaunchList(launchList);
 });
@@ -40,7 +43,7 @@ function renderLaunchList(launchListDiv, path = "../../assets/", shouldRenderBut
 					shouldRenderButtons
 				));
 
-			}).catch(error => handleRequestError(error, launchListDiv, "launch"));
+			}).catch(() => errorNotification(launchNotification, "launch-notification", "Sorry, an error ocurred!"));
 	}
 }
 
@@ -123,15 +126,13 @@ function addLaunch(event) {
 			const launchList = document.getElementById("launchList");
 			renderLaunchList(launchList);
 
-			addLaunchModal.style.display = "none";
+			addLaunchModal.style.visibility = "hidden";
 
-		} else {
-			const data = await response.json();
-			alert(`Could not create launch:\n\n${data.message}`);
-		}
+			successNotification(launchNotification, "launch-notification", "Launch added!");
 
-	}).catch(error => alert('Sorry, an error ocurred:\n' + error));
+		} else errorNotification(launchNotification, "launch-notification", "Sorry, launch could not be added!");
 
+	}).catch(() => errorNotification(launchNotification, "launch-notification", "Sorry, an error ocurred!"));
 }
 
 function updateLaunch(event) {
@@ -159,15 +160,13 @@ function updateLaunch(event) {
 			const launchList = document.getElementById("launchList");
 			renderLaunchList(launchList);
 
-			updateLaunchModal.style.display = "none";
+			updateLaunchModal.style.visibility = "hidden";
 
-		} else {
-			const data = await response.json();
-			alert(`Could not update launch:\n\n${data.message}`);
-		}
+			successNotification(launchNotification, "launch-notification", "Launch updated!");
 
-	}).catch(error => alert('Sorry, an error ocurred:\n' + error));
+		} else errorNotification(launchNotification, "launch-notification", "Sorry, launch could not be updated!");
 
+	}).catch(() => errorNotification(launchNotification, "launch-notification", "Sorry, an error ocurred!"));
 }
 
 function deleteLaunch(launch) {
@@ -187,12 +186,11 @@ function deleteLaunch(launch) {
 				renderLaunchList(launchListHome, false);
 				renderLaunchList(launchList);
 
-			} else {
-				const data = await response.json();
-				alert(`Can not delete the launch of id ${launchId}:\n\n${data.message}`);
-			}
+				successNotification(launchNotification, "launch-notification", "Launch deleted!");
 
-		}).catch(error => alert('An error ocurred:\n' + error));
+			} else errorNotification(launchNotification, "launch-notification", "Sorry, launch could not be deleted!");
+
+		}).catch(() => errorNotification(launchNotification, "launch-notification", "Sorry, an error ocurred!"));
 }
 
 function editUpdateLaunchModal(launch) {
@@ -202,15 +200,5 @@ function editUpdateLaunchModal(launch) {
 	document.getElementById("update-launch-form-success").value = launch.success ? "true" : "false";
 	document.getElementById("update-launch-form-rocket").value = launch.rocket.id;
 	document.getElementById("update-launch-form-crew").value = launch.crew.id;
-	updateLaunchModal.style.display = "block";
-}
-
-function handleRequestError(error, parentDiv, colorClass) {
-	if (parentDiv) {
-		var childDiv = document.createElement("div");
-		childDiv.classList.add("list-item");
-		childDiv.classList.add(colorClass);
-		childDiv.innerHTML = "<strong>Error: </strong> " + error.message;
-		parentDiv.appendChild(childDiv);
-	}
+	updateLaunchModal.style.visibility = "visible";
 }

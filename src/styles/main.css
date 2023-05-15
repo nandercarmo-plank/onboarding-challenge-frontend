@@ -1,0 +1,115 @@
+img {
+	display: flex;
+	align-self: center;
+	margin: 30px auto 20px auto;
+	height: 130px;
+}
+
+h1 {
+	display: flex;
+	align-items: center;
+	font-family: 'Press Start 2P';
+	font-size:50px;
+	margin: 10px auto 10px auto;
+	height: 130px;
+}
+
+h2 {
+	display: flex;
+	align-items: center;
+	font-family: 'Press Start 2P';
+	margin: 0px 15px 40px 15px;
+	height: 100px;
+}
+
+h3 {
+	display: flex;
+	justify-content: center;
+	justify-self: center;
+	font-family: 'Press Start 2P';
+	font-size: 18px;
+	width: 100%;
+	flex-grow: 1;
+}
+
+h4 {
+	display: flex;
+	justify-content: center;
+	justify-self: center;
+	font-family: 'Press Start 2P';
+	font-size: 14px;
+	width: 100%;
+}
+
+footer {
+	display: flex;
+	justify-content: center;
+}
+
+.content-div {
+	display: flex;
+	justify-content: center;
+	flex-grow: 1;
+}
+
+.data-div {
+	display: flex;
+	flex-direction: column;
+	width: 90%;
+	margin-left: 10px;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+.data-div h2 {
+	margin: 15px 0px 0px 0px;
+	align-self: self-start;
+}
+
+.data-header-div {
+	display: flex;
+	flex-direction: row;
+	text-align: center;
+	justify-content: center;
+	align-items: center;
+	margin-bottom: 30px;
+}
+
+.data-header-div h1 {
+	display: flex;
+	justify-content: center;
+	flex-grow: 1;
+	width: 100%;
+	margin-left: 120px;
+}
+
+.data-header-div a {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+	align-items: center;
+	width: 140px;
+	height: 40px;
+	border-radius: 10px;
+	background-color: #6edf7d;
+	padding: 5px 15px 5px 15px;
+	text-decoration: none;
+	color: #fff;
+	font-size: 18px;
+	font-family: 'Press Start 2P';
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+}
+
+
+.data-header-div a:hover {
+	cursor: pointer;
+	background-color: #47b155 ;
+}
+
+.data-header-div a img {
+	display: flex;
+	align-self: center;
+	justify-self: center;
+	width: 20px;
+	margin: 0px 0px 0px 0px;
+}

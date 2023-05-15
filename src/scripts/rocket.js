@@ -6,17 +6,20 @@ const addRocketModal = document.getElementById("add-rocket-modal");
 const updateRocketModal = document.getElementById("update-rocket-modal");
 const addRocketModalForm = document.getElementById("add-rocket-modal-form");
 const updateRocketModalForm = document.getElementById("update-rocket-modal-form");
+const rocketNotification = document.getElementById("rocket-notification");
 
 let updateRocketId;
 
 document.addEventListener("DOMContentLoaded", () => {
 
-	if (addRocketButton) addRocketButton.addEventListener("click", () => addRocketModal.style.display = "block");
-	if (closeAddRocketModalButton) closeAddRocketModalButton.addEventListener("click", () => addRocketModal.style.display = "none");
+	if (addRocketButton) addRocketButton.addEventListener("click", () => addRocketModal.style.visibility = "visible");
+	if (closeAddRocketModalButton) closeAddRocketModalButton.addEventListener("click", () => addRocketModal.style.visibility = "hidden");
 	if (addRocketModalForm) addRocketModalForm.addEventListener("submit", (event) => addRocket(event));
 
-	if (closeUpdateRocketModalButton) closeUpdateRocketModalButton.addEventListener("click", () => updateRocketModal.style.display = "none");
+	if (closeUpdateRocketModalButton) closeUpdateRocketModalButton.addEventListener("click", () => updateRocketModal.style.visibility = "hidden");
 	if (updateRocketModalForm) updateRocketModalForm.addEventListener("submit", (event) => updateRocket(event));
+
+	if (rocketNotification) rocketNotification.addEventListener("click", () => { rocketNotification.style.top = "-100%"; });
 
 	renderRocketList(rocketList);
 });
@@ -40,7 +43,7 @@ function renderRocketList(rocketListDiv, path = "../../assets/", shouldRenderBut
 					shouldRenderButtons
 				));
 
-			}).catch(error => handleRequestError(error, rocketListDiv, "rocket"));
+			}).catch(() => errorNotification(rocketNotification, "rocket-notification", "Sorry, an error ocurred!"));
 	}
 }
 
@@ -113,14 +116,13 @@ function addRocket(event) {
 			const rocketList = document.getElementById("rocketList");
 			renderRocketList(rocketList);
 
-			addRocketModal.style.display = "none";
+			addRocketModal.style.visibility = "hidden";
 
-		} else {
-			const data = await response.json();
-			alert(`Could not create rocket\n\n${data.message}`);
-		}
+			successNotification(rocketNotification, "rocket-notification", "Rocket added!");
 
-	}).catch(error => alert('Sorry, an error ocurred:\n' + error));
+		} else errorNotification(rocketNotification, "rocket-notification", "Sorry, rocket could not be added!");
+
+	}).catch(() => errorNotification(rocketNotification, "rocket-notification", "Sorry, an error ocurred!"));
 
 }
 
@@ -145,14 +147,14 @@ function updateRocket(event) {
 			const rocketList = document.getElementById("rocketList");
 			renderRocketList(rocketList);
 
-			updateRocketModal.style.display = "none";
+			updateRocketModal.style.visibility = "hidden";
 
-		} else {
-			const data = await response.json();
-			alert(`Could not update rocket:\n\n${data.message}`);
-		}
+			successNotification(rocketNotification, "rocket-notification", "Rocket updated!");
 
-	}).catch(error => alert('Sorry, an error ocurred:\n' + error));
+		} else errorNotification(rocketNotification, "rocket-notification", "Sorry, rocket could not be updated!");
+
+
+	}).catch(() => errorNotification(rocketNotification, "rocket-notification", "Sorry, an error ocurred!"));
 
 }
 
@@ -173,26 +175,15 @@ function deleteRocket(rocket) {
 				renderRocketList(rocketListHome, false);
 				renderRocketList(rocketList);
 
-			} else {
-				const data = await response.json();
-				alert(`Could not delete the rocket of id ${rocketId}:\n\n${data.message}`);
-			}
+				successNotification(rocketNotification, "rocket-notification", "Rocket deleted!");
 
-		}).catch(error => alert('Sorry, an error ocurred:\n' + error));
+			} else errorNotification(rocketNotification, "rocket-notification", "Sorry, rocket could not be deleted!");
+
+		}).catch(() => errorNotification(rocketNotification, "rocket-notification", "Sorry, an error ocurred!"));
 }
 
 function editUpdateRocketModal(rocket) {
 	updateRocketId = rocket.id;
 	document.getElementById("update-rocket-form-name").value = rocket.name
-	updateRocketModal.style.display = "block";
-}
-
-function handleRequestError(error, parentDiv, colorClass) {
-	if (parentDiv) {
-		const childDiv = document.createElement("div");
-		childDiv.classList.add("list-item");
-		childDiv.classList.add(colorClass);
-		childDiv.innerHTML = "<strong>Error: </strong> " + error.message;
-		parentDiv.appendChild(childDiv);
-	}
+	updateRocketModal.style.visibility = "visible";
 }

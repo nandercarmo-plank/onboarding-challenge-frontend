@@ -6,17 +6,20 @@ const addCrewModal = document.getElementById("add-crew-modal");
 const updateCrewModal = document.getElementById("update-crew-modal");
 const addCrewModalForm = document.getElementById("add-crew-modal-form");
 const updateCrewModalForm = document.getElementById("update-crew-modal-form");
+const crewNotification = document.getElementById("crew-notification");
 
 let updateCrewId;
 
 document.addEventListener("DOMContentLoaded", () => {
 
-	if (addCrewButton) addCrewButton.addEventListener("click", () => addCrewModal.style.display = "block");
-	if (closeAddCrewModalButton) closeAddCrewModalButton.addEventListener("click", () => addCrewModal.style.display = "none");
+	if (addCrewButton) addCrewButton.addEventListener("click", () => addCrewModal.style.visibility = "visible");
+	if (closeAddCrewModalButton) closeAddCrewModalButton.addEventListener("click", () => addCrewModal.style.visibility = "hidden");
 	if (addCrewModalForm) addCrewModalForm.addEventListener("submit", (event) => addCrew(event));
 
-	if (closeUpdateCrewModalButton) closeUpdateCrewModalButton.addEventListener("click", () => updateCrewModal.style.display = "none");
+	if (closeUpdateCrewModalButton) closeUpdateCrewModalButton.addEventListener("click", () => updateCrewModal.style.visibility = "hidden");
 	if (updateCrewModalForm) updateCrewModalForm.addEventListener("submit", (event) => updateCrew(event));
+
+	if (crewNotification) crewNotification.addEventListener("click", () => { crewNotification.style.top = "-100%"; });
 
 	renderCrewList(crewList);
 });
@@ -40,7 +43,7 @@ function renderCrewList(crewListDiv, path = "../../assets/", shouldRenderButtons
 					shouldRenderButtons
 				));
 
-			}).catch(error => handleRequestError(error, crewListDiv, "crew"));
+			}).catch(() => errorNotification(crewNotification, "crew-notification", "Sorry, an error ocurred!"));
 	}
 }
 
@@ -58,6 +61,9 @@ function renderCrew(parentDiv, crew, crewClasses, path, shouldRenderButtons) {
 		"<strong>ID:</strong> " + crew.id +
 		"<br><strong>Name:</strong> " + crew.name +
 		"<br><strong>Crewmans:</strong><br>";
+
+	crew.crewmans.sort((a, b) => a.id - b.id);
+
 	crew.crewmans.forEach(crewman => renderCrewman(
 		contentDiv,
 		crewman,
@@ -119,14 +125,13 @@ async function addCrew(event) {
 			const crewList = document.getElementById("crewList");
 			renderCrewList(crewList);
 
-			addCrewModal.style.display = "none";
+			addCrewModal.style.visibility = "hidden";
 
-		} else {
-			const data = await response.json();
-			alert(`Could not delete the crew of id ${crewId}:\n\n${data.message}`);
-		}
+			successNotification(crewNotification, "crew-notification", "Crew added!");
 
-	}).catch(error => alert('Sorry, an error ocurred:\n' + error));
+		} else errorNotification(crewNotification, "crew-notification", "Sorry, crew could not be added!");
+
+	}).catch(() => errorNotification(crewNotification, "crew-notification", "Sorry, an error ocurred!"));
 }
 
 async function updateCrew(event) {
@@ -151,14 +156,13 @@ async function updateCrew(event) {
 			const crewList = document.getElementById("crewList");
 			renderCrewList(crewList);
 
-			updateCrewModal.style.display = "none";
+			updateCrewModal.style.visibility = "hidden";
 
-		} else {
-			const data = await response.json();
-			alert(`Could not delete the crew of id ${crewId}:\n\n${data.message}`);
-		}
+			successNotification(crewNotification, "crew-notification", "Crew updated!");
 
-	}).catch(error => alert('Sorry, an error ocurred:\n' + error));
+		} else errorNotification(crewNotification, "crew-notification", "Sorry, crew could not be updated!");
+
+	}).catch(() => errorNotification(crewNotification, "crew-notification", "Sorry, an error ocurred!"));
 }
 
 function deleteCrew(crew) {
@@ -178,27 +182,16 @@ function deleteCrew(crew) {
 				renderCrewList(crewListHome, false);
 				renderCrewList(crewList);
 
-			} else {
-				const data = await response.json();
-				alert(`Can not delete the crew of id ${crewId}:\n\n${data.message}`);
-			}
+				successNotification(crewNotification, "crew-notification", "Crew deleted!");
 
-		}).catch(error => alert('An error ocurred:\n' + error));
+			} else errorNotification(crewNotification, "crew-notification", "Sorry, crew could not be deleted!");
+
+		}).catch(() => errorNotification(crewNotification, "crew-notification", "Sorry, an error ocurred!"));
 }
 
 function editUpdateCrewModal(crew) {
 	updateCrewId = crew.id;
 	document.getElementById("update-crew-form-name").value = crew.name;
 	document.getElementById("update-crew-form-crewmans").value = crew.crewmans.map(crewman => crewman.id).join(", ");
-	updateCrewModal.style.display = "block";
-}
-
-function handleRequestError(error, parentDiv, colorClass) {
-	if (parentDiv) {
-		var childDiv = document.createElement("div");
-		childDiv.classList.add("list-item");
-		childDiv.classList.add(colorClass);
-		childDiv.innerHTML = "<strong>Error: </strong> " + error.message;
-		parentDiv.appendChild(childDiv);
-	}
+	updateCrewModal.style.visibility = "visible";
 }
