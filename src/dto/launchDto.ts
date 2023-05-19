@@ -9,3 +9,19 @@ export interface ILaunch {
 	rocket: IRocket;
 	crew?: ICrew;
 }
+
+export interface ICreateLaunchDto {
+	launchCode: string;
+	date: string;
+	success: boolean;
+	rocketId?: number;
+	crewId?: number;
+}
+
+export interface IUpdateLaunchDto {
+	launchCode: string;
+	date: string;
+	success: boolean;
+	rocketId?: number;
+	crewId?: number;
+}

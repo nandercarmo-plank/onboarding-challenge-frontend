@@ -1,34 +1,39 @@
+import { useState } from "react";
 import DataListRender from "../components/DataListRender/DataListRender";
 import Crew from "../components/DataRenders/Crew/Crew";
-import Footer from "../components/Footer/Footer";
-import Navbar from "../components/Navbar/Navbar";
-import { ICrew } from "../dto/crewDto";
+import AddCrewForm from "../components/Forms/Crew/AddCrewForm";
+import Modal from "../components/Modal/Modal";
+import { ICreateCrewDto, ICrew } from "../dto/crewDto";
 import { addButton } from "../resources/images";
-import { getCrews } from "../services/crewService";
-import { ContentDiv, DataDiv, DataHeaderDiv } from "./styles/styles";
+import { createCrew, getCrews } from "../services/crewService";
+import { DataDiv, DataHeaderDiv } from "./styles/styles";
 
 export default function CrewPage() {
 
+	const [isAddModalVisible, setAddModalVisibility] = useState(false);
+
 	const crews: ICrew[] = getCrews();
 
+	const onSubmitAddForm = (createCrewDto: ICreateCrewDto) => {
+		setAddModalVisibility(false);
+		createCrew(createCrewDto);
+	}
+
 	return (
-		<>
-			<ContentDiv>
-				<Navbar/>
-				<DataDiv>
-					<DataHeaderDiv>
-						<h1>Crew Page</h1>
-						<a href="#" onClick={() => console.log("Add Crew")}>
-							<h4>Add</h4>
-							<img src={addButton}/>
-						</a>
-					</DataHeaderDiv>
-					<DataListRender >
-						<Crew data={crews} />
-					</DataListRender>
-				</DataDiv>
-			</ContentDiv>
-			<Footer/>
-		</>
+		<DataDiv>
+			<DataHeaderDiv>
+				<h1>Crew Page</h1>
+				<a href="#" onClick={() => setAddModalVisibility(true)}>
+					<h4>Add</h4>
+					<img src={addButton} />
+				</a>
+			</DataHeaderDiv>
+			<DataListRender >
+				<Crew data={crews} />
+			</DataListRender>
+			<Modal title="Add Crew" visible={isAddModalVisible} setVisible={setAddModalVisibility}>
+				<AddCrewForm onSubmit={onSubmitAddForm} />
+			</Modal>
+		</DataDiv>
 	);
 }

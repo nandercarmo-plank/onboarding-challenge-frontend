@@ -3,3 +3,13 @@ export interface ICrewman {
 	name: string;
 	patent: string;
 }
+
+export interface ICreateCrewmanDto {
+	name: string;
+	patent: string;
+}
+
+export interface IUpdateCrewmanDto {
+	name: string;
+	patent: string;
+}
