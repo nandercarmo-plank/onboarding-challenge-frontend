@@ -1,6 +1,6 @@
-import { ICreateCrewmanDto, ICrewman, IUpdateCrewmanDto } from "../dto/crewmanDto";
+import { ICreateCrewmanDto, ICrewmanDto, IUpdateCrewmanDto } from "../dto/CrewmanDto";
 
-export function getCrewmans(): ICrewman[] {
+function getCrewmans(): ICrewmanDto[] {
 	return [
 		{ "id": 1, "name": "Luffy", "patent": "Capitão" },
 		{ "id": 2, "name": "Zoro", "patent": "Primeiro imediato" },
@@ -14,14 +14,21 @@ export function getCrewmans(): ICrewman[] {
 	];
 }
 
-export function createCrewman(createCrewmanDto: ICreateCrewmanDto): void {
+function createCrewman(createCrewmanDto: ICreateCrewmanDto): void {
 	console.log(createCrewmanDto);
 }
 
-export function updateCrewman(crewmanId: number | undefined, updateCrewmanDto: IUpdateCrewmanDto): void {
+function updateCrewman(crewmanId: number | undefined, updateCrewmanDto: IUpdateCrewmanDto): void {
 	console.log(crewmanId, updateCrewmanDto);
 }
 
-export function deleteCrewman(crewmanId: number): void {
+function deleteCrewman(crewmanId: number): void {
 	console.log(`Delete crewman ${crewmanId}`);
 }
+
+export {
+	getCrewmans,
+	createCrewman,
+	updateCrewman,
+	deleteCrewman
+};

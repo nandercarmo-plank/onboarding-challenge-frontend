@@ -1,6 +1,10 @@
-export default function Notification() {
+function Notification() {
 	return (
 		<>
 		</>
 	);
 }
+
+export {
+	Notification
+};

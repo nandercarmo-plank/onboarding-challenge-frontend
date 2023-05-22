@@ -1,18 +1,18 @@
 import { useState } from "react";
-import DataListRender from "../components/DataListRender/DataListRender";
-import Crew from "../components/DataRenders/Crew/Crew";
-import AddCrewForm from "../components/Forms/Crew/AddCrewForm";
-import Modal from "../components/Modal/Modal";
-import { ICreateCrewDto, ICrew } from "../dto/crewDto";
+import { DataListRender } from "../components/DataListRender/DataListRender";
+import { Crew } from "../components/DataRenders/Crew/Crew";
+import { CrewForm } from "../components/Forms/Crew/CrewForm";
+import { Modal } from "../components/Modal/Modal";
+import { ICreateCrewDto, ICrewDto } from "../dto/CrewDto";
 import { addButton } from "../resources/images";
 import { createCrew, getCrews } from "../services/crewService";
 import { DataDiv, DataHeaderDiv } from "./styles/styles";
 
-export default function CrewPage() {
+function CrewPage() {
 
 	const [isAddModalVisible, setAddModalVisibility] = useState(false);
 
-	const crews: ICrew[] = getCrews();
+	const crews: ICrewDto[] = getCrews();
 
 	const onSubmitAddForm = (createCrewDto: ICreateCrewDto) => {
 		setAddModalVisibility(false);
@@ -32,8 +32,12 @@ export default function CrewPage() {
 				<Crew data={crews} />
 			</DataListRender>
 			<Modal title="Add Crew" visible={isAddModalVisible} setVisible={setAddModalVisibility}>
-				<AddCrewForm onSubmit={onSubmitAddForm} />
+				<CrewForm onSubmit={onSubmitAddForm} />
 			</Modal>
 		</DataDiv>
 	);
 }
+
+export {
+	CrewPage
+};

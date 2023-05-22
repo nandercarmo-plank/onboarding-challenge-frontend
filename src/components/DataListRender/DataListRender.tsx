@@ -5,10 +5,14 @@ type DataListRenderProps = {
 	children: ReactNode;
 };
 
-export default function DataListRender({ children }: DataListRenderProps) {
+function DataListRender({ children }: DataListRenderProps) {
 	return (
 		<>
 			<ListItemContainerDiv>{children}</ListItemContainerDiv>
 		</>
 	);
 }
+
+export {
+	DataListRender
+};

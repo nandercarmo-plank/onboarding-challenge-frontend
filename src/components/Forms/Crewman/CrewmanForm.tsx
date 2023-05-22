@@ -1,13 +1,13 @@
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
-import { ICreateCrewmanDto, ICrewman } from "../../../dto/crewmanDto";
+import { ICreateCrewmanDto, ICrewmanDto } from "../../../dto/CrewmanDto";
 import { StyledButton, StyledForm, StyledInput, StyledLabel } from "../styles/styles";
 
-type AddCrewmanFormProps = {
-	crewman?: ICrewman;
+type CrewmanFormProps = {
+	crewman?: ICrewmanDto;
 	onSubmit: (crewman: ICreateCrewmanDto) => void;
 };
 
-export default function AddCrewmanForm({ onSubmit, crewman }: AddCrewmanFormProps) {
+function CrewmanForm({ onSubmit, crewman }: CrewmanFormProps) {
 
 	const [name, setName] = useState<string>(crewman?.name ?? "");
 	const [patent, setPatent] = useState<string>(crewman?.patent ?? "");
@@ -41,3 +41,7 @@ export default function AddCrewmanForm({ onSubmit, crewman }: AddCrewmanFormProp
 		</StyledForm>
 	);
 }
+
+export {
+	CrewmanForm
+};

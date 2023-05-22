@@ -1,28 +1,28 @@
 import { useState } from "react";
-import { ICrewman, IUpdateCrewmanDto } from "../../../dto/crewmanDto";
+import { ICrewmanDto, IUpdateCrewmanDto } from "../../../dto/CrewmanDto";
 import { deleteButton, editButton } from "../../../resources/images";
 import { deleteCrewman, updateCrewman } from "../../../services/crewmanService";
-import AddCrewmanForm from "../../Forms/Crewman/AddCrewmanForm";
-import Modal from "../../Modal/Modal";
+import { CrewmanForm } from "../../Forms/Crewman/CrewmanForm";
+import { Modal } from "../../Modal/Modal";
 import { ListDiv, ListItem, ListItemContainerDiv, ListItemData, ListItemImage } from "../styles";
 
 interface ICrewmanProps {
 	isSubItem?: boolean;
 	renderButtons?: boolean;
-	data: ICrewman[];
+	data: ICrewmanDto[];
 }
 
-export default function Crewman({ isSubItem = false, renderButtons = true, data }: ICrewmanProps) {
+function Crewman({ isSubItem = false, renderButtons = true, data }: ICrewmanProps) {
 
 	const [isUpdateModalVisible, setUpdateModalVisibility] = useState(false);
-	const [clickedCrewman, setClickedCrewman] = useState<ICrewman>();
+	const [clickedCrewman, setClickedCrewman] = useState<ICrewmanDto>();
 
 	const onSubmitUpdateForm = (updateCrewmanDto: IUpdateCrewmanDto) => {
 		setUpdateModalVisibility(false);
 		updateCrewman(clickedCrewman?.id, updateCrewmanDto);
 	}
 
-	const openUpdateCrewmanModal = (crewman: ICrewman) => {
+	const openUpdateCrewmanModal = (crewman: ICrewmanDto) => {
 		setClickedCrewman(crewman);
 		setUpdateModalVisibility(true);
 	}
@@ -51,8 +51,12 @@ export default function Crewman({ isSubItem = false, renderButtons = true, data 
 				})
 			}
 			<Modal title="Update Crewman" visible={isUpdateModalVisible} setVisible={setUpdateModalVisibility}>
-				<AddCrewmanForm onSubmit={onSubmitUpdateForm} crewman={clickedCrewman} />
+				<CrewmanForm onSubmit={onSubmitUpdateForm} crewman={clickedCrewman} />
 			</Modal>
 		</ListDiv>
 	);
 }
+
+export {
+	Crewman
+};

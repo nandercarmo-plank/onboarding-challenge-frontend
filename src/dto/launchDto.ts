@@ -1,27 +1,33 @@
-import { ICrew } from "./crewDto";
-import { IRocket } from "./rocketDto";
+import { ICrewDto } from "./CrewDto";
+import { IRocketDto } from "./RocketDto";
 
-export interface ILaunch {
+interface ILaunchDto {
 	id: number;
 	launchCode: string;
 	date: string;
 	success: boolean;
-	rocket: IRocket;
-	crew?: ICrew;
+	rocket: IRocketDto;
+	crew?: ICrewDto;
 }
 
-export interface ICreateLaunchDto {
+interface ICreateLaunchDto {
 	launchCode: string;
 	date: string;
 	success: boolean;
-	rocketId?: number;
+	rocketId: number;
 	crewId?: number;
 }
 
-export interface IUpdateLaunchDto {
+interface IUpdateLaunchDto {
 	launchCode: string;
 	date: string;
 	success: boolean;
-	rocketId?: number;
+	rocketId: number;
 	crewId?: number;
 }
+
+export type {
+	ILaunchDto,
+	ICreateLaunchDto,
+	IUpdateLaunchDto
+};

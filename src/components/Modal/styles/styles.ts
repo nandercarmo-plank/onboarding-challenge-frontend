@@ -36,6 +36,7 @@ const ModalHeaderDiv = styled.div`
 	h2 {
 		align-self: center;
 		margin: 0px;
+		margin-bottom: 0px;
 	}
 `;
 

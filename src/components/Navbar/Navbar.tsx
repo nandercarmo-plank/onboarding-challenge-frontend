@@ -1,7 +1,7 @@
 import { crewButton, crewmanButton, homeButton, launchButton, logo, rocketButton } from "../../resources/images";
 import { Header, StyledImage, StyledLinkHover, StyledLogoImage, StyledNavItem } from "./styles/styles";
 
-export default function Navbar() {
+function Navbar() {
 	return (
 		<Header>
 			<StyledLogoImage to="/">
@@ -45,3 +45,7 @@ export default function Navbar() {
 		</Header>
 	);
 }
+
+export {
+	Navbar
+};

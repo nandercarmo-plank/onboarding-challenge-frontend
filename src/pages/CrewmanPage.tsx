@@ -1,18 +1,18 @@
 import { useState } from "react";
-import DataListRender from "../components/DataListRender/DataListRender";
-import Crewman from "../components/DataRenders/Crewman/Crewman";
-import AddCrewmanForm from "../components/Forms/Crewman/AddCrewmanForm";
-import Modal from "../components/Modal/Modal";
-import { ICreateCrewmanDto, ICrewman } from "../dto/crewmanDto";
+import { DataListRender } from "../components/DataListRender/DataListRender";
+import { Crewman } from "../components/DataRenders/Crewman/Crewman";
+import { CrewmanForm } from "../components/Forms/Crewman/CrewmanForm";
+import { Modal } from "../components/Modal/Modal";
+import { ICreateCrewmanDto, ICrewmanDto } from "../dto/CrewmanDto";
 import { addButton } from "../resources/images";
 import { createCrewman, getCrewmans } from "../services/crewmanService";
 import { DataDiv, DataHeaderDiv } from "./styles/styles";
 
-export default function CrewmanPage() {
+function CrewmanPage() {
 
 	const [isAddModalVisible, setAddModalVisibility] = useState(false);
 
-	const crewmans: ICrewman[] = getCrewmans();
+	const crewmans: ICrewmanDto[] = getCrewmans();
 
 	const onSubmitAddForm = (createCrewmanDto: ICreateCrewmanDto) => {
 		setAddModalVisibility(false);
@@ -32,8 +32,12 @@ export default function CrewmanPage() {
 				<Crewman data={crewmans} />
 			</DataListRender>
 			<Modal title="Add Crewman" visible={isAddModalVisible} setVisible={setAddModalVisibility}>
-				<AddCrewmanForm onSubmit={onSubmitAddForm} />
+				<CrewmanForm onSubmit={onSubmitAddForm} />
 			</Modal>
 		</DataDiv>
 	);
 }
+
+export {
+	CrewmanPage
+};

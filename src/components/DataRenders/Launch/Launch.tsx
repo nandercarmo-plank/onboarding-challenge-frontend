@@ -1,30 +1,30 @@
 import { useState } from "react";
-import { ILaunch, IUpdateLaunchDto } from "../../../dto/launchDto";
+import { ILaunchDto, IUpdateLaunchDto } from "../../../dto/LaunchDto";
 import { deleteButton, editButton } from "../../../resources/images";
 import { deleteLaunch, updateLaunch } from "../../../services/launchService";
-import AddLaunchForm from "../../Forms/Launch/AddLaunchForm";
-import Modal from "../../Modal/Modal";
-import Crew from "../Crew/Crew";
-import Rocket from "../Rocket/Rocket";
+import { LaunchForm } from "../../Forms/Launch/LaunchForm";
+import { Modal } from "../../Modal/Modal";
+import { Crew } from "../Crew/Crew";
+import { Rocket } from "../Rocket/Rocket";
 import { ListDiv, ListItem, ListItemContainerDiv, ListItemData, ListItemImage } from "../styles";
 
 interface ILaunchProps {
 	isSubItem?: boolean;
 	renderButtons?: boolean;
-	data: ILaunch[];
+	data: ILaunchDto[];
 }
 
-export default function Launch({ isSubItem = false, renderButtons = true, data }: ILaunchProps) {
+function Launch({ isSubItem = false, renderButtons = true, data }: ILaunchProps) {
 
 	const [isUpdateModalVisible, setUpdateModalVisibility] = useState(false);
-	const [clickedLaunch, setClickedLaunch] = useState<ILaunch>();
+	const [clickedLaunch, setClickedLaunch] = useState<ILaunchDto>();
 
 	const onSubmitUpdateForm = (updateLaunchDto: IUpdateLaunchDto) => {
 		setUpdateModalVisibility(false);
 		updateLaunch(clickedLaunch?.id, updateLaunchDto);
 	}
 
-	const openUpdateLaunchModal = (launch: ILaunch) => {
+	const openUpdateLaunchModal = (launch: ILaunchDto) => {
 		setClickedLaunch(launch);
 		setUpdateModalVisibility(true);
 	}
@@ -67,8 +67,12 @@ export default function Launch({ isSubItem = false, renderButtons = true, data }
 				})
 			}
 			<Modal title="Update Launch" visible={isUpdateModalVisible} setVisible={setUpdateModalVisibility}>
-				<AddLaunchForm onSubmit={onSubmitUpdateForm} launch={clickedLaunch} />
+				<LaunchForm onSubmit={onSubmitUpdateForm} launch={clickedLaunch} />
 			</Modal>
 		</ListDiv>
 	);
 }
+
+export {
+	Launch
+};

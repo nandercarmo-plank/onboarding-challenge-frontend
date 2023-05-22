@@ -1,28 +1,28 @@
 import { useState } from "react";
-import { IRocket, IUpdateRocketDto } from "../../../dto/rocketDto";
+import { IRocketDto, IUpdateRocketDto } from "../../../dto/RocketDto";
 import { deleteButton, editButton } from "../../../resources/images";
 import { deleteRocket, updateRocket } from "../../../services/rocketService";
-import AddRocketForm from "../../Forms/Rocket/AddRocketForm";
-import Modal from "../../Modal/Modal";
+import { RocketForm } from "../../Forms/Rocket/RocketForm";
+import { Modal } from "../../Modal/Modal";
 import { ListDiv, ListItem, ListItemContainerDiv, ListItemData, ListItemImage } from "../styles";
 
 interface IRocketProps {
 	isSubItem?: boolean;
 	renderButtons?: boolean;
-	data: IRocket[];
+	data: IRocketDto[];
 }
 
-export default function Rocket({ isSubItem = false, renderButtons = true, data }: IRocketProps) {
+function Rocket({ isSubItem = false, renderButtons = true, data }: IRocketProps) {
 
 	const [isUpdateModalVisible, setUpdateModalVisibility] = useState(false);
-	const [clickedRocket, setClickedRocket] = useState<IRocket>();
+	const [clickedRocket, setClickedRocket] = useState<IRocketDto>();
 
 	const onSubmitUpdateForm = (updateRocketDto: IUpdateRocketDto) => {
 		setUpdateModalVisibility(false);
 		updateRocket(clickedRocket?.id, updateRocketDto);
 	}
 
-	const openUpdateRocketModal = (rocket: IRocket) => {
+	const openUpdateRocketModal = (rocket: IRocketDto) => {
 		setClickedRocket(rocket);
 		setUpdateModalVisibility(true);
 	}
@@ -49,8 +49,12 @@ export default function Rocket({ isSubItem = false, renderButtons = true, data }
 				})
 			}
 			<Modal title="Update Rocket" visible={isUpdateModalVisible} setVisible={setUpdateModalVisibility}>
-				<AddRocketForm onSubmit={onSubmitUpdateForm} rocket={clickedRocket} />
+				<RocketForm onSubmit={onSubmitUpdateForm} rocket={clickedRocket} />
 			</Modal>
 		</ListDiv>
 	);
 }
+
+export {
+	Rocket
+};

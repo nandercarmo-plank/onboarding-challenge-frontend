@@ -1,13 +1,13 @@
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
-import { ICreateRocketDto, IRocket } from "../../../dto/rocketDto";
+import { ICreateRocketDto, IRocketDto } from "../../../dto/RocketDto";
 import { StyledButton, StyledForm, StyledInput, StyledLabel } from "../styles/styles";
 
-type AddRocketFormProps = {
-	rocket?: IRocket;
+type RocketFormProps = {
+	rocket?: IRocketDto;
 	onSubmit: (rocket: ICreateRocketDto) => void;
 };
 
-export default function AddRocketForm({ onSubmit, rocket }: AddRocketFormProps) {
+function RocketForm({ onSubmit, rocket }: RocketFormProps) {
 
 	const [name, setName] = useState<string>(rocket?.name ?? "");
 
@@ -31,3 +31,7 @@ export default function AddRocketForm({ onSubmit, rocket }: AddRocketFormProps) 
 		</StyledForm>
 	);
 }
+
+export {
+	RocketForm
+};

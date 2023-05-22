@@ -1,19 +1,19 @@
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
-import { ICreateLaunchDto, ILaunch } from "../../../dto/launchDto";
+import { ICreateLaunchDto, ILaunchDto } from "../../../dto/LaunchDto";
 import { StyledButton, StyledForm, StyledInput, StyledLabel, StyledSelect } from "../styles/styles";
 
-type AddLaunchFormProps = {
-	launch?: ILaunch;
+type LaunchFormProps = {
+	launch?: ILaunchDto;
 	onSubmit: (launch: ICreateLaunchDto) => void;
 };
 
-export default function AddLaunchForm({ onSubmit, launch }: AddLaunchFormProps) {
+function LaunchForm({ onSubmit, launch }: LaunchFormProps) {
 
 	const [launchCode, setLaunchCode] = useState<string>(launch?.launchCode ?? "");
 	const [date, setDate] = useState<string>(launch?.date ?? "");
 	const [success, setSuccess] = useState<boolean>(launch?.success ?? true);
-	const [rocketId, setRocketId] = useState<number>(launch?.rocket?.id ?? -1);
-	const [crewId, setCrewId] = useState<number | undefined>(launch?.crew?.id);
+	const [rocketId, setRocketId] = useState<number>(launch?.rocket?.id ?? 0);
+	const [crewId, setCrewId] = useState<number>(launch?.crew?.id ?? 0);
 
 	const handleOnChangeLaunchCode = (event: ChangeEvent<HTMLInputElement>) => setLaunchCode(event.target.value);
 	const handleOnChangeDate = (event: ChangeEvent<HTMLInputElement>) => setDate(event.target.value);
@@ -27,7 +27,7 @@ export default function AddLaunchForm({ onSubmit, launch }: AddLaunchFormProps) 
 			date,
 			success,
 			rocketId,
-			crewId
+			crewId: (crewId != 0) ? crewId : undefined
 		});
 	}
 
@@ -37,7 +37,7 @@ export default function AddLaunchForm({ onSubmit, launch }: AddLaunchFormProps) 
 			setDate(launch.date);
 			setSuccess(launch.success);
 			setRocketId(launch.rocket.id);
-			setCrewId(launch.crew?.id ?? undefined);
+			setCrewId(launch.crew?.id ?? 0);
 		}
 	}, [launch]);
 
@@ -62,3 +62,7 @@ export default function AddLaunchForm({ onSubmit, launch }: AddLaunchFormProps) 
 		</StyledForm>
 	);
 }
+
+export {
+	LaunchForm
+};

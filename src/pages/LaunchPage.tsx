@@ -1,18 +1,18 @@
 import { useState } from "react";
-import DataListRender from "../components/DataListRender/DataListRender";
-import Launch from "../components/DataRenders/Launch/Launch";
-import AddLaunchForm from "../components/Forms/Launch/AddLaunchForm";
-import Modal from "../components/Modal/Modal";
-import { ICreateLaunchDto, ILaunch } from "../dto/launchDto";
+import { DataListRender } from "../components/DataListRender/DataListRender";
+import { Launch } from "../components/DataRenders/Launch/Launch";
+import { LaunchForm } from "../components/Forms/Launch/LaunchForm";
+import { Modal } from "../components/Modal/Modal";
+import { ICreateLaunchDto, ILaunchDto } from "../dto/LaunchDto";
 import { addButton } from "../resources/images";
 import { createLaunch, getLaunchs } from "../services/launchService";
 import { DataDiv, DataHeaderDiv } from "./styles/styles";
 
-export default function LaunchPage() {
+function LaunchPage() {
 
 	const [isAddModalVisible, setAddModalVisibility] = useState(false);
 
-	const launchs: ILaunch[] = getLaunchs();
+	const launchs: ILaunchDto[] = getLaunchs();
 
 	const onSubmitAddForm = (createLaunchDto: ICreateLaunchDto) => {
 		setAddModalVisibility(false);
@@ -32,8 +32,12 @@ export default function LaunchPage() {
 				<Launch data={launchs} />
 			</DataListRender>
 			<Modal title="Add Launch" visible={isAddModalVisible} setVisible={setAddModalVisibility}>
-				<AddLaunchForm onSubmit={onSubmitAddForm} />
+				<LaunchForm onSubmit={onSubmitAddForm} />
 			</Modal>
 		</DataDiv>
 	);
 }
+
+export {
+	LaunchPage
+};

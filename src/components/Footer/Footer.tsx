@@ -1,6 +1,6 @@
 import { FooterDiv } from "./styles/styles";
 
-export default function Footer() {
+function Footer() {
 	return (
 		<FooterDiv>
 			<h5>
@@ -9,3 +9,7 @@ export default function Footer() {
 		</FooterDiv>
 	);
 }
+
+export {
+	Footer
+};

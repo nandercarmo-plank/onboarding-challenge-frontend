@@ -1,6 +1,6 @@
-import { ICreateRocketDto, IRocket, IUpdateRocketDto } from "../dto/rocketDto";
+import { ICreateRocketDto, IRocketDto, IUpdateRocketDto } from "../dto/RocketDto";
 
-export function getRockets(): IRocket[] {
+function getRockets(): IRocketDto[] {
 	return [
 		{ "id": 1, "name": "Going Merry I" },
 		{ "id": 2, "name": "Konoha I" },
@@ -12,14 +12,21 @@ export function getRockets(): IRocket[] {
 	];
 }
 
-export function createRocket(createRocketDto: ICreateRocketDto): void {
+function createRocket(createRocketDto: ICreateRocketDto): void {
 	console.log(createRocketDto);
 }
 
-export function updateRocket(rocketId: number | undefined, updateRocketDto: IUpdateRocketDto): void {
+function updateRocket(rocketId: number | undefined, updateRocketDto: IUpdateRocketDto): void {
 	console.log(rocketId, updateRocketDto);
 }
 
-export function deleteRocket(rocketId: number): void {
+function deleteRocket(rocketId: number): void {
 	console.log(`Delete rocket ${rocketId}`);
 }
+
+export {
+	getRockets,
+	createRocket,
+	updateRocket,
+	deleteRocket
+};

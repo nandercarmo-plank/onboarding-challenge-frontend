@@ -1,6 +1,6 @@
-import { ICreateCrewDto, ICrew, IUpdateCrewDto } from "../dto/crewDto";
+import { ICreateCrewDto, ICrewDto, IUpdateCrewDto } from "../dto/CrewDto";
 
-export function getCrews(): ICrew[] {
+function getCrews(): ICrewDto[] {
 	return [
 		{ "id": 1, "name": "Bando do chapéu de palha", "crewmans": [{ "id": 1, "name": "Luffy", "patent": "Capitão" }, { "id": 2, "name": "Zoro", "patent": "Primeiro imediato" }, { "id": 3, "name": "Nami", "patent": "Navegadora" }] },
 		{ "id": 2, "name": "Time 7", "crewmans": [{ "id": 4, "name": "Naruto", "patent": "Hokage" }, { "id": 5, "name": "Sakura", "patent": "Kunoich" }, { "id": 6, "name": "Sasuke", "patent": "Jounin" }, { "id": 7, "name": "Kakashi", "patent": "Ambu" }] },
@@ -10,14 +10,21 @@ export function getCrews(): ICrew[] {
 	];
 }
 
-export function createCrew(createCrewDto: ICreateCrewDto): void {
+function createCrew(createCrewDto: ICreateCrewDto): void {
 	console.log(createCrewDto);
 }
 
-export function updateCrew(crewId: number | undefined, updateCrewDto: IUpdateCrewDto): void {
+function updateCrew(crewId: number | undefined, updateCrewDto: IUpdateCrewDto): void {
 	console.log(crewId, updateCrewDto);
 }
 
-export function deleteCrew(crewId: number): void {
+function deleteCrew(crewId: number): void {
 	console.log(`Delete crew ${crewId}`);
 }
+
+export {
+	getCrews,
+	createCrew,
+	updateCrew,
+	deleteCrew
+};

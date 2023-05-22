@@ -1,15 +1,21 @@
-export interface ICrewman {
+interface ICrewmanDto {
 	id: number;
 	name: string;
 	patent: string;
 }
 
-export interface ICreateCrewmanDto {
+interface ICreateCrewmanDto {
 	name: string;
 	patent: string;
 }
 
-export interface IUpdateCrewmanDto {
+interface IUpdateCrewmanDto {
 	name: string;
 	patent: string;
 }
+
+export type {
+	ICrewmanDto,
+	ICreateCrewmanDto,
+	IUpdateCrewmanDto
+};

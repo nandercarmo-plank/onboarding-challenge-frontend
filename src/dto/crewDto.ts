@@ -1,17 +1,23 @@
-import { ICrewman } from "./crewmanDto";
+import { ICrewmanDto } from "./CrewmanDto";
 
-export interface ICrew {
+interface ICrewDto {
 	id: number;
 	name: string;
-	crewmans?: ICrewman[];
+	crewmans?: ICrewmanDto[];
 }
 
-export interface ICreateCrewDto {
+interface ICreateCrewDto {
 	name: string;
 	crewmans?: number[];
 }
 
-export interface IUpdateCrewDto {
+interface IUpdateCrewDto {
 	name: string;
 	crewmans?: number[];
 }
+
+export type {
+	ICrewDto,
+	ICreateCrewDto,
+	IUpdateCrewDto
+};

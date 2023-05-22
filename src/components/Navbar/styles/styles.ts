@@ -8,7 +8,7 @@ const Header = styled.header`
 	margin-bottom: 10px;
 	text-align: center;
 	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
-	width: 300px;
+	width: 275px;
 
 	h2 {
 		display: flex;

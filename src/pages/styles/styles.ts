@@ -1,4 +1,4 @@
-import {styled} from "styled-components";
+import { styled } from "styled-components";
 
 const ContentDiv = styled.div`
 	flex: 1;
@@ -17,8 +17,8 @@ const DataDiv = styled.div`
 	padding-left: 20px;
 	padding-right: 20px;
 
-	h2 {
-		margin: 50px 0px 20px 0px;
+	.h2-title {
+		margin: 20px 0px 20px 0px;
 		align-self: self-start;
 	}
 `;
@@ -75,4 +75,4 @@ export {
 	ContentDiv,
 	DataDiv,
 	DataHeaderDiv
-}
+};

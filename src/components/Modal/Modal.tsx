@@ -8,7 +8,7 @@ type ModalProps = {
 	title: string;
 };
 
-export default function Modal({ children, visible, setVisible, title }: ModalProps) {
+function Modal({ children, visible, setVisible, title }: ModalProps) {
 	return (
 		<ModalDiv style={{ visibility: visible ? "visible" : "hidden" }}>
 			<ModalContentDiv>
@@ -21,3 +21,7 @@ export default function Modal({ children, visible, setVisible, title }: ModalPro
 		</ModalDiv>
 	);
 }
+
+export {
+	Modal
+};

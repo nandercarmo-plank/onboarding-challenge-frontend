@@ -1,13 +1,13 @@
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
-import { ICreateCrewDto, ICrew } from "../../../dto/crewDto";
+import { ICreateCrewDto, ICrewDto } from "../../../dto/CrewDto";
 import { StyledButton, StyledForm, StyledInput, StyledLabel } from "../styles/styles";
 
-type AddCrewFormProps = {
-	crew?: ICrew;
+type CrewFormProps = {
+	crew?: ICrewDto;
 	onSubmit: (crew: ICreateCrewDto) => void;
 };
 
-export default function AddCrewForm({ onSubmit, crew }: AddCrewFormProps) {
+function CrewForm({ onSubmit, crew }: CrewFormProps) {
 
 	const [name, setName] = useState<string>(crew?.name ?? "");
 	const [crewmans, setCrewmans] = useState<string>(crew?.crewmans?.map(crewman => crewman.id).join(", ") ?? "");
@@ -41,3 +41,7 @@ export default function AddCrewForm({ onSubmit, crew }: AddCrewFormProps) {
 		</StyledForm>
 	);
 }
+
+export {
+	CrewForm
+};
