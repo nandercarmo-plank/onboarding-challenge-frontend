@@ -1,4 +1,4 @@
-import {styled} from "styled-components";
+import { styled } from "styled-components";
 
 const ListDiv = styled.div`
 	display: flex;
@@ -93,4 +93,4 @@ export {
 	ListItem,
 	ListItemData,
 	ListItemImage
-}
+};

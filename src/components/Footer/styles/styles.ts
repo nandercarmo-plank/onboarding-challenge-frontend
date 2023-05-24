@@ -1,4 +1,4 @@
-import {styled} from "styled-components";
+import { styled } from "styled-components";
 
 const FooterDiv = styled.div`
 	display: flex;
@@ -14,4 +14,4 @@ const FooterDiv = styled.div`
 
 export {
 	FooterDiv
-}
+};

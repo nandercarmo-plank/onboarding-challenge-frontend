@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { ReactNode } from "react";
 import { ListItemContainerDiv } from "./styles/styles";
 
 type DataListRenderProps = {
@@ -6,6 +6,10 @@ type DataListRenderProps = {
 };
 
 function DataListRender({ children }: DataListRenderProps) {
+
+	const oi = (number: number) => console.log(number)
+	oi(1)
+
 	return (
 		<>
 			<ListItemContainerDiv>{children}</ListItemContainerDiv>
