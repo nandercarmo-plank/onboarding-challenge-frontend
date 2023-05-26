@@ -3,12 +3,12 @@ import { ThemeProvider } from "styled-components";
 import { Footer } from "./components/Footer/Footer";
 import { Notification } from "./components/Notification/Notification";
 import { NotificationProvider } from "./context/NotificationContext";
-import { CrewPage } from "./pages/CrewPage";
-import { CrewmanPage } from "./pages/CrewmanPage";
-import { HomePage } from "./pages/HomePage";
-import { LaunchPage } from "./pages/LaunchPage";
-import { NotFoundPage } from "./pages/NotFoundPage";
-import { RocketPage } from "./pages/RocketPage";
+import { CrewPage } from "./pages/EntitiesPages/CrewPage";
+import { CrewmanPage } from "./pages/EntitiesPages/CrewmanPage";
+import { LaunchPage } from "./pages/EntitiesPages/LaunchPage";
+import { RocketPage } from "./pages/EntitiesPages/RocketPage";
+import { HomePage } from "./pages/HomePage/HomePage";
+import { NotFoundPage } from "./pages/NotFoundPage/NotFoundPage";
 import { GlobalStyle } from './styles/styles';
 import { theme } from "./styles/theme";
 

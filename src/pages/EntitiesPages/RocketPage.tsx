@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import { DataListRender } from "../components/DataListRender/DataListRender";
-import { Rocket } from "../components/DataRenders/Rocket/Rocket";
-import { RocketForm } from "../components/Forms/Rocket/RocketForm";
-import { Modal } from "../components/Modal/Modal";
-import { Navbar } from "../components/Navbar/Navbar";
-import { ICreateRocketDto } from "../dto/RocketDto";
-import { useRocket } from "../hooks/useRocket";
-import { addButton } from "../resources/images";
+import { DataListRender } from "../../components/DataListRender/DataListRender";
+import { Rocket } from "../../components/DataRenders/Rocket/Rocket";
+import { RocketForm } from "../../components/Forms/Rocket/RocketForm";
+import { Modal } from "../../components/Modal/Modal";
+import { Navbar } from "../../components/Navbar/Navbar";
+import { ICreateRocketDto } from "../../dto/RocketDto";
+import { useRocket } from "../../hooks/useRocket";
+import { addButton } from "../../resources/images";
 import { ContentDiv, DataDiv, DataHeaderDiv } from "./styles/styles";
 
 export const RocketPage = () => {

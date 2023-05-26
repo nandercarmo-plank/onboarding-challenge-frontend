@@ -1,4 +1,4 @@
-import { logo } from "../resources/images";
+import { logo } from "../../resources/images";
 import { NotFoundDiv } from "./styles/styles";
 
 export const NotFoundPage = () => {

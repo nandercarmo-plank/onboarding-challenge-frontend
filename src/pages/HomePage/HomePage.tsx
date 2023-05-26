@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { crewmanButton, launchButton, rocketButton } from "../resources/images";
+import { crewmanButton, launchButton, rocketButton } from "../../resources/images";
 import { HomeCard, HomeCardsContainerDiv, HomeContentDiv, HomeLogoDiv } from "./styles/styles";
 
 export const HomePage = () => {

@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import { DataListRender } from "../components/DataListRender/DataListRender";
-import { Launch } from "../components/DataRenders/Launch/Launch";
-import { LaunchForm } from "../components/Forms/Launch/LaunchForm";
-import { Modal } from "../components/Modal/Modal";
-import { Navbar } from "../components/Navbar/Navbar";
-import { ICreateLaunchDto } from "../dto/LaunchDto";
-import { useLaunch } from "../hooks/useLaunch";
-import { addButton } from "../resources/images";
+import { DataListRender } from "../../components/DataListRender/DataListRender";
+import { Launch } from "../../components/DataRenders/Launch/Launch";
+import { LaunchForm } from "../../components/Forms/Launch/LaunchForm";
+import { Modal } from "../../components/Modal/Modal";
+import { Navbar } from "../../components/Navbar/Navbar";
+import { ICreateLaunchDto } from "../../dto/LaunchDto";
+import { useLaunch } from "../../hooks/useLaunch";
+import { addButton } from "../../resources/images";
 import { ContentDiv, DataDiv, DataHeaderDiv } from "./styles/styles";
 
 export const LaunchPage = () => {

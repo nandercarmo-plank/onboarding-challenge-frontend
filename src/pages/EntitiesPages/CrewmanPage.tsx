@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import { DataListRender } from "../components/DataListRender/DataListRender";
-import { Crewman } from "../components/DataRenders/Crewman/Crewman";
-import { CrewmanForm } from "../components/Forms/Crewman/CrewmanForm";
-import { Modal } from "../components/Modal/Modal";
-import { Navbar } from "../components/Navbar/Navbar";
-import { ICreateCrewmanDto } from "../dto/CrewmanDto";
-import { useCrewman } from "../hooks/useCrewman";
-import { addButton } from "../resources/images";
+import { DataListRender } from "../../components/DataListRender/DataListRender";
+import { Crewman } from "../../components/DataRenders/Crewman/Crewman";
+import { CrewmanForm } from "../../components/Forms/Crewman/CrewmanForm";
+import { Modal } from "../../components/Modal/Modal";
+import { Navbar } from "../../components/Navbar/Navbar";
+import { ICreateCrewmanDto } from "../../dto/CrewmanDto";
+import { useCrewman } from "../../hooks/useCrewman";
+import { addButton } from "../../resources/images";
 import { ContentDiv, DataDiv, DataHeaderDiv } from "./styles/styles";
 
 export const CrewmanPage = () => {
