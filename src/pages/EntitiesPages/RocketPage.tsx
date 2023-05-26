@@ -5,7 +5,6 @@ import { Modal } from "../../components/Modal/Modal";
 import { Navbar } from "../../components/Navbar/Navbar";
 import { ICreateRocketDto } from "../../dto/RocketDto";
 import { useRocket } from "../../hooks/useRocket";
-import { addButton } from "../../resources/images";
 import { ContentDiv, DataDiv, DataHeaderDiv } from "./styles/styles";
 
 export const RocketPage = () => {
@@ -28,7 +27,6 @@ export const RocketPage = () => {
 					<h1>Rockets</h1>
 					<a href="#" onClick={() => setAddModalVisibility(true)}>
 						<h4>Add</h4>
-						<img src={addButton} />
 					</a>
 				</DataHeaderDiv>
 				<Rocket rockets={rockets} setRockets={setRockets} />

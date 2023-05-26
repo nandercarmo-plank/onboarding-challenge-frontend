@@ -5,7 +5,6 @@ import { Modal } from "../../components/Modal/Modal";
 import { Navbar } from "../../components/Navbar/Navbar";
 import { ICreateCrewmanDto } from "../../dto/CrewmanDto";
 import { useCrewman } from "../../hooks/useCrewman";
-import { addButton } from "../../resources/images";
 import { ContentDiv, DataDiv, DataHeaderDiv } from "./styles/styles";
 
 export const CrewmanPage = () => {
@@ -28,7 +27,6 @@ export const CrewmanPage = () => {
 					<h1>Crewmans</h1>
 					<a href="#" onClick={() => setAddModalVisibility(true)}>
 						<h4>Add</h4>
-						<img src={addButton} />
 					</a>
 				</DataHeaderDiv>
 				<Crewman crewmans={crewmans} setCrewmans={setCrewmans} />

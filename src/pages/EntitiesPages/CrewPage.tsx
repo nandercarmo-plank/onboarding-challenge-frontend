@@ -5,7 +5,6 @@ import { Modal } from "../../components/Modal/Modal";
 import { Navbar } from "../../components/Navbar/Navbar";
 import { ICreateCrewDto } from "../../dto/CrewDto";
 import { useCrew } from "../../hooks/useCrew";
-import { addButton } from "../../resources/images";
 import { ContentDiv, DataDiv, DataHeaderDiv } from "./styles/styles";
 
 export const CrewPage = () => {
@@ -28,7 +27,6 @@ export const CrewPage = () => {
 					<h1>Crews</h1>
 					<a href="#" onClick={() => setAddModalVisibility(true)}>
 						<h4>Add</h4>
-						<img src={addButton} />
 					</a>
 				</DataHeaderDiv>
 				<Crew crews={crews} setCrews={setCrews} />

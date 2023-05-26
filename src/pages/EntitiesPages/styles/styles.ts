@@ -45,6 +45,7 @@ export const DataHeaderDiv = styled.div`
 		flex-direction: row;
 		justify-content: space-evenly;
 		align-items: center;
+		margin-right: 40px;
 		width: 140px;
 		height: 40px;
 		border-radius: 10px;
