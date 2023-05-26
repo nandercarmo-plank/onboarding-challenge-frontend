@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { DataListRender } from "../../components/DataRenders/DataListRender";
 import { Rocket } from "../../components/DataRenders/Rocket/Rocket";
 import { RocketForm } from "../../components/Forms/Rocket/RocketForm";
 import { Modal } from "../../components/Modal/Modal";
@@ -32,9 +31,7 @@ export const RocketPage = () => {
 						<img src={addButton} />
 					</a>
 				</DataHeaderDiv>
-				<DataListRender >
-					<Rocket rockets={rockets} setRockets={setRockets} />
-				</DataListRender>
+				<Rocket rockets={rockets} setRockets={setRockets} />
 				<Modal title="Add Rocket" visible={isAddModalVisible} setVisible={setAddModalVisibility}>
 					<RocketForm onSubmit={onSubmitAddForm} />
 				</Modal>

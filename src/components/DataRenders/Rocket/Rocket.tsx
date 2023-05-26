@@ -37,29 +37,31 @@ export const Rocket = ({ isSubItem = false, renderButtons = true, rockets, setRo
 	}
 
 	return (
-		<ListDiv>
-			{
-				rockets.map(rocket => {
-					return (
-						<ListItemContainerDiv key={rocket.id}>
-							<ListItem className={isSubItem ? "sub-list-item" : "rocket list-item"}>
-								<ListItemData>
-									<strong>ID:</strong> {rocket.id}
-									<br />
-									<strong>Name:</strong> {rocket.name}
-								</ListItemData>
-								<ListItemImage>
-									{renderButtons && <img src={editButton} onClick={() => openUpdateRocketModal(rocket)} />}
-								</ListItemImage>
-							</ListItem>
-							{renderButtons && <img src={deleteButton} onClick={() => onDeleteRocket(rocket.id)} />}
-						</ListItemContainerDiv>
-					);
-				})
-			}
-			<Modal title="Update Rocket" visible={isUpdateModalVisible} setVisible={setUpdateModalVisibility}>
-				<RocketForm onSubmit={onSubmitUpdateForm} rocket={clickedRocket} />
-			</Modal>
-		</ListDiv>
+		<ListItemContainerDiv>
+			<ListDiv>
+				{
+					rockets.map(rocket => {
+						return (
+							<ListItemContainerDiv key={rocket.id}>
+								<ListItem className={isSubItem ? "sub-list-item" : "rocket list-item"}>
+									<ListItemData>
+										<strong>ID:</strong> {rocket.id}
+										<br />
+										<strong>Name:</strong> {rocket.name}
+									</ListItemData>
+									<ListItemImage>
+										{renderButtons && <img src={editButton} onClick={() => openUpdateRocketModal(rocket)} />}
+									</ListItemImage>
+								</ListItem>
+								{renderButtons && <img src={deleteButton} onClick={() => onDeleteRocket(rocket.id)} />}
+							</ListItemContainerDiv>
+						);
+					})
+				}
+				<Modal title="Update Rocket" visible={isUpdateModalVisible} setVisible={setUpdateModalVisibility}>
+					<RocketForm onSubmit={onSubmitUpdateForm} rocket={clickedRocket} />
+				</Modal>
+			</ListDiv>
+		</ListItemContainerDiv>
 	);
 }

@@ -38,37 +38,39 @@ export const Crew = ({ isSubItem = false, renderButtons = true, crews, setCrews 
 	}
 
 	return (
-		<ListDiv>
-			{
-				crews.map(crew => {
-					return (
-						<ListItemContainerDiv key={crew.id}>
-							<ListItem className={isSubItem ? "sub-list-item" : "crew list-item"}>
-								<ListItemData>
-									<strong>ID:</strong> {crew.id}
-									<br />
-									<strong>Name:</strong> {crew.name}
-									<br />
-									{
-										(crew.crewmans?.length) ? <>
-											<strong>Crewmans:</strong>
-											<br />
-											<Crewman isSubItem={true} renderButtons={false} crewmans={crew.crewmans} />
-										</> : <></>
-									}
-								</ListItemData>
-								<ListItemImage>
-									{renderButtons && <img src={editButton} onClick={() => openUpdateCrewModal(crew)} />}
-								</ListItemImage>
-							</ListItem>
-							{renderButtons && <img src={deleteButton} onClick={() => onDeleteCrew(crew.id)} />}
-						</ListItemContainerDiv>
-					);
-				})
-			}
-			<Modal title="Update Crew" visible={isUpdateModalVisible} setVisible={setUpdateModalVisibility}>
-				<CrewForm onSubmit={onSubmitUpdateForm} crew={clickedCrew} />
-			</Modal>
-		</ListDiv>
+		<ListItemContainerDiv>
+			<ListDiv>
+				{
+					crews.map(crew => {
+						return (
+							<ListItemContainerDiv key={crew.id}>
+								<ListItem className={isSubItem ? "sub-list-item" : "crew list-item"}>
+									<ListItemData>
+										<strong>ID:</strong> {crew.id}
+										<br />
+										<strong>Name:</strong> {crew.name}
+										<br />
+										{
+											(crew.crewmans?.length) ? <>
+												<strong>Crewmans:</strong>
+												<br />
+												<Crewman isSubItem={true} renderButtons={false} crewmans={crew.crewmans} />
+											</> : <></>
+										}
+									</ListItemData>
+									<ListItemImage>
+										{renderButtons && <img src={editButton} onClick={() => openUpdateCrewModal(crew)} />}
+									</ListItemImage>
+								</ListItem>
+								{renderButtons && <img src={deleteButton} onClick={() => onDeleteCrew(crew.id)} />}
+							</ListItemContainerDiv>
+						);
+					})
+				}
+				<Modal title="Update Crew" visible={isUpdateModalVisible} setVisible={setUpdateModalVisibility}>
+					<CrewForm onSubmit={onSubmitUpdateForm} crew={clickedCrew} />
+				</Modal>
+			</ListDiv>
+		</ListItemContainerDiv>
 	);
 }

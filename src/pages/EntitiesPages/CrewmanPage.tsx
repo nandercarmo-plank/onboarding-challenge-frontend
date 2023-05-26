@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { Crewman } from "../../components/DataRenders/Crewman/Crewman";
-import { DataListRender } from "../../components/DataRenders/DataListRender";
 import { CrewmanForm } from "../../components/Forms/Crewman/CrewmanForm";
 import { Modal } from "../../components/Modal/Modal";
 import { Navbar } from "../../components/Navbar/Navbar";
@@ -32,9 +31,7 @@ export const CrewmanPage = () => {
 						<img src={addButton} />
 					</a>
 				</DataHeaderDiv>
-				<DataListRender >
-					<Crewman crewmans={crewmans} setCrewmans={setCrewmans} />
-				</DataListRender>
+				<Crewman crewmans={crewmans} setCrewmans={setCrewmans} />
 				<Modal title="Add Crewman" visible={isAddModalVisible} setVisible={setAddModalVisibility}>
 					<CrewmanForm onSubmit={onSubmitAddForm} />
 				</Modal>

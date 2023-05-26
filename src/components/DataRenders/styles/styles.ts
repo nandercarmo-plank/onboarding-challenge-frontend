@@ -1,11 +1,5 @@
 import { styled } from "styled-components";
 
-export const ListDiv = styled.div`
-	display: flex;
-	flex-direction: column;
-	width: 100%;
-`;
-
 export const ListItemContainerDiv = styled.div`
 	display: flex;
 	flex-direction: row;
@@ -53,6 +47,12 @@ export const ListItemContainerDiv = styled.div`
 		border: 1px solid #ffddaa;
 		background-color: #ffddbb;
 	}
+`;
+
+export const ListDiv = styled.div`
+	display: flex;
+	flex-direction: column;
+	width: 100%;
 `;
 
 export const ListItem = styled.div`

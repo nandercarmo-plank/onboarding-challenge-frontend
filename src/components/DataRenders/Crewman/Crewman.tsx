@@ -37,31 +37,33 @@ export const Crewman = ({ isSubItem = false, renderButtons = true, crewmans, set
 	}
 
 	return (
-		<ListDiv>
-			{
-				crewmans.map(crewman => {
-					return (
-						<ListItemContainerDiv key={crewman.id}>
-							<ListItem className={isSubItem ? "sub-list-item" : "crewman list-item"}>
-								<ListItemData>
-									<strong>ID:</strong> {crewman.id}
-									<br />
-									<strong>Name:</strong> {crewman.name}
-									<br />
-									<strong>Patent:</strong> {crewman.patent}
-								</ListItemData>
-								<ListItemImage>
-									{renderButtons && <img src={editButton} onClick={() => openUpdateCrewmanModal(crewman)} />}
-								</ListItemImage>
-							</ListItem>
-							{renderButtons && <img src={deleteButton} onClick={() => onDeleteCrewman(crewman.id)} />}
-						</ListItemContainerDiv>
-					);
-				})
-			}
-			<Modal title="Update Crewman" visible={isUpdateModalVisible} setVisible={setUpdateModalVisibility}>
-				<CrewmanForm onSubmit={onSubmitUpdateForm} crewman={clickedCrewman} />
-			</Modal>
-		</ListDiv>
+		<ListItemContainerDiv>
+			<ListDiv>
+				{
+					crewmans.map(crewman => {
+						return (
+							<ListItemContainerDiv key={crewman.id}>
+								<ListItem className={isSubItem ? "sub-list-item" : "crewman list-item"}>
+									<ListItemData>
+										<strong>ID:</strong> {crewman.id}
+										<br />
+										<strong>Name:</strong> {crewman.name}
+										<br />
+										<strong>Patent:</strong> {crewman.patent}
+									</ListItemData>
+									<ListItemImage>
+										{renderButtons && <img src={editButton} onClick={() => openUpdateCrewmanModal(crewman)} />}
+									</ListItemImage>
+								</ListItem>
+								{renderButtons && <img src={deleteButton} onClick={() => onDeleteCrewman(crewman.id)} />}
+							</ListItemContainerDiv>
+						);
+					})
+				}
+				<Modal title="Update Crewman" visible={isUpdateModalVisible} setVisible={setUpdateModalVisibility}>
+					<CrewmanForm onSubmit={onSubmitUpdateForm} crewman={clickedCrewman} />
+				</Modal>
+			</ListDiv>
+		</ListItemContainerDiv>
 	);
 }

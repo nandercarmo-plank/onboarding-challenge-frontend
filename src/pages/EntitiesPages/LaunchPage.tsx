@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { DataListRender } from "../../components/DataRenders/DataListRender";
 import { Launch } from "../../components/DataRenders/Launch/Launch";
 import { LaunchForm } from "../../components/Forms/Launch/LaunchForm";
 import { Modal } from "../../components/Modal/Modal";
@@ -32,9 +31,7 @@ export const LaunchPage = () => {
 						<img src={addButton} />
 					</a>
 				</DataHeaderDiv>
-				<DataListRender >
-					<Launch launchs={launchs} setLaunchs={setLaunchs} />
-				</DataListRender>
+				<Launch launchs={launchs} setLaunchs={setLaunchs} />
 				<Modal title="Add Launch" visible={isAddModalVisible} setVisible={setAddModalVisibility}>
 					<LaunchForm onSubmit={onSubmitAddForm} />
 				</Modal>

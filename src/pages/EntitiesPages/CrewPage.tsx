@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { Crew } from "../../components/DataRenders/Crew/Crew";
-import { DataListRender } from "../../components/DataRenders/DataListRender";
 import { CrewForm } from "../../components/Forms/Crew/CrewForm";
 import { Modal } from "../../components/Modal/Modal";
 import { Navbar } from "../../components/Navbar/Navbar";
@@ -32,9 +31,7 @@ export const CrewPage = () => {
 						<img src={addButton} />
 					</a>
 				</DataHeaderDiv>
-				<DataListRender >
-					<Crew crews={crews} setCrews={setCrews} />
-				</DataListRender>
+				<Crew crews={crews} setCrews={setCrews} />
 				<Modal title="Add Crew" visible={isAddModalVisible} setVisible={setAddModalVisibility}>
 					<CrewForm onSubmit={onSubmitAddForm} />
 				</Modal>
