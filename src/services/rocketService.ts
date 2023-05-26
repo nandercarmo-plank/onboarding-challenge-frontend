@@ -1,32 +1,48 @@
+import { del, get, post, put } from "../api/api";
 import { ICreateRocketDto, IRocketDto, IUpdateRocketDto } from "../dto/RocketDto";
 
-function getRockets(): IRocketDto[] {
-	return [
-		{ "id": 1, "name": "Going Merry I" },
-		{ "id": 2, "name": "Konoha I" },
-		{ "id": 18, "name": "Teste 3" },
-		{ "id": 19, "name": "Shazam" },
-		{ "id": 16, "name": "Rocket Test 1" },
-		{ "id": 17, "name": "Shuleigos 1" },
-		{ "id": 20, "name": "New Rocket 1" }
-	];
+const PATH = "rocket";
+
+async function getRockets(): Promise<IRocketDto[]> {
+	try {
+		return await get<IRocketDto>(PATH);
+	} catch (err) {
+		throw "Sorry, an error ocurred!";
+	}
 }
 
-function createRocket(createRocketDto: ICreateRocketDto): void {
-	console.log(createRocketDto);
+async function sendCreateRocket(createRocketDto: ICreateRocketDto): Promise<boolean> {
+	try {
+		await post<ICreateRocketDto>(PATH, createRocketDto);
+		return true;
+	} catch (err) {
+		return false;
+	}
 }
 
-function updateRocket(rocketId: number | undefined, updateRocketDto: IUpdateRocketDto): void {
-	console.log(rocketId, updateRocketDto);
+async function sendUpdateRocket(rocketId: number, updateRocketDto: IUpdateRocketDto): Promise<boolean> {
+	try {
+		await put<IUpdateRocketDto>(PATH, rocketId, updateRocketDto);
+		return true;
+	} catch (err) {
+		return false;
+		throw "Sorry, rocket could not be updated!";
+	}
 }
 
-function deleteRocket(rocketId: number): void {
-	console.log(`Delete rocket ${rocketId}`);
+async function sendDeleteRocket(rocketId: number): Promise<boolean> {
+	try {
+		await del(PATH, rocketId);
+		return true;
+	} catch (err) {
+		return false;
+		throw "Sorry, rocket could not be deleted!";
+	}
 }
 
 export {
 	getRockets,
-	createRocket,
-	updateRocket,
-	deleteRocket
+	sendCreateRocket,
+	sendUpdateRocket,
+	sendDeleteRocket
 };

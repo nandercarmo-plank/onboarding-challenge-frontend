@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { ICrewmanDto, IUpdateCrewmanDto } from "../../../dto/CrewmanDto";
+import { IUseCrewman } from "../../../hooks/useCrewman";
 import { deleteButton, editButton } from "../../../resources/images";
-import { deleteCrewman, updateCrewman } from "../../../services/crewmanService";
 import { CrewmanForm } from "../../Forms/Crewman/CrewmanForm";
 import { Modal } from "../../Modal/Modal";
 import { ListDiv, ListItem, ListItemContainerDiv, ListItemData, ListItemImage } from "../styles";
@@ -9,17 +9,26 @@ import { ListDiv, ListItem, ListItemContainerDiv, ListItemData, ListItemImage } 
 interface ICrewmanProps {
 	isSubItem?: boolean;
 	renderButtons?: boolean;
-	data: ICrewmanDto[];
+	crewmans: ICrewmanDto[];
+	setCrewmans?: IUseCrewman;
 }
 
-function Crewman({ isSubItem = false, renderButtons = true, data }: ICrewmanProps) {
+function Crewman({ isSubItem = false, renderButtons = true, crewmans, setCrewmans }: ICrewmanProps) {
 
 	const [isUpdateModalVisible, setUpdateModalVisibility] = useState(false);
 	const [clickedCrewman, setClickedCrewman] = useState<ICrewmanDto>();
 
-	const onSubmitUpdateForm = (updateCrewmanDto: IUpdateCrewmanDto) => {
-		setUpdateModalVisibility(false);
-		updateCrewman(clickedCrewman?.id, updateCrewmanDto);
+	const onSubmitUpdateForm = async (updateCrewmanDto: IUpdateCrewmanDto) => {
+		if (setCrewmans) {
+			setUpdateModalVisibility(false);
+			setCrewmans.editCrewman(clickedCrewman?.id ?? 0, updateCrewmanDto);
+		}
+	}
+
+	const onDeleteCrewman = async (crewmanId: number) => {
+		if (setCrewmans) {
+			setCrewmans.deleteCrewman(crewmanId);
+		}
 	}
 
 	const openUpdateCrewmanModal = (crewman: ICrewmanDto) => {
@@ -30,7 +39,7 @@ function Crewman({ isSubItem = false, renderButtons = true, data }: ICrewmanProp
 	return (
 		<ListDiv>
 			{
-				data.map(crewman => {
+				crewmans.map(crewman => {
 					return (
 						<ListItemContainerDiv key={crewman.id}>
 							<ListItem className={isSubItem ? "sub-list-item" : "crewman list-item"}>
@@ -45,7 +54,7 @@ function Crewman({ isSubItem = false, renderButtons = true, data }: ICrewmanProp
 									{renderButtons && <img src={editButton} onClick={() => openUpdateCrewmanModal(crewman)} />}
 								</ListItemImage>
 							</ListItem>
-							{renderButtons && <img src={deleteButton} onClick={() => deleteCrewman(crewman.id)} />}
+							{renderButtons && <img src={deleteButton} onClick={() => onDeleteCrewman(crewman.id)} />}
 						</ListItemContainerDiv>
 					);
 				})

@@ -1,24 +1,25 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { DataListRender } from "../components/DataListRender/DataListRender";
 import { Crewman } from "../components/DataRenders/Crewman/Crewman";
 import { CrewmanForm } from "../components/Forms/Crewman/CrewmanForm";
 import { Modal } from "../components/Modal/Modal";
 import { Navbar } from "../components/Navbar/Navbar";
-import { ICreateCrewmanDto, ICrewmanDto } from "../dto/CrewmanDto";
+import { ICreateCrewmanDto } from "../dto/CrewmanDto";
+import { useCrewman } from "../hooks/useCrewman";
 import { addButton } from "../resources/images";
-import { createCrewman, getCrewmans } from "../services/crewmanService";
 import { ContentDiv, DataDiv, DataHeaderDiv } from "./styles/styles";
 
 function CrewmanPage() {
 
 	const [isAddModalVisible, setAddModalVisibility] = useState(false);
+	const [crewmans, setCrewmans] = useCrewman([]);
 
-	const crewmans: ICrewmanDto[] = getCrewmans();
-
-	const onSubmitAddForm = (createCrewmanDto: ICreateCrewmanDto) => {
+	const onSubmitAddForm = async (createCrewmanDto: ICreateCrewmanDto) => {
 		setAddModalVisibility(false);
-		createCrewman(createCrewmanDto);
+		setCrewmans.addCrewman(createCrewmanDto);
 	}
+
+	useEffect(() => { setCrewmans.fetchCrewmans(); }, []);
 
 	return (
 		<ContentDiv>
@@ -32,7 +33,7 @@ function CrewmanPage() {
 					</a>
 				</DataHeaderDiv>
 				<DataListRender >
-					<Crewman data={crewmans} />
+					<Crewman crewmans={crewmans} setCrewmans={setCrewmans} />
 				</DataListRender>
 				<Modal title="Add Crewman" visible={isAddModalVisible} setVisible={setAddModalVisibility}>
 					<CrewmanForm onSubmit={onSubmitAddForm} />

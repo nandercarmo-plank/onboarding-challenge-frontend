@@ -1,44 +1,47 @@
-import { Crew } from "../components/DataRenders/Crew/Crew";
-import { Crewman } from "../components/DataRenders/Crewman/Crewman";
-import { Launch } from "../components/DataRenders/Launch/Launch";
-import { Rocket } from "../components/DataRenders/Rocket/Rocket";
-import { Navbar } from "../components/Navbar/Navbar";
-import { ICrewDto } from "../dto/CrewDto";
-import { ICrewmanDto } from "../dto/CrewmanDto";
-import { ILaunchDto } from "../dto/LaunchDto";
-import { IRocketDto } from "../dto/RocketDto";
-import { getCrews } from "../services/crewService";
-import { getCrewmans } from "../services/crewmanService";
-import { getLaunchs } from "../services/launchService";
-import { getRockets } from "../services/rocketService";
-import { ContentDiv, DataDiv, DataHeaderDiv } from "./styles/styles";
+import { useEffect, useState } from "react";
+import { crewmanButton, launchButton, rocketButton } from "../resources/images";
+import { HomeCard, HomeCardsContainerDiv, HomeContentDiv, HomeLogoDiv } from "./styles/styles";
 
 function HomePage() {
+	const [isLoaded, setIsLoaded] = useState(false);
 
-	const rockets: IRocketDto[] = getRockets();
-	const crewmans: ICrewmanDto[] = getCrewmans();
-	const crews: ICrewDto[] = getCrews();
-	const launchs: ILaunchDto[] = getLaunchs();
+	const fetchData = async () => {
+		setIsLoaded(true);
+	};
+
+	useEffect(() => {
+		fetchData();
+	}, []);
 
 	return (
-		<ContentDiv>
-			<Navbar />
-			<DataDiv>
-				<DataHeaderDiv>
-					<h1>Home Page</h1>
-				</DataHeaderDiv>
-				<h2 className="h2-title">Rockets</h2>
-				<Rocket renderButtons={false} data={rockets} />
-				<h2 className="h2-title">Crewmans</h2>
-				<Crewman renderButtons={false} data={crewmans} />
-				<h2 className="h2-title">Crews</h2>
-				<Crew renderButtons={false} data={crews} />
-				<h2 className="h2-title">Launchs</h2>
-				<Launch renderButtons={false} data={launchs} />
-			</DataDiv>
-		</ContentDiv>
+		<HomeContentDiv>
+			<HomeLogoDiv>
+				<h1 className={isLoaded ? 'loaded' : ''}>
+					Plank<br />Onboarding<br />Challenge
+				</h1>
+			</HomeLogoDiv>
+			<HomeCardsContainerDiv>
+				<HomeCard to="/rocket">
+					<img src={rocketButton} />
+					<h4>Rockets</h4>
+				</HomeCard>
+				<HomeCard to="/crewman">
+					<img src={crewmanButton} />
+					<h4>Crewmans</h4>
+				</HomeCard>
+				<HomeCard to="/crewman">
+					<img src={crewmanButton} />
+					<h4>Crews</h4>
+				</HomeCard>
+				<HomeCard to="/launch">
+					<img src={launchButton} />
+					<h4>Launchs</h4>
+				</HomeCard>
+			</HomeCardsContainerDiv>
+		</HomeContentDiv>
 	);
 }
+
 
 export {
 	HomePage

@@ -1,34 +1,43 @@
+import { del, get, post, put } from "../api/api";
 import { ICreateCrewmanDto, ICrewmanDto, IUpdateCrewmanDto } from "../dto/CrewmanDto";
 
-function getCrewmans(): ICrewmanDto[] {
-	return [
-		{ "id": 1, "name": "Luffy", "patent": "Capitão" },
-		{ "id": 2, "name": "Zoro", "patent": "Primeiro imediato" },
-		{ "id": 3, "name": "Nami", "patent": "Navegadora" },
-		{ "id": 4, "name": "Naruto", "patent": "Hokage" },
-		{ "id": 5, "name": "Sakura", "patent": "Kunoich" },
-		{ "id": 6, "name": "Sasuke", "patent": "Jounin" },
-		{ "id": 7, "name": "Kakashi", "patent": "Ambu" },
-		{ "id": 12, "name": "Teste 2", "patent": "Crew" },
-		{ "id": 11, "name": "Crewman", "patent": "Captain" }
-	];
+const PATH = "crewman";
+
+async function getCrewmans(): Promise<ICrewmanDto[]> {
+	try {
+		return await get<ICrewmanDto>(PATH);
+	} catch (err) {
+		throw "Sorry, an error ocurred!";
+	}
 }
 
-function createCrewman(createCrewmanDto: ICreateCrewmanDto): void {
-	console.log(createCrewmanDto);
+async function sendCreateCrewman(createCrewmanDto: ICreateCrewmanDto): Promise<boolean> {
+	try {
+		return post<ICreateCrewmanDto>(PATH, createCrewmanDto);
+	} catch (err) {
+		throw "Sorry, an error ocurred!";
+	}
 }
 
-function updateCrewman(crewmanId: number | undefined, updateCrewmanDto: IUpdateCrewmanDto): void {
-	console.log(crewmanId, updateCrewmanDto);
+async function sendUpdateCrewman(crewmanId: number, updateCrewmanDto: IUpdateCrewmanDto): Promise<boolean> {
+	try {
+		return put<IUpdateCrewmanDto>(PATH, crewmanId, updateCrewmanDto);
+	} catch (err) {
+		throw "Sorry, crewman could not be updated!";
+	}
 }
 
-function deleteCrewman(crewmanId: number): void {
-	console.log(`Delete crewman ${crewmanId}`);
+async function sendDeleteCrewman(crewmanId: number): Promise<boolean> {
+	try {
+		return del(PATH, crewmanId);
+	} catch (err) {
+		throw "Sorry, an error ocurred!";
+	}
 }
 
 export {
 	getCrewmans,
-	createCrewman,
-	updateCrewman,
-	deleteCrewman
+	sendCreateCrewman,
+	sendUpdateCrewman,
+	sendDeleteCrewman
 };

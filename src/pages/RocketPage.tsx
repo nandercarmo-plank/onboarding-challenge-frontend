@@ -1,24 +1,25 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { DataListRender } from "../components/DataListRender/DataListRender";
 import { Rocket } from "../components/DataRenders/Rocket/Rocket";
 import { RocketForm } from "../components/Forms/Rocket/RocketForm";
 import { Modal } from "../components/Modal/Modal";
 import { Navbar } from "../components/Navbar/Navbar";
-import { ICreateRocketDto, IRocketDto } from "../dto/RocketDto";
+import { ICreateRocketDto } from "../dto/RocketDto";
+import { useRocket } from "../hooks/useRocket";
 import { addButton } from "../resources/images";
-import { createRocket, getRockets } from "../services/rocketService";
 import { ContentDiv, DataDiv, DataHeaderDiv } from "./styles/styles";
 
 function RocketPage() {
 
 	const [isAddModalVisible, setAddModalVisibility] = useState(false);
+	const [rockets, setRockets] = useRocket([]);
 
-	const rockets: IRocketDto[] = getRockets();
-
-	const onSubmitAddForm = (createRocketDto: ICreateRocketDto) => {
+	const onSubmitAddForm = async (createRocketDto: ICreateRocketDto) => {
 		setAddModalVisibility(false);
-		createRocket(createRocketDto);
+		setRockets.addRocket(createRocketDto);
 	}
+
+	useEffect(() => { setRockets.fetchRockets(); }, []);
 
 	return (
 		<ContentDiv>
@@ -32,7 +33,7 @@ function RocketPage() {
 					</a>
 				</DataHeaderDiv>
 				<DataListRender >
-					<Rocket data={rockets} />
+					<Rocket rockets={rockets} setRockets={setRockets} />
 				</DataListRender>
 				<Modal title="Add Rocket" visible={isAddModalVisible} setVisible={setAddModalVisibility}>
 					<RocketForm onSubmit={onSubmitAddForm} />

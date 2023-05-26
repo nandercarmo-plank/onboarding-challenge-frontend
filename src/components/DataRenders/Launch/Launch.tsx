@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { ILaunchDto, IUpdateLaunchDto } from "../../../dto/LaunchDto";
+import { IUseLaunch } from "../../../hooks/useLaunch";
 import { deleteButton, editButton } from "../../../resources/images";
-import { deleteLaunch, updateLaunch } from "../../../services/launchService";
 import { LaunchForm } from "../../Forms/Launch/LaunchForm";
 import { Modal } from "../../Modal/Modal";
 import { Crew } from "../Crew/Crew";
@@ -11,17 +11,26 @@ import { ListDiv, ListItem, ListItemContainerDiv, ListItemData, ListItemImage } 
 interface ILaunchProps {
 	isSubItem?: boolean;
 	renderButtons?: boolean;
-	data: ILaunchDto[];
+	launchs: ILaunchDto[];
+	setLaunchs?: IUseLaunch;
 }
 
-function Launch({ isSubItem = false, renderButtons = true, data }: ILaunchProps) {
+function Launch({ isSubItem = false, renderButtons = true, launchs, setLaunchs }: ILaunchProps) {
 
 	const [isUpdateModalVisible, setUpdateModalVisibility] = useState(false);
 	const [clickedLaunch, setClickedLaunch] = useState<ILaunchDto>();
 
-	const onSubmitUpdateForm = (updateLaunchDto: IUpdateLaunchDto) => {
-		setUpdateModalVisibility(false);
-		updateLaunch(clickedLaunch?.id, updateLaunchDto);
+	const onSubmitUpdateForm = async (updateLaunchDto: IUpdateLaunchDto) => {
+		if (setLaunchs) {
+			setUpdateModalVisibility(false);
+			setLaunchs.editLaunch(clickedLaunch?.id ?? 0, updateLaunchDto);
+		}
+	}
+
+	const onDeleteLaunch = async (launchId: number) => {
+		if (setLaunchs) {
+			setLaunchs.deleteLaunch(launchId);
+		}
 	}
 
 	const openUpdateLaunchModal = (launch: ILaunchDto) => {
@@ -32,7 +41,7 @@ function Launch({ isSubItem = false, renderButtons = true, data }: ILaunchProps)
 	return (
 		<ListDiv>
 			{
-				data.map(launch => {
+				launchs.map(launch => {
 					return (
 						<ListItemContainerDiv key={launch.id}>
 							<ListItem className={isSubItem ? "sub-list-item" : "launch list-item"}>
@@ -46,13 +55,13 @@ function Launch({ isSubItem = false, renderButtons = true, data }: ILaunchProps)
 									<strong>Success:</strong> {`${launch.success}`}
 									<br />
 									<strong>Rocket:</strong>
-									<Rocket isSubItem={true} renderButtons={false} data={[launch.rocket]} />
+									<Rocket isSubItem={true} renderButtons={false} rockets={[launch.rocket]} />
 									{
 										launch.crew && (
 											<>
 												<br />
 												<strong>Crew:</strong>
-												<Crew isSubItem={true} renderButtons={false} data={[launch.crew]} />
+												<Crew isSubItem={true} renderButtons={false} crews={[launch.crew]} />
 											</>
 										)
 									}
@@ -61,7 +70,7 @@ function Launch({ isSubItem = false, renderButtons = true, data }: ILaunchProps)
 									{renderButtons && <img src={editButton} onClick={() => openUpdateLaunchModal(launch)} />}
 								</ListItemImage>
 							</ListItem>
-							{renderButtons && <img src={deleteButton} onClick={() => deleteLaunch(launch.id)} />}
+							{renderButtons && <img src={deleteButton} onClick={() => onDeleteLaunch(launch.id)} />}
 						</ListItemContainerDiv>
 					);
 				})

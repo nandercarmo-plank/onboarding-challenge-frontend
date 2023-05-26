@@ -34,7 +34,7 @@ function CrewForm({ onSubmit, crew }: CrewFormProps) {
 			<StyledLabel>Name:</StyledLabel>
 			<StyledInput type="text" placeholder="Ex: Crew III" value={name} onChange={handleOnChangeName} required />
 			<StyledLabel>Crewmans:</StyledLabel>
-			<StyledInput type="text" placeholder="Ex: 1, 2, 3" value={crewmans} onChange={handleOnChangeCrewmans} required />
+			<StyledInput type="text" placeholder="Ex: 1, 2, 3" value={crewmans} onChange={handleOnChangeCrewmans} />
 			<StyledButton type="submit">
 				<h4>Ok</h4>
 			</StyledButton>

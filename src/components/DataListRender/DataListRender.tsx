@@ -6,10 +6,6 @@ type DataListRenderProps = {
 };
 
 function DataListRender({ children }: DataListRenderProps) {
-
-	const oi = (number: number) => console.log(number)
-	oi(1)
-
 	return (
 		<>
 			<ListItemContainerDiv>{children}</ListItemContainerDiv>

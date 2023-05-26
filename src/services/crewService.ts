@@ -1,30 +1,43 @@
+import { del, get, post, put } from "../api/api";
 import { ICreateCrewDto, ICrewDto, IUpdateCrewDto } from "../dto/CrewDto";
 
-function getCrews(): ICrewDto[] {
-	return [
-		{ "id": 1, "name": "Bando do chapéu de palha", "crewmans": [{ "id": 1, "name": "Luffy", "patent": "Capitão" }, { "id": 2, "name": "Zoro", "patent": "Primeiro imediato" }, { "id": 3, "name": "Nami", "patent": "Navegadora" }] },
-		{ "id": 2, "name": "Time 7", "crewmans": [{ "id": 4, "name": "Naruto", "patent": "Hokage" }, { "id": 5, "name": "Sakura", "patent": "Kunoich" }, { "id": 6, "name": "Sasuke", "patent": "Jounin" }, { "id": 7, "name": "Kakashi", "patent": "Ambu" }] },
-		{ "id": 6, "name": "Crew Test 1", "crewmans": [{ "id": 1, "name": "Luffy", "patent": "Capitão" }, { "id": 3, "name": "Nami", "patent": "Navegadora" }, { "id": 4, "name": "Naruto", "patent": "Hokage" }] },
-		{ "id": 7, "name": "Crew Test 2", "crewmans": [{ "id": 1, "name": "Luffy", "patent": "Capitão" }, { "id": 2, "name": "Zoro", "patent": "Primeiro imediato" }, { "id": 4, "name": "Naruto", "patent": "Hokage" }] },
-		{ "id": 8, "name": "New Crew 1", "crewmans": [{ "id": 2, "name": "Zoro", "patent": "Primeiro imediato" }, { "id": 5, "name": "Sakura", "patent": "Kunoich" }] }
-	];
+const PATH = "crew";
+
+async function getCrews(): Promise<ICrewDto[]> {
+	try {
+		return await get<ICrewDto>(PATH);
+	} catch (err) {
+		throw "Sorry, an error ocurred!";
+	}
 }
 
-function createCrew(createCrewDto: ICreateCrewDto): void {
-	console.log(createCrewDto);
+async function sendCreateCrew(createCrewDto: ICreateCrewDto): Promise<boolean> {
+	try {
+		return post<ICreateCrewDto>(PATH, createCrewDto);
+	} catch (err) {
+		throw "Sorry, an error ocurred!";
+	}
 }
 
-function updateCrew(crewId: number | undefined, updateCrewDto: IUpdateCrewDto): void {
-	console.log(crewId, updateCrewDto);
+async function sendUpdateCrew(crewId: number, updateCrewDto: IUpdateCrewDto): Promise<boolean> {
+	try {
+		return put<IUpdateCrewDto>(PATH, crewId, updateCrewDto);
+	} catch (err) {
+		throw "Sorry, crew could not be updated!";
+	}
 }
 
-function deleteCrew(crewId: number): void {
-	console.log(`Delete crew ${crewId}`);
+async function sendDeleteCrew(crewId: number): Promise<boolean> {
+	try {
+		return del(PATH, crewId);
+	} catch (err) {
+		throw "Sorry, an error ocurred!";
+	}
 }
 
 export {
 	getCrews,
-	createCrew,
-	updateCrew,
-	deleteCrew
+	sendCreateCrew,
+	sendUpdateCrew,
+	sendDeleteCrew
 };

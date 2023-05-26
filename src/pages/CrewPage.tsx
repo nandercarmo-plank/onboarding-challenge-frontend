@@ -1,24 +1,25 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { DataListRender } from "../components/DataListRender/DataListRender";
 import { Crew } from "../components/DataRenders/Crew/Crew";
 import { CrewForm } from "../components/Forms/Crew/CrewForm";
 import { Modal } from "../components/Modal/Modal";
 import { Navbar } from "../components/Navbar/Navbar";
-import { ICreateCrewDto, ICrewDto } from "../dto/CrewDto";
+import { ICreateCrewDto } from "../dto/CrewDto";
+import { useCrew } from "../hooks/useCrew";
 import { addButton } from "../resources/images";
-import { createCrew, getCrews } from "../services/crewService";
 import { ContentDiv, DataDiv, DataHeaderDiv } from "./styles/styles";
 
 function CrewPage() {
 
 	const [isAddModalVisible, setAddModalVisibility] = useState(false);
+	const [crews, setCrews] = useCrew([]);
 
-	const crews: ICrewDto[] = getCrews();
-
-	const onSubmitAddForm = (createCrewDto: ICreateCrewDto) => {
+	const onSubmitAddForm = async (createCrewDto: ICreateCrewDto) => {
 		setAddModalVisibility(false);
-		createCrew(createCrewDto);
+		setCrews.addCrew(createCrewDto);
 	}
+
+	useEffect(() => { setCrews.fetchCrews(); }, []);
 
 	return (
 		<ContentDiv>
@@ -32,7 +33,7 @@ function CrewPage() {
 					</a>
 				</DataHeaderDiv>
 				<DataListRender >
-					<Crew data={crews} />
+					<Crew crews={crews} setCrews={setCrews} />
 				</DataListRender>
 				<Modal title="Add Crew" visible={isAddModalVisible} setVisible={setAddModalVisibility}>
 					<CrewForm onSubmit={onSubmitAddForm} />

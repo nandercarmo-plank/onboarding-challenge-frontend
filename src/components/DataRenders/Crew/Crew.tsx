@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { ICrewDto, IUpdateCrewDto } from "../../../dto/CrewDto";
+import { IUseCrew } from "../../../hooks/useCrew";
 import { deleteButton, editButton } from "../../../resources/images";
-import { deleteCrew, updateCrew } from "../../../services/crewService";
 import { CrewForm } from "../../Forms/Crew/CrewForm";
 import { Modal } from "../../Modal/Modal";
 import { Crewman } from "../Crewman/Crewman";
@@ -10,17 +10,26 @@ import { ListDiv, ListItem, ListItemContainerDiv, ListItemData, ListItemImage } 
 interface ICrewProps {
 	isSubItem?: boolean;
 	renderButtons?: boolean;
-	data: ICrewDto[];
+	crews: ICrewDto[];
+	setCrews?: IUseCrew;
 }
 
-function Crew({ isSubItem = false, renderButtons = true, data }: ICrewProps) {
+function Crew({ isSubItem = false, renderButtons = true, crews, setCrews }: ICrewProps) {
 
 	const [isUpdateModalVisible, setUpdateModalVisibility] = useState(false);
 	const [clickedCrew, setClickedCrew] = useState<ICrewDto>();
 
-	const onSubmitUpdateForm = (updateCrewDto: IUpdateCrewDto) => {
-		setUpdateModalVisibility(false);
-		updateCrew(clickedCrew?.id, updateCrewDto);
+	const onSubmitUpdateForm = async (updateCrewDto: IUpdateCrewDto) => {
+		if (setCrews) {
+			setUpdateModalVisibility(false);
+			setCrews.editCrew(clickedCrew?.id ?? 0, updateCrewDto);
+		}
+	}
+
+	const onDeleteCrew = async (crewId: number) => {
+		if (setCrews) {
+			setCrews.deleteCrew(crewId);
+		}
 	}
 
 	const openUpdateCrewModal = (crew: ICrewDto) => {
@@ -31,7 +40,7 @@ function Crew({ isSubItem = false, renderButtons = true, data }: ICrewProps) {
 	return (
 		<ListDiv>
 			{
-				data.map(crew => {
+				crews.map(crew => {
 					return (
 						<ListItemContainerDiv key={crew.id}>
 							<ListItem className={isSubItem ? "sub-list-item" : "crew list-item"}>
@@ -40,17 +49,19 @@ function Crew({ isSubItem = false, renderButtons = true, data }: ICrewProps) {
 									<br />
 									<strong>Name:</strong> {crew.name}
 									<br />
-									<strong>Crewmans:</strong>
-									<br />
 									{
-										crew.crewmans && <Crewman isSubItem={true} renderButtons={false} data={crew.crewmans} />
+										(crew.crewmans?.length) ? <>
+											<strong>Crewmans:</strong>
+											<br />
+											<Crewman isSubItem={true} renderButtons={false} crewmans={crew.crewmans} />
+										</> : <></>
 									}
 								</ListItemData>
 								<ListItemImage>
 									{renderButtons && <img src={editButton} onClick={() => openUpdateCrewModal(crew)} />}
 								</ListItemImage>
 							</ListItem>
-							{renderButtons && <img src={deleteButton} onClick={() => deleteCrew(crew.id)} />}
+							{renderButtons && <img src={deleteButton} onClick={() => onDeleteCrew(crew.id)} />}
 						</ListItemContainerDiv>
 					);
 				})
