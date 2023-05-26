@@ -4,7 +4,7 @@ import { IUseRocket } from "../../../hooks/useRocket";
 import { deleteButton, editButton } from "../../../resources/images";
 import { RocketForm } from "../../Forms/Rocket/RocketForm";
 import { Modal } from "../../Modal/Modal";
-import { ListDiv, ListItem, ListItemContainerDiv, ListItemData, ListItemImage } from "../styles";
+import { ListDiv, ListItem, ListItemContainerDiv, ListItemData, ListItemImage } from "../styles/styles";
 
 interface IRocketProps {
 	isSubItem?: boolean;

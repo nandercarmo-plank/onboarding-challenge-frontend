@@ -4,7 +4,7 @@ import { IUseCrewman } from "../../../hooks/useCrewman";
 import { deleteButton, editButton } from "../../../resources/images";
 import { CrewmanForm } from "../../Forms/Crewman/CrewmanForm";
 import { Modal } from "../../Modal/Modal";
-import { ListDiv, ListItem, ListItemContainerDiv, ListItemData, ListItemImage } from "../styles";
+import { ListDiv, ListItem, ListItemContainerDiv, ListItemData, ListItemImage } from "../styles/styles";
 
 interface ICrewmanProps {
 	isSubItem?: boolean;

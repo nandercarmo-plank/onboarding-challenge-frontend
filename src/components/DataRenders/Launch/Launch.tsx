@@ -6,7 +6,7 @@ import { LaunchForm } from "../../Forms/Launch/LaunchForm";
 import { Modal } from "../../Modal/Modal";
 import { Crew } from "../Crew/Crew";
 import { Rocket } from "../Rocket/Rocket";
-import { ListDiv, ListItem, ListItemContainerDiv, ListItemData, ListItemImage } from "../styles";
+import { ListDiv, ListItem, ListItemContainerDiv, ListItemData, ListItemImage } from "../styles/styles";
 
 interface ILaunchProps {
 	isSubItem?: boolean;

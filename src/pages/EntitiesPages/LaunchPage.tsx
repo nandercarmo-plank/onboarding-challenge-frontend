@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { DataListRender } from "../../components/DataListRender/DataListRender";
+import { DataListRender } from "../../components/DataRenders/DataListRender";
 import { Launch } from "../../components/DataRenders/Launch/Launch";
 import { LaunchForm } from "../../components/Forms/Launch/LaunchForm";
 import { Modal } from "../../components/Modal/Modal";

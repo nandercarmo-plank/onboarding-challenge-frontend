@@ -5,7 +5,7 @@ import { deleteButton, editButton } from "../../../resources/images";
 import { CrewForm } from "../../Forms/Crew/CrewForm";
 import { Modal } from "../../Modal/Modal";
 import { Crewman } from "../Crewman/Crewman";
-import { ListDiv, ListItem, ListItemContainerDiv, ListItemData, ListItemImage } from "../styles";
+import { ListDiv, ListItem, ListItemContainerDiv, ListItemData, ListItemImage } from "../styles/styles";
 
 interface ICrewProps {
 	isSubItem?: boolean;
