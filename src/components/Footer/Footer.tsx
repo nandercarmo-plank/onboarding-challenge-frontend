@@ -2,7 +2,7 @@ import { GitHub, LinkedIn, Wysiwyg } from "@mui/icons-material";
 import { Box, Container, Grid, IconButton, Link, Typography } from "@mui/material";
 import { theme } from "../../styles/theme";
 
-function Footer() {
+export const Footer = () => {
 	return (
 		<Box
 			sx={{
@@ -55,7 +55,3 @@ function Footer() {
 		</Box>
 	);
 }
-
-export {
-	Footer
-};

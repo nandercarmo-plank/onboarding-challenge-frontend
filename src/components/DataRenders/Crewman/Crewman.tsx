@@ -13,7 +13,7 @@ interface ICrewmanProps {
 	setCrewmans?: IUseCrewman;
 }
 
-function Crewman({ isSubItem = false, renderButtons = true, crewmans, setCrewmans }: ICrewmanProps) {
+export const Crewman = ({ isSubItem = false, renderButtons = true, crewmans, setCrewmans }: ICrewmanProps) => {
 
 	const [isUpdateModalVisible, setUpdateModalVisibility] = useState(false);
 	const [clickedCrewman, setClickedCrewman] = useState<ICrewmanDto>();
@@ -65,7 +65,3 @@ function Crewman({ isSubItem = false, renderButtons = true, crewmans, setCrewman
 		</ListDiv>
 	);
 }
-
-export {
-	Crewman
-};

@@ -9,7 +9,7 @@ import { useLaunch } from "../hooks/useLaunch";
 import { addButton } from "../resources/images";
 import { ContentDiv, DataDiv, DataHeaderDiv } from "./styles/styles";
 
-function LaunchPage() {
+export const LaunchPage = () => {
 
 	const [isAddModalVisible, setAddModalVisibility] = useState(false);
 	const [launchs, setLaunchs] = useLaunch([]);
@@ -26,7 +26,7 @@ function LaunchPage() {
 			<Navbar />
 			<DataDiv>
 				<DataHeaderDiv>
-					<h1>Launch Page</h1>
+					<h1>Launchs</h1>
 					<a href="#" onClick={() => setAddModalVisibility(true)}>
 						<h4>Add</h4>
 						<img src={addButton} />
@@ -42,7 +42,3 @@ function LaunchPage() {
 		</ContentDiv>
 	);
 }
-
-export {
-	LaunchPage
-};

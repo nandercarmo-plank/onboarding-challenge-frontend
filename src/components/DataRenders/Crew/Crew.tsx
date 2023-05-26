@@ -14,7 +14,7 @@ interface ICrewProps {
 	setCrews?: IUseCrew;
 }
 
-function Crew({ isSubItem = false, renderButtons = true, crews, setCrews }: ICrewProps) {
+export const Crew = ({ isSubItem = false, renderButtons = true, crews, setCrews }: ICrewProps) => {
 
 	const [isUpdateModalVisible, setUpdateModalVisibility] = useState(false);
 	const [clickedCrew, setClickedCrew] = useState<ICrewDto>();
@@ -72,7 +72,3 @@ function Crew({ isSubItem = false, renderButtons = true, crews, setCrews }: ICre
 		</ListDiv>
 	);
 }
-
-export {
-	Crew
-};

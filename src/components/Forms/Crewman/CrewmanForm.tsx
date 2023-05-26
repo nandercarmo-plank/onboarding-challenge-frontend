@@ -7,7 +7,7 @@ type CrewmanFormProps = {
 	onSubmit: (crewman: ICreateCrewmanDto) => void;
 };
 
-function CrewmanForm({ onSubmit, crewman }: CrewmanFormProps) {
+export const CrewmanForm = ({ onSubmit, crewman }: CrewmanFormProps) => {
 
 	const [name, setName] = useState<string>(crewman?.name ?? "");
 	const [patent, setPatent] = useState<string>(crewman?.patent ?? "");
@@ -41,7 +41,3 @@ function CrewmanForm({ onSubmit, crewman }: CrewmanFormProps) {
 		</StyledForm>
 	);
 }
-
-export {
-	CrewmanForm
-};

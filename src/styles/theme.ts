@@ -1,4 +1,4 @@
-const theme = {
+export const theme = {
 	fontColor: '#333',
 	backgroundPrimary: '#fff',
 	backgroundSecondary: '#eee',
@@ -14,8 +14,4 @@ const theme = {
 	buttonColor: '#6edf7d',
 	buttonHoverColor: '#47b155',
 	buttonTextColor: '#fff',
-};
-
-export {
-	theme
 };

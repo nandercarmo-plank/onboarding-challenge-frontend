@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { crewmanButton, launchButton, rocketButton } from "../resources/images";
 import { HomeCard, HomeCardsContainerDiv, HomeContentDiv, HomeLogoDiv } from "./styles/styles";
 
-function HomePage() {
+export const HomePage = () => {
 	const [isLoaded, setIsLoaded] = useState(false);
 
 	const fetchData = async () => {
@@ -41,8 +41,3 @@ function HomePage() {
 		</HomeContentDiv>
 	);
 }
-
-
-export {
-	HomePage
-};

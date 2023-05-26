@@ -3,7 +3,7 @@ import { ICreateCrewDto, ICrewDto, IUpdateCrewDto } from "../dto/CrewDto";
 
 const PATH = "crew";
 
-async function getCrews(): Promise<ICrewDto[]> {
+export const getCrews = async (): Promise<ICrewDto[]> => {
 	try {
 		return await get<ICrewDto>(PATH);
 	} catch (err) {
@@ -11,33 +11,14 @@ async function getCrews(): Promise<ICrewDto[]> {
 	}
 }
 
-async function sendCreateCrew(createCrewDto: ICreateCrewDto): Promise<boolean> {
-	try {
-		return post<ICreateCrewDto>(PATH, createCrewDto);
-	} catch (err) {
-		throw "Sorry, an error ocurred!";
-	}
+export const sendCreateCrew = async (createCrewDto: ICreateCrewDto): Promise<boolean> => {
+	return post<ICreateCrewDto>(PATH, createCrewDto);
 }
 
-async function sendUpdateCrew(crewId: number, updateCrewDto: IUpdateCrewDto): Promise<boolean> {
-	try {
-		return put<IUpdateCrewDto>(PATH, crewId, updateCrewDto);
-	} catch (err) {
-		throw "Sorry, crew could not be updated!";
-	}
+export const sendUpdateCrew = async (crewId: number, updateCrewDto: IUpdateCrewDto): Promise<boolean> => {
+	return put<IUpdateCrewDto>(PATH, crewId, updateCrewDto);
 }
 
-async function sendDeleteCrew(crewId: number): Promise<boolean> {
-	try {
-		return del(PATH, crewId);
-	} catch (err) {
-		throw "Sorry, an error ocurred!";
-	}
+export const sendDeleteCrew = async (crewId: number): Promise<boolean> => {
+	return del(PATH, crewId);
 }
-
-export {
-	getCrews,
-	sendCreateCrew,
-	sendUpdateCrew,
-	sendDeleteCrew
-};

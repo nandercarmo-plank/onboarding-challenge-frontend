@@ -1,6 +1,6 @@
 import { styled } from "styled-components";
 
-const FooterDiv = styled.div`
+export const FooterDiv = styled.div`
 	display: flex;
 	height: 100px;
 	justify-content: center;
@@ -11,7 +11,3 @@ const FooterDiv = styled.div`
 		font-size: 16px;
 	}
 `;
-
-export {
-	FooterDiv
-};

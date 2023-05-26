@@ -1,14 +1,14 @@
 import { Link } from 'react-router-dom';
 import { styled } from "styled-components";
 
-const ContentDiv = styled.div`
+export const ContentDiv = styled.div`
 	flex: 1;
 	display: flex;
 	height: 100%;
 	justify-content: center;
 `;
 
-const DataDiv = styled.div`
+export const DataDiv = styled.div`
 	flex: 1;
 	display: flex;
 	flex-direction: column;
@@ -24,7 +24,7 @@ const DataDiv = styled.div`
 	}
 `;
 
-const DataHeaderDiv = styled.div`
+export const DataHeaderDiv = styled.div`
 	display: flex;
 	flex-direction: row;
 	text-align: center;
@@ -72,7 +72,7 @@ const DataHeaderDiv = styled.div`
 	}
 `;
 
-const NotFoundDiv = styled.div`
+export const NotFoundDiv = styled.div`
 	display: flex;
 	flex-direction: column;
 	height: 100%;
@@ -93,7 +93,7 @@ const NotFoundDiv = styled.div`
 	}
 `;
 
-const HomeContentDiv = styled.div`
+export const HomeContentDiv = styled.div`
 	display: flex;
 	flex-direction: column;
 	flex-grow: 1;
@@ -102,7 +102,7 @@ const HomeContentDiv = styled.div`
 	align-items: center;
 `;
 
-const HomeLogoDiv = styled.div`
+export const HomeLogoDiv = styled.div`
 	display: flex;
 	height: 500px;
 	width: 100%;
@@ -130,7 +130,7 @@ const HomeLogoDiv = styled.div`
 	}
 `;
 
-const HomeCardsContainerDiv = styled.div`
+export const HomeCardsContainerDiv = styled.div`
 	display: flex;
 	justify-content: space-evenly;
 	align-items:center;
@@ -138,7 +138,7 @@ const HomeCardsContainerDiv = styled.div`
 	margin: 100px 0px;
 `;
 
-const StyledLink = styled(Link)`
+export const StyledLink = styled(Link)`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -164,20 +164,9 @@ const StyledLink = styled(Link)`
 	}
 `;
 
-const HomeCard = styled(StyledLink)`
+export const HomeCard = styled(StyledLink)`
   &:hover {
 	cursor: pointer;
     background-color: #ccc;
   }
 `;
-
-export {
-	ContentDiv,
-	DataDiv,
-	DataHeaderDiv,
-	NotFoundDiv,
-	HomeContentDiv,
-	HomeLogoDiv,
-	HomeCardsContainerDiv,
-	HomeCard
-};

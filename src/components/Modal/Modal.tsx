@@ -8,7 +8,7 @@ type ModalProps = {
 	title: string;
 };
 
-function Modal({ children, visible, setVisible, title }: ModalProps) {
+export const Modal = ({ children, visible, setVisible, title }: ModalProps) => {
 	return (
 		<ModalDiv style={{ visibility: visible ? "visible" : "hidden" }}>
 			<ModalContentDiv>
@@ -21,7 +21,3 @@ function Modal({ children, visible, setVisible, title }: ModalProps) {
 		</ModalDiv>
 	);
 }
-
-export {
-	Modal
-};

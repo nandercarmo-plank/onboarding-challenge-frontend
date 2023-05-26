@@ -3,7 +3,7 @@ import { ICreateRocketDto, IRocketDto, IUpdateRocketDto } from "../dto/RocketDto
 
 const PATH = "rocket";
 
-async function getRockets(): Promise<IRocketDto[]> {
+export const getRockets = async (): Promise<IRocketDto[]> => {
 	try {
 		return await get<IRocketDto>(PATH);
 	} catch (err) {
@@ -11,38 +11,14 @@ async function getRockets(): Promise<IRocketDto[]> {
 	}
 }
 
-async function sendCreateRocket(createRocketDto: ICreateRocketDto): Promise<boolean> {
-	try {
-		await post<ICreateRocketDto>(PATH, createRocketDto);
-		return true;
-	} catch (err) {
-		return false;
-	}
+export const sendCreateRocket = async (createRocketDto: ICreateRocketDto): Promise<boolean> => {
+	return post<ICreateRocketDto>(PATH, createRocketDto);
 }
 
-async function sendUpdateRocket(rocketId: number, updateRocketDto: IUpdateRocketDto): Promise<boolean> {
-	try {
-		await put<IUpdateRocketDto>(PATH, rocketId, updateRocketDto);
-		return true;
-	} catch (err) {
-		return false;
-		throw "Sorry, rocket could not be updated!";
-	}
+export const sendUpdateRocket = async (rocketId: number, updateRocketDto: IUpdateRocketDto): Promise<boolean> => {
+	return put<IUpdateRocketDto>(PATH, rocketId, updateRocketDto);
 }
 
-async function sendDeleteRocket(rocketId: number): Promise<boolean> {
-	try {
-		await del(PATH, rocketId);
-		return true;
-	} catch (err) {
-		return false;
-		throw "Sorry, rocket could not be deleted!";
-	}
+export const sendDeleteRocket = async (rocketId: number): Promise<boolean> => {
+	return del(PATH, rocketId);
 }
-
-export {
-	getRockets,
-	sendCreateRocket,
-	sendUpdateRocket,
-	sendDeleteRocket
-};

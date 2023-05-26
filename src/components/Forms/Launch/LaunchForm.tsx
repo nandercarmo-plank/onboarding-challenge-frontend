@@ -7,7 +7,7 @@ type LaunchFormProps = {
 	onSubmit: (launch: ICreateLaunchDto) => void;
 };
 
-function LaunchForm({ onSubmit, launch }: LaunchFormProps) {
+export const LaunchForm = ({ onSubmit, launch }: LaunchFormProps) => {
 
 	const [launchCode, setLaunchCode] = useState<string>(launch?.launchCode ?? "");
 	const [date, setDate] = useState<string>(launch?.date ?? "");
@@ -62,7 +62,3 @@ function LaunchForm({ onSubmit, launch }: LaunchFormProps) {
 		</StyledForm>
 	);
 }
-
-export {
-	LaunchForm
-};

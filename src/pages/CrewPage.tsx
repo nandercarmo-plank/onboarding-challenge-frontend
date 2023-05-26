@@ -9,7 +9,7 @@ import { useCrew } from "../hooks/useCrew";
 import { addButton } from "../resources/images";
 import { ContentDiv, DataDiv, DataHeaderDiv } from "./styles/styles";
 
-function CrewPage() {
+export const CrewPage = () => {
 
 	const [isAddModalVisible, setAddModalVisibility] = useState(false);
 	const [crews, setCrews] = useCrew([]);
@@ -26,7 +26,7 @@ function CrewPage() {
 			<Navbar />
 			<DataDiv>
 				<DataHeaderDiv>
-					<h1>Crew Page</h1>
+					<h1>Crews</h1>
 					<a href="#" onClick={() => setAddModalVisibility(true)}>
 						<h4>Add</h4>
 						<img src={addButton} />
@@ -42,7 +42,3 @@ function CrewPage() {
 		</ContentDiv>
 	);
 }
-
-export {
-	CrewPage
-};

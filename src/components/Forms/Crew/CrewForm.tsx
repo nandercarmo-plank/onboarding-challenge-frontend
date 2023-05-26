@@ -7,7 +7,7 @@ type CrewFormProps = {
 	onSubmit: (crew: ICreateCrewDto) => void;
 };
 
-function CrewForm({ onSubmit, crew }: CrewFormProps) {
+export const CrewForm = ({ onSubmit, crew }: CrewFormProps) => {
 
 	const [name, setName] = useState<string>(crew?.name ?? "");
 	const [crewmans, setCrewmans] = useState<string>(crew?.crewmans?.map(crewman => crewman.id).join(", ") ?? "");
@@ -41,7 +41,3 @@ function CrewForm({ onSubmit, crew }: CrewFormProps) {
 		</StyledForm>
 	);
 }
-
-export {
-	CrewForm
-};

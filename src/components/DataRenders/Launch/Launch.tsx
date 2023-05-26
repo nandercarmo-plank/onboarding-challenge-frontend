@@ -15,7 +15,7 @@ interface ILaunchProps {
 	setLaunchs?: IUseLaunch;
 }
 
-function Launch({ isSubItem = false, renderButtons = true, launchs, setLaunchs }: ILaunchProps) {
+export const Launch = ({ isSubItem = false, renderButtons = true, launchs, setLaunchs }: ILaunchProps) => {
 
 	const [isUpdateModalVisible, setUpdateModalVisibility] = useState(false);
 	const [clickedLaunch, setClickedLaunch] = useState<ILaunchDto>();
@@ -81,7 +81,3 @@ function Launch({ isSubItem = false, renderButtons = true, launchs, setLaunchs }
 		</ListDiv>
 	);
 }
-
-export {
-	Launch
-};

@@ -1,17 +1,17 @@
 import { styled } from "styled-components";
 
-const StyledForm = styled.form`
+export const StyledForm = styled.form`
 	display: flex;
 	flex-direction: column;	
 `;
 
-const StyledLabel = styled.label`
+export const StyledLabel = styled.label`
 	margin: 10px 0px;
 	font-size: 18px;
 	font-weight: bold;
 `;
 
-const StyledInput = styled.input`
+export const StyledInput = styled.input`
 	margin-bottom: 20px;
 	font-size: 18px;
 	padding: 10px;
@@ -19,7 +19,7 @@ const StyledInput = styled.input`
 	border-radius: 10px;
 `;
 
-const StyledSelect = styled.select`
+export const StyledSelect = styled.select`
 	margin-bottom: 20px;
 	font-size: 18px;
 	padding: 10px 30px 10px 10px;
@@ -34,7 +34,7 @@ const StyledSelect = styled.select`
 	background-position: right 10px center;
 `;
 
-const StyledButton = styled.button`
+export const StyledButton = styled.button`
 	align-self: center;
 	width: 140px;
 	height: 50px;
@@ -55,11 +55,3 @@ const StyledButton = styled.button`
 		background-color: ${props => props.theme.buttonHoverColor} ;
 	}
 `;
-
-export {
-	StyledForm,
-	StyledLabel,
-	StyledInput,
-	StyledSelect,
-	StyledButton
-};

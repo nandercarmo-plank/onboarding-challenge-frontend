@@ -13,7 +13,7 @@ interface IRocketProps {
 	setRockets?: IUseRocket;
 }
 
-function Rocket({ isSubItem = false, renderButtons = true, rockets, setRockets }: IRocketProps) {
+export const Rocket = ({ isSubItem = false, renderButtons = true, rockets, setRockets }: IRocketProps) => {
 
 	const [isUpdateModalVisible, setUpdateModalVisibility] = useState(false);
 	const [clickedRocket, setClickedRocket] = useState<IRocketDto>();
@@ -63,7 +63,3 @@ function Rocket({ isSubItem = false, renderButtons = true, rockets, setRockets }
 		</ListDiv>
 	);
 }
-
-export {
-	Rocket
-};

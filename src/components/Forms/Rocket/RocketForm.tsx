@@ -7,7 +7,7 @@ type RocketFormProps = {
 	onSubmit: (rocket: ICreateRocketDto) => void;
 };
 
-function RocketForm({ onSubmit, rocket }: RocketFormProps) {
+export const RocketForm = ({ onSubmit, rocket }: RocketFormProps) => {
 
 	const [name, setName] = useState<string>(rocket?.name ?? "");
 
@@ -31,7 +31,3 @@ function RocketForm({ onSubmit, rocket }: RocketFormProps) {
 		</StyledForm>
 	);
 }
-
-export {
-	RocketForm
-};

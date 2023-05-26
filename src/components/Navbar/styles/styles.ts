@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-const Header = styled.header`
+export const Header = styled.header`
 	background-color: ${props => props.theme.backgroundSecondary};
 	padding: 5px 15px;
 	border-radius: 10px;
@@ -24,7 +24,7 @@ const Header = styled.header`
 	}
 `;
 
-const StyledLogoImage = styled(Link)`
+export const StyledLogoImage = styled(Link)`
 	img {
 		display: flex;
 		align-self: center;
@@ -33,7 +33,7 @@ const StyledLogoImage = styled(Link)`
 	}
 `;
 
-const StyledLink = styled(Link)`
+export const StyledLink = styled(Link)`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -49,7 +49,7 @@ const StyledLink = styled(Link)`
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
 `;
 
-const StyledImage = styled.img`
+export const StyledImage = styled.img`
   display: flex;
   justify-self: center;
   height: 30px;
@@ -57,30 +57,19 @@ const StyledImage = styled.img`
   margin: 0;
 `;
 
-const StyledNavItem = styled.li`
+export const StyledNavItem = styled.li`
   display: flex;
   margin-bottom: 15px;
 `;
 
-const StyledNav = styled.ul`
+export const StyledNav = styled.ul`
   text-align: center;
   padding: 0;
   list-style: none;
 `;
 
-const StyledLinkHover = styled(StyledLink)`
+export const StyledLinkHover = styled(StyledLink)`
   &:hover {
     background-color: #ccc;
   }
 `;
-
-
-export {
-	Header,
-	StyledLogoImage,
-	StyledLink,
-	StyledImage,
-	StyledNavItem,
-	StyledNav,
-	StyledLinkHover
-};

@@ -1,6 +1,6 @@
 import { styled } from "styled-components";
 
-const ListItemContainerDiv = styled.div`
+export const ListItemContainerDiv = styled.div`
 	display: flex;
 	flex-direction: row;
 	justify-content: start;
@@ -16,7 +16,3 @@ const ListItemContainerDiv = styled.div`
 		cursor: pointer;
 	}
 `;
-
-export {
-	ListItemContainerDiv
-};

@@ -9,7 +9,7 @@ import { useRocket } from "../hooks/useRocket";
 import { addButton } from "../resources/images";
 import { ContentDiv, DataDiv, DataHeaderDiv } from "./styles/styles";
 
-function RocketPage() {
+export const RocketPage = () => {
 
 	const [isAddModalVisible, setAddModalVisibility] = useState(false);
 	const [rockets, setRockets] = useRocket([]);
@@ -26,7 +26,7 @@ function RocketPage() {
 			<Navbar />
 			<DataDiv>
 				<DataHeaderDiv>
-					<h1>Rocket Page</h1>
+					<h1>Rockets</h1>
 					<a href="#" onClick={() => setAddModalVisibility(true)}>
 						<h4>Add</h4>
 						<img src={addButton} />
@@ -42,7 +42,3 @@ function RocketPage() {
 		</ContentDiv>
 	);
 }
-
-export {
-	RocketPage
-};

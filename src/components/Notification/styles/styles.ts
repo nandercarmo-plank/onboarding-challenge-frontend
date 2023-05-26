@@ -1,6 +1,6 @@
 import { styled } from "styled-components";
 
-const NotificationDiv = styled.div`
+export const NotificationDiv = styled.div`
 	display: flex;
 	position: fixed;
 	visibility: visible;
@@ -34,7 +34,3 @@ const NotificationDiv = styled.div`
 		background-color: #6edf7d;
 	}
 `;
-
-export {
-	NotificationDiv
-};

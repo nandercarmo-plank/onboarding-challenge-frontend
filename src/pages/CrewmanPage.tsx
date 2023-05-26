@@ -9,7 +9,7 @@ import { useCrewman } from "../hooks/useCrewman";
 import { addButton } from "../resources/images";
 import { ContentDiv, DataDiv, DataHeaderDiv } from "./styles/styles";
 
-function CrewmanPage() {
+export const CrewmanPage = () => {
 
 	const [isAddModalVisible, setAddModalVisibility] = useState(false);
 	const [crewmans, setCrewmans] = useCrewman([]);
@@ -26,7 +26,7 @@ function CrewmanPage() {
 			<Navbar />
 			<DataDiv>
 				<DataHeaderDiv>
-					<h1>Crewman Page</h1>
+					<h1>Crewmans</h1>
 					<a href="#" onClick={() => setAddModalVisibility(true)}>
 						<h4>Add</h4>
 						<img src={addButton} />
@@ -42,7 +42,3 @@ function CrewmanPage() {
 		</ContentDiv>
 	);
 }
-
-export {
-	CrewmanPage
-};

@@ -15,7 +15,13 @@ export const useCrewman = (initState: ICrewmanDto[] = []): [ICrewmanDto[], IUseC
 	const [crewmans, setCrewmans] = useState(initState);
 	const [, setNotification] = useNotification();
 
-	const fetchCrewmans = async () => setCrewmans((await getCrewmans()).sort((a, b) => a.id - b.id));
+	const fetchCrewmans = async () => {
+		try {
+			setCrewmans((await getCrewmans()).sort((a, b) => a.id - b.id));
+		} catch (err) {
+			setNotification.showNotification(`${err}`, false);
+		}
+	}
 
 	const addCrewman = async (createCrewmanDto: ICreateCrewmanDto) => {
 		const requestSucceed = await sendCreateCrewman(createCrewmanDto);

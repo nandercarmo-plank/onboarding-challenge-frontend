@@ -2,7 +2,7 @@ import axios, { AxiosResponse } from "axios";
 
 const API_URL = "http://localhost:80";
 
-async function get<T>(path: string): Promise<T[]> {
+export const get = async <T>(path: string): Promise<T[]> => {
 	const url = API_URL + (path.startsWith("/") ? path : "/" + path);
 
 	try {
@@ -10,11 +10,11 @@ async function get<T>(path: string): Promise<T[]> {
 		return response.data;
 	} catch (error) {
 		console.error(`Error while making GET request to ${url}: `, error);
-		return [];
+		throw error;
 	}
 }
 
-async function post<T>(path: string, createDto: T): Promise<boolean> {
+export const post = async <T>(path: string, createDto: T): Promise<boolean> => {
 	const url = API_URL + (path.startsWith("/") ? path : "/" + path);
 
 	try {
@@ -26,7 +26,7 @@ async function post<T>(path: string, createDto: T): Promise<boolean> {
 	}
 }
 
-async function put<T>(path: string, id: number, updateDto: T): Promise<boolean> {
+export const put = async <T>(path: string, id: number, updateDto: T): Promise<boolean> => {
 	const url = API_URL + (path.startsWith("/") ? path : "/" + path);
 
 	try {
@@ -38,7 +38,7 @@ async function put<T>(path: string, id: number, updateDto: T): Promise<boolean> 
 	}
 }
 
-async function del(path: string, id: number): Promise<boolean> {
+export const del = async (path: string, id: number): Promise<boolean> => {
 	const url = API_URL + (path.startsWith("/") ? path : "/" + path);
 
 	try {
@@ -49,5 +49,3 @@ async function del(path: string, id: number): Promise<boolean> {
 		return false;
 	}
 }
-
-export { get, post, put, del };

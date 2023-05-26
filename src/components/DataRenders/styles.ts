@@ -1,12 +1,12 @@
 import { styled } from "styled-components";
 
-const ListDiv = styled.div`
+export const ListDiv = styled.div`
 	display: flex;
 	flex-direction: column;
 	width: 100%;
 `;
 
-const ListItemContainerDiv = styled.div`
+export const ListItemContainerDiv = styled.div`
 	display: flex;
 	flex-direction: row;
 	justify-content: start;
@@ -55,7 +55,7 @@ const ListItemContainerDiv = styled.div`
 	}
 `;
 
-const ListItem = styled.div`
+export const ListItem = styled.div`
 	display: flex;
 	flex-direction: row;
 	flex-grow: 1;
@@ -63,14 +63,14 @@ const ListItem = styled.div`
 	align-items: start;
 `;
 
-const ListItemData = styled.div`
+export const ListItemData = styled.div`
 	display: block;
 	flex-direction: column;
 	width: 100%;
 	flex-grow: 1;
 `;
 
-const ListItemImage = styled.div`
+export const ListItemImage = styled.div`
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
@@ -86,11 +86,3 @@ const ListItemImage = styled.div`
 		cursor: pointer;
 	}
 `;
-
-export {
-	ListDiv,
-	ListItemContainerDiv,
-	ListItem,
-	ListItemData,
-	ListItemImage
-};

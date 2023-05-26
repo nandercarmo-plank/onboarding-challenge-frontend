@@ -3,7 +3,7 @@ import { ICreateCrewmanDto, ICrewmanDto, IUpdateCrewmanDto } from "../dto/Crewma
 
 const PATH = "crewman";
 
-async function getCrewmans(): Promise<ICrewmanDto[]> {
+export const getCrewmans = async (): Promise<ICrewmanDto[]> => {
 	try {
 		return await get<ICrewmanDto>(PATH);
 	} catch (err) {
@@ -11,33 +11,14 @@ async function getCrewmans(): Promise<ICrewmanDto[]> {
 	}
 }
 
-async function sendCreateCrewman(createCrewmanDto: ICreateCrewmanDto): Promise<boolean> {
-	try {
-		return post<ICreateCrewmanDto>(PATH, createCrewmanDto);
-	} catch (err) {
-		throw "Sorry, an error ocurred!";
-	}
+export const sendCreateCrewman = async (createCrewmanDto: ICreateCrewmanDto): Promise<boolean> => {
+	return post<ICreateCrewmanDto>(PATH, createCrewmanDto);
 }
 
-async function sendUpdateCrewman(crewmanId: number, updateCrewmanDto: IUpdateCrewmanDto): Promise<boolean> {
-	try {
-		return put<IUpdateCrewmanDto>(PATH, crewmanId, updateCrewmanDto);
-	} catch (err) {
-		throw "Sorry, crewman could not be updated!";
-	}
+export const sendUpdateCrewman = async (crewmanId: number, updateCrewmanDto: IUpdateCrewmanDto): Promise<boolean> => {
+	return put<IUpdateCrewmanDto>(PATH, crewmanId, updateCrewmanDto);
 }
 
-async function sendDeleteCrewman(crewmanId: number): Promise<boolean> {
-	try {
-		return del(PATH, crewmanId);
-	} catch (err) {
-		throw "Sorry, an error ocurred!";
-	}
+export const sendDeleteCrewman = async (crewmanId: number): Promise<boolean> => {
+	return del(PATH, crewmanId);
 }
-
-export {
-	getCrewmans,
-	sendCreateCrewman,
-	sendUpdateCrewman,
-	sendDeleteCrewman
-};

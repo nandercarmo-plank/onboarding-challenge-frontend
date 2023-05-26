@@ -1,7 +1,7 @@
 import { logo } from "../resources/images";
 import { NotFoundDiv } from "./styles/styles";
 
-function NotFoundPage() {
+export const NotFoundPage = () => {
 	return (
 		<NotFoundDiv>
 			<h1>Ooops!!!</h1>
@@ -10,7 +10,3 @@ function NotFoundPage() {
 		</NotFoundDiv>
 	);
 }
-
-export {
-	NotFoundPage
-};

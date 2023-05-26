@@ -16,9 +16,13 @@ export const useLaunch = (initState: ILaunchDto[] = []): [ILaunchDto[], IUseLaun
 	const [, setNotification] = useNotification();
 
 	const fetchLaunchs = async () => {
-		const fetchedLaunchs = (await getLaunchs()).sort((a, b) => a.id - b.id);
-		fetchedLaunchs.forEach(launch => launch.crew?.crewmans?.sort((a, b) => a.id - b.id));
-		setLaunchs(fetchedLaunchs);
+		try {
+			const fetchedLaunchs = (await getLaunchs()).sort((a, b) => a.id - b.id);
+			fetchedLaunchs.forEach(launch => launch.crew?.crewmans?.sort((a, b) => a.id - b.id));
+			setLaunchs(fetchedLaunchs);
+		} catch (err) {
+			setNotification.showNotification(`${err}`, false);
+		}
 	}
 
 	const addLaunch = async (createLaunchDto: ICreateLaunchDto) => {

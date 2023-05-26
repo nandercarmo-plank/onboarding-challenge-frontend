@@ -16,9 +16,13 @@ export const useCrew = (initState: ICrewDto[] = []): [ICrewDto[], IUseCrew] => {
 	const [, setNotification] = useNotification();
 
 	const fetchCrews = async () => {
-		const fetchedCrews = (await getCrews()).sort((a, b) => a.id - b.id);
-		fetchedCrews.forEach(crew => crew.crewmans?.sort((a, b) => a.id - b.id));
-		setCrews(fetchedCrews);
+		try {
+			const fetchedCrews = (await getCrews()).sort((a, b) => a.id - b.id);
+			fetchedCrews.forEach(crew => crew.crewmans?.sort((a, b) => a.id - b.id));
+			setCrews(fetchedCrews);
+		} catch (err) {
+			setNotification.showNotification(`${err}`, false);
+		}
 	}
 
 	const addCrew = async (createCrewDto: ICreateCrewDto) => {

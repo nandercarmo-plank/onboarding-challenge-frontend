@@ -15,7 +15,13 @@ export const useRocket = (initState: IRocketDto[] = []): [IRocketDto[], IUseRock
 	const [rockets, setRockets] = useState(initState);
 	const [, setNotification] = useNotification();
 
-	const fetchRockets = async () => setRockets((await getRockets()).sort((a, b) => a.id - b.id));
+	const fetchRockets = async () => {
+		try {
+			setRockets((await getRockets()).sort((a, b) => a.id - b.id));
+		} catch (err) {
+			setNotification.showNotification(`${err}`, false);
+		}
+	}
 
 	const addRocket = async (createRocketDto: ICreateRocketDto) => {
 		const requestSucceed = await sendCreateRocket(createRocketDto);

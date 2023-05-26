@@ -1,6 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 
-const GlobalStyle = createGlobalStyle`
+export const GlobalStyle = createGlobalStyle`
 
 	* {
 		font-family: 'Courier New', Courier, monospace;
@@ -48,7 +48,3 @@ const GlobalStyle = createGlobalStyle`
 	}
 
 `;
-
-export {
-	GlobalStyle
-};

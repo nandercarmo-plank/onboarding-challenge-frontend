@@ -1,7 +1,7 @@
 import { useNotification } from "../../hooks/useNotification";
 import { NotificationDiv } from "./styles/styles";
 
-export function Notification() {
+export const Notification = () => {
 
 	const [notification, notificationActions] = useNotification();
 	const style = {
