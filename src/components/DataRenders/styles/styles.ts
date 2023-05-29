@@ -76,7 +76,7 @@ export const ListItemData = styled.div`
 	font-size: 16px;
 	
 	strong {
-		font-size: 20px;
+		font-size: 18px;
 	}
 `;
 

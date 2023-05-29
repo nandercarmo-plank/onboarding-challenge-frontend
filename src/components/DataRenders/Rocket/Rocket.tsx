@@ -73,7 +73,7 @@ export const Rocket = ({ isSubItem = false, renderButtons = true, rockets, setRo
 						<RocketForm onSubmit={onSubmitUpdateForm} rocket={clickedRocket} />
 					</Modal>
 				</ListDiv>
-				<Modal title="Rocket" visible={isDataViewModalVisible} setVisible={setDataViewModalVisible} className="rocket">
+				<Modal title="Rocket" visible={isDataViewModalVisible} setVisible={setDataViewModalVisible} className="rocket-modal">
 					<ListItemData>
 						<strong>ID:</strong> {clickedRocket?.id}
 						<br />

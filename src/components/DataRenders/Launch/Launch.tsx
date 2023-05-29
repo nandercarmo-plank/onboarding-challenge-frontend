@@ -79,7 +79,7 @@ export const Launch = ({ isSubItem = false, renderButtons = true, launchs, setLa
 						<LaunchForm onSubmit={onSubmitUpdateForm} launch={clickedLaunch} />
 					</Modal>
 				</ListDiv>
-				<Modal title="Launch" visible={isDataViewModalVisible} setVisible={setDataViewModalVisible} className="launch">
+				<Modal title="Launch" visible={isDataViewModalVisible} setVisible={setDataViewModalVisible} className="launch-modal">
 					<ListItemData>
 						<strong>ID:</strong> {clickedLaunch?.id}
 						<br />

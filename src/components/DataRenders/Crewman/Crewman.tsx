@@ -75,7 +75,7 @@ export const Crewman = ({ isSubItem = false, renderButtons = true, crewmans, set
 						<CrewmanForm onSubmit={onSubmitUpdateForm} crewman={clickedCrewman} />
 					</Modal>
 				</ListDiv>
-				<Modal title="Crewman" visible={isDataViewModalVisible} setVisible={setDataViewModalVisible} className="crewman">
+				<Modal title="Crewman" visible={isDataViewModalVisible} setVisible={setDataViewModalVisible} className="crewman-modal">
 					<ListItemData>
 						<strong>ID:</strong> {clickedCrewman?.id}
 						<br />

@@ -13,22 +13,22 @@ export const ModalDiv = styled.div`
 	overflow: auto;
 	background-color: rgba(0, 0, 0, 0.8);
 
-	.rocket {
+	.rocket-modal {
 		border: 1px solid #def2ff;
 		background-color: #e8f4ff;
 	}
 
-	.crewman {
+	.crewman-modal {
 		border: 1px solid #f2dfff;
 		background-color: #f2e4ff;
 	}
 
-	.crew {
+	.crew-modal {
 		border: 1px solid #efffd7;
 		background-color: #f1ffe2;
 	}
 
-	.launch {
+	.launch-modal {
 		border: 1px solid #ffe9c8;
 		background-color: #fde6ce;
 	}
@@ -62,7 +62,7 @@ export const ModalHeaderDiv = styled.div`
 
 export const StyledSpan = styled.span`
 	display: flex;
-	color: #aaa;
+	color: #888;
 	font-size: 28px;
 	font-weight: bold;
 	cursor: pointer;
