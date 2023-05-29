@@ -21,7 +21,7 @@ export const useRocket = (initState: IRocketDto[] = []): [IRocketDto[], IUseRock
 		try {
 			setDataIsLoad(false);
 			setRockets((await getRockets()).sort((a, b) => a.id - b.id));
-			setTimeout(() => setDataIsLoad(true), 1000);
+			setDataIsLoad(true);
 		} catch (err) {
 			setNotification.showNotification(`${err}`, false);
 		}
