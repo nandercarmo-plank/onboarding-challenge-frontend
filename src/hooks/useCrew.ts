@@ -23,7 +23,7 @@ export const useCrew = (initState: ICrewDto[] = []): [ICrewDto[], IUseCrew] => {
 			const fetchedCrews = (await getCrews()).sort((a, b) => a.id - b.id);
 			fetchedCrews.forEach(crew => crew.crewmans?.sort((a, b) => a.id - b.id));
 			setCrews(fetchedCrews);
-			setTimeout(() => setDataIsLoad(true), 1000);
+			setDataIsLoad(true);
 		} catch (err) {
 			setNotification.showNotification(`${err}`, false);
 		}

@@ -23,7 +23,7 @@ export const useLaunch = (initState: ILaunchDto[] = []): [ILaunchDto[], IUseLaun
 			const fetchedLaunchs = (await getLaunchs()).sort((a, b) => a.id - b.id);
 			fetchedLaunchs.forEach(launch => launch.crew?.crewmans?.sort((a, b) => a.id - b.id));
 			setLaunchs(fetchedLaunchs);
-			setTimeout(() => setDataIsLoad(true), 1000);
+			setDataIsLoad(true);
 		} catch (err) {
 			setNotification.showNotification(`${err}`, false);
 		}

@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from "axios";
 
-const API_URL = "http://localhost:80";
+const API_URL = "https://onboarding-challenge-seven.vercel.app";
 
 export const get = async <T>(path: string): Promise<T[]> => {
 	const url = API_URL + (path.startsWith("/") ? path : "/" + path);

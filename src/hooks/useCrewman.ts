@@ -21,7 +21,7 @@ export const useCrewman = (initState: ICrewmanDto[] = []): [ICrewmanDto[], IUseC
 		try {
 			setDataIsLoad(false);
 			setCrewmans((await getCrewmans()).sort((a, b) => a.id - b.id));
-			setTimeout(() => setDataIsLoad(true), 1000);
+			setDataIsLoad(true);
 		} catch (err) {
 			setNotification.showNotification(`${err}`, false);
 		}
