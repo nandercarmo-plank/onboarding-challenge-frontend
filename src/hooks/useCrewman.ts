@@ -8,16 +8,20 @@ export interface IUseCrewman {
 	addCrewman: (createCrewmanDto: ICreateCrewmanDto) => Promise<void>;
 	editCrewman: (id: number, updateCrewmanDto: IUpdateCrewmanDto) => Promise<void>;
 	deleteCrewman: (id: number) => Promise<void>;
+	isDataLoaded: () => boolean;
 };
 
 export const useCrewman = (initState: ICrewmanDto[] = []): [ICrewmanDto[], IUseCrewman] => {
 
+	const [dataIsLoad, setDataIsLoad] = useState(false);
 	const [crewmans, setCrewmans] = useState(initState);
 	const [, setNotification] = useNotification();
 
 	const fetchCrewmans = async () => {
 		try {
+			setDataIsLoad(false);
 			setCrewmans((await getCrewmans()).sort((a, b) => a.id - b.id));
+			setTimeout(() => setDataIsLoad(true), 1000);
 		} catch (err) {
 			setNotification.showNotification(`${err}`, false);
 		}
@@ -50,13 +54,16 @@ export const useCrewman = (initState: ICrewmanDto[] = []): [ICrewmanDto[], IUseC
 		fetchCrewmans();
 	}
 
+	const isDataLoaded = () => dataIsLoad;
+
 	return [
 		crewmans,
 		{
 			fetchCrewmans,
 			addCrewman,
 			editCrewman,
-			deleteCrewman
+			deleteCrewman,
+			isDataLoaded,
 		}
 	]
 }

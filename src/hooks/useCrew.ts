@@ -8,18 +8,22 @@ export interface IUseCrew {
 	addCrew: (createCrewDto: ICreateCrewDto) => Promise<void>;
 	editCrew: (id: number, updateCrewDto: IUpdateCrewDto) => Promise<void>;
 	deleteCrew: (id: number) => Promise<void>;
+	isDataLoaded: () => boolean;
 };
 
 export const useCrew = (initState: ICrewDto[] = []): [ICrewDto[], IUseCrew] => {
 
+	const [dataIsLoad, setDataIsLoad] = useState(false);
 	const [crews, setCrews] = useState(initState);
 	const [, setNotification] = useNotification();
 
 	const fetchCrews = async () => {
 		try {
+			setDataIsLoad(false);
 			const fetchedCrews = (await getCrews()).sort((a, b) => a.id - b.id);
 			fetchedCrews.forEach(crew => crew.crewmans?.sort((a, b) => a.id - b.id));
 			setCrews(fetchedCrews);
+			setTimeout(() => setDataIsLoad(true), 1000);
 		} catch (err) {
 			setNotification.showNotification(`${err}`, false);
 		}
@@ -52,13 +56,16 @@ export const useCrew = (initState: ICrewDto[] = []): [ICrewDto[], IUseCrew] => {
 		fetchCrews();
 	}
 
+	const isDataLoaded = () => dataIsLoad;
+
 	return [
 		crews,
 		{
 			fetchCrews,
 			addCrew,
 			editCrew,
-			deleteCrew
+			deleteCrew,
+			isDataLoaded,
 		}
 	]
 }

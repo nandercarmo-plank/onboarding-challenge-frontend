@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { IRocketDto, IUpdateRocketDto } from "../../../dto/RocketDto";
 import { IUseRocket } from "../../../hooks/useRocket";
+import { LoadingPage } from "../../../pages/LoadingPage/LoadingPage";
 import { deleteButton, editButton } from "../../../resources/images";
 import { RocketForm } from "../../Forms/Rocket/RocketForm";
 import { Modal } from "../../Modal/Modal";
@@ -37,7 +38,7 @@ export const Rocket = ({ isSubItem = false, renderButtons = true, rockets, setRo
 	}
 
 	return (
-		false ? (
+		setRockets == undefined || setRockets.isDataLoaded() ? (
 			<ListItemContainerDiv>
 				<ListDiv>
 					{
@@ -64,6 +65,6 @@ export const Rocket = ({ isSubItem = false, renderButtons = true, rockets, setRo
 					</Modal>
 				</ListDiv>
 			</ListItemContainerDiv>
-		) : <></>
+		) : <LoadingPage />
 	);
 }

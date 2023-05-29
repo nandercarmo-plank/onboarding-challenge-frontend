@@ -18,7 +18,7 @@ export const HomeLogoDiv = styled.div`
 	align-items: center;
 	text-align: center;
 	margin: 50px 0px 0px 0px;
-	background-image: url('src/assets/pixel-rocket-opacity.png');
+	background-image: url('src/resources/assets/pixel-rocket-opacity.png');
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: contain;

@@ -8,16 +8,20 @@ export interface IUseRocket {
 	addRocket: (createRocketDto: ICreateRocketDto) => Promise<void>;
 	editRocket: (id: number, updateRocketDto: IUpdateRocketDto) => Promise<void>;
 	deleteRocket: (id: number) => Promise<void>;
+	isDataLoaded: () => boolean;
 };
 
 export const useRocket = (initState: IRocketDto[] = []): [IRocketDto[], IUseRocket] => {
 
+	const [dataIsLoad, setDataIsLoad] = useState(false);
 	const [rockets, setRockets] = useState(initState);
 	const [, setNotification] = useNotification();
 
 	const fetchRockets = async () => {
 		try {
+			setDataIsLoad(false);
 			setRockets((await getRockets()).sort((a, b) => a.id - b.id));
+			setTimeout(() => setDataIsLoad(true), 1000);
 		} catch (err) {
 			setNotification.showNotification(`${err}`, false);
 		}
@@ -50,13 +54,16 @@ export const useRocket = (initState: IRocketDto[] = []): [IRocketDto[], IUseRock
 		fetchRockets();
 	}
 
+	const isDataLoaded = () => dataIsLoad;
+
 	return [
 		rockets,
 		{
 			fetchRockets,
 			addRocket,
 			editRocket,
-			deleteRocket
+			deleteRocket,
+			isDataLoaded,
 		}
 	]
 }

@@ -8,18 +8,22 @@ export interface IUseLaunch {
 	addLaunch: (createLaunchDto: ICreateLaunchDto) => Promise<void>;
 	editLaunch: (id: number, updateLaunchDto: IUpdateLaunchDto) => Promise<void>;
 	deleteLaunch: (id: number) => Promise<void>;
+	isDataLoaded: () => boolean;
 };
 
 export const useLaunch = (initState: ILaunchDto[] = []): [ILaunchDto[], IUseLaunch] => {
 
+	const [dataIsLoad, setDataIsLoad] = useState(false);
 	const [launchs, setLaunchs] = useState(initState);
 	const [, setNotification] = useNotification();
 
 	const fetchLaunchs = async () => {
 		try {
+			setDataIsLoad(false);
 			const fetchedLaunchs = (await getLaunchs()).sort((a, b) => a.id - b.id);
 			fetchedLaunchs.forEach(launch => launch.crew?.crewmans?.sort((a, b) => a.id - b.id));
 			setLaunchs(fetchedLaunchs);
+			setTimeout(() => setDataIsLoad(true), 1000);
 		} catch (err) {
 			setNotification.showNotification(`${err}`, false);
 		}
@@ -52,13 +56,16 @@ export const useLaunch = (initState: ILaunchDto[] = []): [ILaunchDto[], IUseLaun
 		fetchLaunchs();
 	}
 
+	const isDataLoaded = () => dataIsLoad;
+
 	return [
 		launchs,
 		{
 			fetchLaunchs,
 			addLaunch,
 			editLaunch,
-			deleteLaunch
+			deleteLaunch,
+			isDataLoaded,
 		}
 	]
 }
