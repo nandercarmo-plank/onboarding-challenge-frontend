@@ -6,12 +6,13 @@ type ModalProps = {
 	visible?: boolean;
 	setVisible: React.Dispatch<SetStateAction<boolean>>;
 	title: string;
+	className?: string,
 };
 
-export const Modal = ({ children, visible, setVisible, title }: ModalProps) => {
+export const Modal = ({ children, visible, setVisible, title, className }: ModalProps) => {
 	return (
 		<ModalDiv style={{ visibility: visible ? "visible" : "hidden" }}>
-			<ModalContentDiv>
+			<ModalContentDiv className={className}>
 				<ModalHeaderDiv>
 					<h2>{title}</h2>
 					<StyledSpan onClick={() => setVisible(false)}>&times;</StyledSpan>

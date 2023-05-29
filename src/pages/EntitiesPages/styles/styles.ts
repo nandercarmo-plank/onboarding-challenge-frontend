@@ -60,7 +60,7 @@ export const DataHeaderDiv = styled.div`
 
 	a:hover {
 		cursor: pointer;
-		background-color: ${props => props.theme.buttonHoverColor} ;
+		filter: brightness(95%);
 	}
 
 	a img {

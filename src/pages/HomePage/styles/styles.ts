@@ -75,6 +75,6 @@ export const StyledLink = styled(Link)`
 export const HomeCard = styled(StyledLink)`
   &:hover {
 	cursor: pointer;
-    background-color: #ccc;
+	filter: brightness(85%);
   }
 `;

@@ -61,6 +61,11 @@ export const ListItem = styled.div`
 	flex-grow: 1;
 	width: 100%;
 	align-items: start;
+	
+	&:hover {
+		filter: brightness(95%);
+		cursor: pointer;
+	}
 `;
 
 export const ListItemData = styled.div`
@@ -68,6 +73,11 @@ export const ListItemData = styled.div`
 	flex-direction: column;
 	width: 100%;
 	flex-grow: 1;
+	font-size: 16px;
+	
+	strong {
+		font-size: 20px;
+	}
 `;
 
 export const ListItemImage = styled.div`

@@ -31,6 +31,11 @@ export const StyledLogoImage = styled(Link)`
 		margin: 30px auto 20px auto;
 		height: 130px;
 	}
+
+	img:hover {
+		cursor: pointer;
+		filter: brightness(95%);
+	}
 `;
 
 export const StyledLink = styled(Link)`
@@ -70,6 +75,6 @@ export const StyledNav = styled.ul`
 
 export const StyledLinkHover = styled(StyledLink)`
   &:hover {
-    background-color: #ccc;
+	filter: brightness(85%);
   }
 `;

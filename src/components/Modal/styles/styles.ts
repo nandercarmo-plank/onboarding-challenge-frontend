@@ -11,7 +11,27 @@ export const ModalDiv = styled.div`
 	width: 100%;
 	height: 100%;
 	overflow: auto;
-	background-color: rgba(0, 0, 0, 0.5);
+	background-color: rgba(0, 0, 0, 0.8);
+
+	.rocket {
+		border: 1px solid #def2ff;
+		background-color: #e8f4ff;
+	}
+
+	.crewman {
+		border: 1px solid #f2dfff;
+		background-color: #f2e4ff;
+	}
+
+	.crew {
+		border: 1px solid #efffd7;
+		background-color: #f1ffe2;
+	}
+
+	.launch {
+		border: 1px solid #ffe9c8;
+		background-color: #fde6ce;
+	}
 `;
 
 export const ModalContentDiv = styled.div`

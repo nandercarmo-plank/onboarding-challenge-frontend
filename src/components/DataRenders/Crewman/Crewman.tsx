@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { MouseEvent, useState } from "react";
 import { ICrewmanDto, IUpdateCrewmanDto } from "../../../dto/CrewmanDto";
 import { IUseCrewman } from "../../../hooks/useCrewman";
 import { LoadingPage } from "../../../pages/LoadingPage/LoadingPage";
@@ -17,6 +17,7 @@ interface ICrewmanProps {
 export const Crewman = ({ isSubItem = false, renderButtons = true, crewmans, setCrewmans }: ICrewmanProps) => {
 
 	const [isUpdateModalVisible, setUpdateModalVisibility] = useState(false);
+	const [isDataViewModalVisible, setDataViewModalVisible] = useState(false);
 	const [clickedCrewman, setClickedCrewman] = useState<ICrewmanDto>();
 
 	const onSubmitUpdateForm = async (updateCrewmanDto: IUpdateCrewmanDto) => {
@@ -32,9 +33,17 @@ export const Crewman = ({ isSubItem = false, renderButtons = true, crewmans, set
 		}
 	}
 
-	const openUpdateCrewmanModal = (crewman: ICrewmanDto) => {
+	const openUpdateCrewmanModal = (event: MouseEvent<HTMLImageElement>, crewman: ICrewmanDto) => {
+		event.stopPropagation();
 		setClickedCrewman(crewman);
 		setUpdateModalVisibility(true);
+	}
+
+	const openDataViewModal = (crewman: ICrewmanDto) => {
+		if (!isSubItem) {
+			setClickedCrewman(crewman);
+			setDataViewModalVisible(true);
+		}
 	}
 
 	return (
@@ -45,7 +54,7 @@ export const Crewman = ({ isSubItem = false, renderButtons = true, crewmans, set
 						crewmans.map(crewman => {
 							return (
 								<ListItemContainerDiv key={crewman.id}>
-									<ListItem className={isSubItem ? "sub-list-item" : "crewman list-item"}>
+									<ListItem className={isSubItem ? "sub-list-item" : "crewman list-item"} onClick={() => openDataViewModal(crewman)}>
 										<ListItemData>
 											<strong>ID:</strong> {crewman.id}
 											<br />
@@ -54,7 +63,7 @@ export const Crewman = ({ isSubItem = false, renderButtons = true, crewmans, set
 											<strong>Patent:</strong> {crewman.patent}
 										</ListItemData>
 										<ListItemImage>
-											{renderButtons && <img src={editButton} onClick={() => openUpdateCrewmanModal(crewman)} />}
+											{renderButtons && <img src={editButton} onClick={(event) => openUpdateCrewmanModal(event, crewman)} />}
 										</ListItemImage>
 									</ListItem>
 									{renderButtons && <img src={deleteButton} onClick={() => onDeleteCrewman(crewman.id)} />}
@@ -66,6 +75,15 @@ export const Crewman = ({ isSubItem = false, renderButtons = true, crewmans, set
 						<CrewmanForm onSubmit={onSubmitUpdateForm} crewman={clickedCrewman} />
 					</Modal>
 				</ListDiv>
+				<Modal title="Crewman" visible={isDataViewModalVisible} setVisible={setDataViewModalVisible} className="crewman">
+					<ListItemData>
+						<strong>ID:</strong> {clickedCrewman?.id}
+						<br />
+						<strong>Name:</strong> {clickedCrewman?.name}
+						<br />
+						<strong>Patent:</strong> {clickedCrewman?.patent}
+					</ListItemData>
+				</Modal>
 			</ListItemContainerDiv>
 		) : <LoadingPage />
 	);

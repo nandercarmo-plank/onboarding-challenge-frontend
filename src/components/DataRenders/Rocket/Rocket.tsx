@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { MouseEvent, useState } from "react";
 import { IRocketDto, IUpdateRocketDto } from "../../../dto/RocketDto";
 import { IUseRocket } from "../../../hooks/useRocket";
 import { LoadingPage } from "../../../pages/LoadingPage/LoadingPage";
@@ -17,6 +17,7 @@ interface IRocketProps {
 export const Rocket = ({ isSubItem = false, renderButtons = true, rockets, setRockets }: IRocketProps) => {
 
 	const [isUpdateModalVisible, setUpdateModalVisibility] = useState(false);
+	const [isDataViewModalVisible, setDataViewModalVisible] = useState(false);
 	const [clickedRocket, setClickedRocket] = useState<IRocketDto>();
 
 	const onSubmitUpdateForm = async (updateRocketDto: IUpdateRocketDto) => {
@@ -32,9 +33,17 @@ export const Rocket = ({ isSubItem = false, renderButtons = true, rockets, setRo
 		}
 	}
 
-	const openUpdateRocketModal = (rocket: IRocketDto) => {
+	const openUpdateRocketModal = (event: MouseEvent<HTMLImageElement>, rocket: IRocketDto) => {
+		event.stopPropagation();
 		setClickedRocket(rocket);
 		setUpdateModalVisibility(true);
+	}
+
+	const openDataViewModal = (rocket: IRocketDto) => {
+		if (!isSubItem) {
+			setClickedRocket(rocket);
+			setDataViewModalVisible(true);
+		}
 	}
 
 	return (
@@ -45,14 +54,14 @@ export const Rocket = ({ isSubItem = false, renderButtons = true, rockets, setRo
 						rockets.map(rocket => {
 							return (
 								<ListItemContainerDiv key={rocket.id}>
-									<ListItem className={isSubItem ? "sub-list-item" : "rocket list-item"}>
+									<ListItem className={isSubItem ? "sub-list-item" : "rocket list-item"} onClick={() => openDataViewModal(rocket)}>
 										<ListItemData>
 											<strong>ID:</strong> {rocket.id}
 											<br />
 											<strong>Name:</strong> {rocket.name}
 										</ListItemData>
 										<ListItemImage>
-											{renderButtons && <img src={editButton} onClick={() => openUpdateRocketModal(rocket)} />}
+											{renderButtons && <img src={editButton} onClick={(event) => openUpdateRocketModal(event, rocket)} />}
 										</ListItemImage>
 									</ListItem>
 									{renderButtons && <img src={deleteButton} onClick={() => onDeleteRocket(rocket.id)} />}
@@ -64,6 +73,13 @@ export const Rocket = ({ isSubItem = false, renderButtons = true, rockets, setRo
 						<RocketForm onSubmit={onSubmitUpdateForm} rocket={clickedRocket} />
 					</Modal>
 				</ListDiv>
+				<Modal title="Rocket" visible={isDataViewModalVisible} setVisible={setDataViewModalVisible} className="rocket">
+					<ListItemData>
+						<strong>ID:</strong> {clickedRocket?.id}
+						<br />
+						<strong>Name:</strong> {clickedRocket?.name}
+					</ListItemData>
+				</Modal>
 			</ListItemContainerDiv>
 		) : <LoadingPage />
 	);

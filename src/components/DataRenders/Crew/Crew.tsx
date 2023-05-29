@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { MouseEvent, useState } from "react";
 import { ICrewDto, IUpdateCrewDto } from "../../../dto/CrewDto";
 import { IUseCrew } from "../../../hooks/useCrew";
 import { LoadingPage } from "../../../pages/LoadingPage/LoadingPage";
@@ -18,6 +18,7 @@ interface ICrewProps {
 export const Crew = ({ isSubItem = false, renderButtons = true, crews, setCrews }: ICrewProps) => {
 
 	const [isUpdateModalVisible, setUpdateModalVisibility] = useState(false);
+	const [isDataViewModalVisible, setDataViewModalVisible] = useState(false);
 	const [clickedCrew, setClickedCrew] = useState<ICrewDto>();
 
 	const onSubmitUpdateForm = async (updateCrewDto: IUpdateCrewDto) => {
@@ -33,9 +34,17 @@ export const Crew = ({ isSubItem = false, renderButtons = true, crews, setCrews 
 		}
 	}
 
-	const openUpdateCrewModal = (crew: ICrewDto) => {
+	const openUpdateCrewModal = (event: MouseEvent<HTMLImageElement>, crew: ICrewDto) => {
+		event.stopPropagation();
 		setClickedCrew(crew);
 		setUpdateModalVisibility(true);
+	}
+
+	const openDataViewModal = (crew: ICrewDto) => {
+		if (!isSubItem) {
+			setClickedCrew(crew);
+			setDataViewModalVisible(true);
+		}
 	}
 
 	return (
@@ -46,22 +55,14 @@ export const Crew = ({ isSubItem = false, renderButtons = true, crews, setCrews 
 						crews.map(crew => {
 							return (
 								<ListItemContainerDiv key={crew.id}>
-									<ListItem className={isSubItem ? "sub-list-item" : "crew list-item"}>
+									<ListItem className={isSubItem ? "sub-list-item" : "crew list-item"} onClick={() => openDataViewModal(crew)}>
 										<ListItemData>
 											<strong>ID:</strong> {crew.id}
 											<br />
 											<strong>Name:</strong> {crew.name}
-											<br />
-											{
-												(crew.crewmans?.length) ? <>
-													<strong>Crewmans:</strong>
-													<br />
-													<Crewman isSubItem={true} renderButtons={false} crewmans={crew.crewmans} />
-												</> : <></>
-											}
 										</ListItemData>
 										<ListItemImage>
-											{renderButtons && <img src={editButton} onClick={() => openUpdateCrewModal(crew)} />}
+											{renderButtons && <img src={editButton} onClick={(event) => openUpdateCrewModal(event, crew)} />}
 										</ListItemImage>
 									</ListItem>
 									{renderButtons && <img src={deleteButton} onClick={() => onDeleteCrew(crew.id)} />}
@@ -73,6 +74,21 @@ export const Crew = ({ isSubItem = false, renderButtons = true, crews, setCrews 
 						<CrewForm onSubmit={onSubmitUpdateForm} crew={clickedCrew} />
 					</Modal>
 				</ListDiv>
+				<Modal title="Crew" visible={isDataViewModalVisible} setVisible={setDataViewModalVisible} className="crew">
+					<ListItemData>
+						<strong>ID:</strong> {clickedCrew?.id}
+						<br />
+						<strong>Name:</strong> {clickedCrew?.name}
+						<br />
+						{
+							(clickedCrew?.crewmans?.length) ? <>
+								<strong>Crewmans:</strong>
+								<br />
+								<Crewman isSubItem={true} renderButtons={false} crewmans={clickedCrew?.crewmans} />
+							</> : <></>
+						}
+					</ListItemData>
+				</Modal>
 			</ListItemContainerDiv>
 		) : <LoadingPage />
 	);

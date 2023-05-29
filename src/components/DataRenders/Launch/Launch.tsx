@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { MouseEvent, useState } from "react";
 import { ILaunchDto, IUpdateLaunchDto } from "../../../dto/LaunchDto";
 import { IUseLaunch } from "../../../hooks/useLaunch";
 import { LoadingPage } from "../../../pages/LoadingPage/LoadingPage";
@@ -19,6 +19,7 @@ interface ILaunchProps {
 export const Launch = ({ isSubItem = false, renderButtons = true, launchs, setLaunchs }: ILaunchProps) => {
 
 	const [isUpdateModalVisible, setUpdateModalVisibility] = useState(false);
+	const [isDataViewModalVisible, setDataViewModalVisible] = useState(false);
 	const [clickedLaunch, setClickedLaunch] = useState<ILaunchDto>();
 
 	const onSubmitUpdateForm = async (updateLaunchDto: IUpdateLaunchDto) => {
@@ -34,9 +35,17 @@ export const Launch = ({ isSubItem = false, renderButtons = true, launchs, setLa
 		}
 	}
 
-	const openUpdateLaunchModal = (launch: ILaunchDto) => {
+	const openUpdateLaunchModal = (event: MouseEvent<HTMLImageElement>, launch: ILaunchDto) => {
+		event.stopPropagation();
 		setClickedLaunch(launch);
 		setUpdateModalVisibility(true);
+	}
+
+	const openDataViewModal = (launch: ILaunchDto) => {
+		if (!isSubItem) {
+			setClickedLaunch(launch);
+			setDataViewModalVisible(true);
+		}
 	}
 
 	return (
@@ -47,7 +56,7 @@ export const Launch = ({ isSubItem = false, renderButtons = true, launchs, setLa
 						launchs.map(launch => {
 							return (
 								<ListItemContainerDiv key={launch.id}>
-									<ListItem className={isSubItem ? "sub-list-item" : "launch list-item"}>
+									<ListItem className={isSubItem ? "sub-list-item" : "launch list-item"} onClick={() => openDataViewModal(launch)}>
 										<ListItemData>
 											<strong>ID:</strong> {launch.id}
 											<br />
@@ -56,21 +65,9 @@ export const Launch = ({ isSubItem = false, renderButtons = true, launchs, setLa
 											<strong>Date:</strong> {launch.date}
 											<br />
 											<strong>Success:</strong> {`${launch.success}`}
-											<br />
-											<strong>Rocket:</strong>
-											<Rocket isSubItem={true} renderButtons={false} rockets={[launch.rocket]} />
-											{
-												launch.crew && (
-													<>
-														<br />
-														<strong>Crew:</strong>
-														<Crew isSubItem={true} renderButtons={false} crews={[launch.crew]} />
-													</>
-												)
-											}
 										</ListItemData>
 										<ListItemImage>
-											{renderButtons && <img src={editButton} onClick={() => openUpdateLaunchModal(launch)} />}
+											{renderButtons && <img src={editButton} onClick={(event) => openUpdateLaunchModal(event, launch)} />}
 										</ListItemImage>
 									</ListItem>
 									{renderButtons && <img src={deleteButton} onClick={() => onDeleteLaunch(launch.id)} />}
@@ -82,6 +79,29 @@ export const Launch = ({ isSubItem = false, renderButtons = true, launchs, setLa
 						<LaunchForm onSubmit={onSubmitUpdateForm} launch={clickedLaunch} />
 					</Modal>
 				</ListDiv>
+				<Modal title="Launch" visible={isDataViewModalVisible} setVisible={setDataViewModalVisible} className="launch">
+					<ListItemData>
+						<strong>ID:</strong> {clickedLaunch?.id}
+						<br />
+						<strong>Launch code:</strong> {clickedLaunch?.launchCode}
+						<br />
+						<strong>Date:</strong> {clickedLaunch?.date}
+						<br />
+						<strong>Success:</strong> {`${clickedLaunch?.success}`}
+						<br />
+						<strong>Rocket:</strong>
+						<Rocket isSubItem={true} renderButtons={false} rockets={clickedLaunch?.rocket ? [clickedLaunch?.rocket] : []} />
+						{
+							clickedLaunch?.crew && (
+								<>
+									<br />
+									<strong>Crew:</strong>
+									<Crew isSubItem={true} renderButtons={false} crews={[clickedLaunch?.crew]} />
+								</>
+							)
+						}
+					</ListItemData>
+				</Modal>
 			</ListItemContainerDiv>
 		) : <LoadingPage />
 	);
