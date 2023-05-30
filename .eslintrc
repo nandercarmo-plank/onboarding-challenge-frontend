@@ -34,7 +34,7 @@
 		"react-refresh/only-export-components": "warn",
 		"@typescript-eslint/no-unused-vars": "error",
 		"@typescript-eslint/consistent-type-definitions": ["error", "type"],
-		"react-hooks/exhaustive-deps": "warn",
+		"react-hooks/exhaustive-deps": "off",
 		"react-hooks/rules-of-hooks": "error",
 		"react/button-has-type": "error",
 		"react/prop-types": ["off"],
