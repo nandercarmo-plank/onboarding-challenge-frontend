@@ -8,4 +8,4 @@ export const LoadingPage = () => {
 			<h2>Loading</h2>
 		</LoadDiv>
 	);
-}
+};

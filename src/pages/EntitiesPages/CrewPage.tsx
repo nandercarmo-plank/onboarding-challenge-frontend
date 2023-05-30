@@ -1,23 +1,25 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, type ReactNode } from "react";
+
 import { Crew } from "../../components/DataRenders/Crew/Crew";
 import { CrewForm } from "../../components/Forms/Crew/CrewForm";
 import { Modal } from "../../components/Modal/Modal";
 import { Navbar } from "../../components/Navbar/Navbar";
-import { ICreateCrewDto } from "../../dto/CrewDto";
+import { type ICreateCrewDto } from "../../dto/CrewDto";
 import { useCrew } from "../../hooks/useCrew";
 import { ContentDiv, DataDiv, DataHeaderDiv } from "./styles/styles";
 
-export const CrewPage = () => {
-
+export const CrewPage = (): ReactNode => {
 	const [isAddModalVisible, setAddModalVisibility] = useState(false);
 	const [crews, setCrews] = useCrew([]);
 
-	const onSubmitAddForm = async (createCrewDto: ICreateCrewDto) => {
+	const onSubmitAddForm = (createCrewDto: ICreateCrewDto): void => {
 		setAddModalVisibility(false);
-		setCrews.addCrew(createCrewDto);
-	}
+		void setCrews.addCrew(createCrewDto);
+	};
 
-	useEffect(() => { setCrews.fetchCrews(); }, []);
+	useEffect(() => {
+		void setCrews.fetchCrews();
+	}, []);
 
 	return (
 		<ContentDiv>
@@ -25,15 +27,24 @@ export const CrewPage = () => {
 			<DataDiv>
 				<DataHeaderDiv>
 					<h1>Crews</h1>
-					<a href="#" onClick={() => setAddModalVisibility(true)}>
+					<a
+						href="#"
+						onClick={() => {
+							setAddModalVisibility(true);
+						}}
+					>
 						<h4>Add</h4>
 					</a>
 				</DataHeaderDiv>
 				<Crew crews={crews} setCrews={setCrews} />
-				<Modal title="Add Crew" visible={isAddModalVisible} setVisible={setAddModalVisibility}>
+				<Modal
+					title="Add Crew"
+					visible={isAddModalVisible}
+					setVisible={setAddModalVisibility}
+				>
 					<CrewForm onSubmit={onSubmitAddForm} />
 				</Modal>
 			</DataDiv>
 		</ContentDiv>
 	);
-}
+};

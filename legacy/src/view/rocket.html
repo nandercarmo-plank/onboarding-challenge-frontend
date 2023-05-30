@@ -1,111 +1,132 @@
 <!DOCTYPE html>
 <html>
+	<head>
+		<title>Rocket</title>
+		<link rel="stylesheet" href="../styles.css" />
+		<link rel="stylesheet" href="../styles/main.css" />
+		<link rel="stylesheet" href="../styles/data.css" />
+		<link rel="stylesheet" href="../styles/nav.css" />
+		<link rel="stylesheet" href="../styles/modal.css" />
+		<link rel="stylesheet" href="../styles/notification.css" />
+		<link
+			rel="icon"
+			href="../../assets/pixel-rocket.png"
+			type="image/x-icon"
+		/>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+			rel="stylesheet"
+		/>
+	</head>
 
-<head>
-	<title>Rocket</title>
-	<link rel="stylesheet" href="../styles.css">
-	<link rel="stylesheet" href="../styles/main.css">
-	<link rel="stylesheet" href="../styles/data.css">
-	<link rel="stylesheet" href="../styles/nav.css">
-	<link rel="stylesheet" href="../styles/modal.css">
-	<link rel="stylesheet" href="../styles/notification.css">
-	<link rel="icon" href="../../assets/pixel-rocket.png" type="image/x-icon">
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-</head>
-
-<body>
-	<div class="content-div">
-		<header>
-			<a href="../index.html">
-				<img src="../../assets/pixel-rocket.png">
-			</a>
-			<h2>Onboarding<br>Challenge</h2>
-			<nav>
-				<ul>
-					<li>
-						<a href="../index.html">
-							<img src="../../assets/home-button.svg">
-							<h3>Home</h3>
-						</a>
-					</li>
-					<li>
-						<a href="rocket.html">
-							<img src="../../assets/rocket-button.svg">
-							<h3>Rocket</h3>
-						</a>
-					</li>
-					<li>
-						<a href="crewman.html">
-							<img src="../../assets/crewman-button.svg">
-							<h3>Crewman</h3>
-						</a>
-					</li>
-					<li>
-						<a href="crew.html">
-							<img src="../../assets/crew-button.svg">
-							<h3>Crew</h3>
-						</a>
-					</li>
-					<li>
-						<a href="launch.html">
-							<img src="../../assets/launch-button.svg">
-							<h3>Launch</h3>
-						</a>
-					</li>
-				</ul>
-			</nav>
-		</header>
-		<div class="data-div">
-			<div class="data-header-div">
-				<h1>Rocket</h1>
-				<a href="#" id="add-rocket-button">
-					<h4>Add</h4>
-					<img src="../../assets/add-button.svg">
+	<body>
+		<div class="content-div">
+			<header>
+				<a href="../index.html">
+					<img src="../../assets/pixel-rocket.png" />
 				</a>
+				<h2>Onboarding<br />Challenge</h2>
+				<nav>
+					<ul>
+						<li>
+							<a href="../index.html">
+								<img src="../../assets/home-button.svg" />
+								<h3>Home</h3>
+							</a>
+						</li>
+						<li>
+							<a href="rocket.html">
+								<img src="../../assets/rocket-button.svg" />
+								<h3>Rocket</h3>
+							</a>
+						</li>
+						<li>
+							<a href="crewman.html">
+								<img src="../../assets/crewman-button.svg" />
+								<h3>Crewman</h3>
+							</a>
+						</li>
+						<li>
+							<a href="crew.html">
+								<img src="../../assets/crew-button.svg" />
+								<h3>Crew</h3>
+							</a>
+						</li>
+						<li>
+							<a href="launch.html">
+								<img src="../../assets/launch-button.svg" />
+								<h3>Launch</h3>
+							</a>
+						</li>
+					</ul>
+				</nav>
+			</header>
+			<div class="data-div">
+				<div class="data-header-div">
+					<h1>Rocket</h1>
+					<a href="#" id="add-rocket-button">
+						<h4>Add</h4>
+						<img src="../../assets/add-button.svg" />
+					</a>
+				</div>
+				<div id="rocketList"></div>
 			</div>
-			<div id="rocketList"></div>
 		</div>
-	</div>
-	<div class="modal" id="add-rocket-modal">
-		<div class="modal-content">
-			<span class="close" id="add-rocket-modal-close-button">&times;</span>
-			<h2>Add Rocket</h2>
-			<form id="add-rocket-modal-form">
-				<label for="name">Name:</label>
-				<input type="text" id="add-rocket-form-name" name="name" required>
-				<button type="submit">
-					<h4>Add</h4>
-				</button>
-			</form>
+		<div class="modal" id="add-rocket-modal">
+			<div class="modal-content">
+				<span class="close" id="add-rocket-modal-close-button"
+					>&times;</span
+				>
+				<h2>Add Rocket</h2>
+				<form id="add-rocket-modal-form">
+					<label for="name">Name:</label>
+					<input
+						type="text"
+						id="add-rocket-form-name"
+						name="name"
+						required
+					/>
+					<button type="submit">
+						<h4>Add</h4>
+					</button>
+				</form>
+			</div>
 		</div>
-	</div>
-	<div class="modal" id="update-rocket-modal">
-		<div class="modal-content">
-			<span class="close" id="update-rocket-modal-close-button">&times;</span>
-			<h2>Update Rocket</h2>
-			<form id="update-rocket-modal-form">
-				<label for="name">Name:</label>
-				<input type="text" id="update-rocket-form-name" name="name" required>
-				<button type="submit">
-					<h4>Update</h4>
-				</button>
-			</form>
+		<div class="modal" id="update-rocket-modal">
+			<div class="modal-content">
+				<span class="close" id="update-rocket-modal-close-button"
+					>&times;</span
+				>
+				<h2>Update Rocket</h2>
+				<form id="update-rocket-modal-form">
+					<label for="name">Name:</label>
+					<input
+						type="text"
+						id="update-rocket-form-name"
+						name="name"
+						required
+					/>
+					<button type="submit">
+						<h4>Update</h4>
+					</button>
+				</form>
+			</div>
 		</div>
-	</div>
-	<div class="notification error-notification" id="rocket-notification">
-		<p id="rocket-notification-text"></p>
-	</div>
-</body>
+		<div class="notification error-notification" id="rocket-notification">
+			<p id="rocket-notification-text"></p>
+		</div>
+	</body>
 
-<footer>
-	<h5>
-		Made with ❤️ in the
-		<a href="https://www.joinplank.com/fellowship" target="_blank">Plank Fellowship Programa</a>
-	</h5>
-</footer>
-<script src="../scripts/notification.js"></script>
-<script src="../scripts/rocket.js"></script>
-
+	<footer>
+		<h5>
+			Made with ❤️ in the
+			<a href="https://www.joinplank.com/fellowship" target="_blank"
+				>Plank Fellowship Programa</a
+			>
+		</h5>
+	</footer>
+	<script src="../scripts/notification.js"></script>
+	<script src="../scripts/rocket.js"></script>
 </html>

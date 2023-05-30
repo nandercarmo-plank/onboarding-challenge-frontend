@@ -8,16 +8,17 @@ import { useLaunch } from "../../hooks/useLaunch";
 import { ContentDiv, DataDiv, DataHeaderDiv } from "./styles/styles";
 
 export const LaunchPage = () => {
-
 	const [isAddModalVisible, setAddModalVisibility] = useState(false);
 	const [launchs, setLaunchs] = useLaunch([]);
 
 	const onSubmitAddForm = async (createLaunchDto: ICreateLaunchDto) => {
 		setAddModalVisibility(false);
 		setLaunchs.addLaunch(createLaunchDto);
-	}
+	};
 
-	useEffect(() => { setLaunchs.fetchLaunchs(); }, []);
+	useEffect(() => {
+		setLaunchs.fetchLaunchs();
+	}, []);
 
 	return (
 		<ContentDiv>
@@ -30,10 +31,14 @@ export const LaunchPage = () => {
 					</a>
 				</DataHeaderDiv>
 				<Launch launchs={launchs} setLaunchs={setLaunchs} />
-				<Modal title="Add Launch" visible={isAddModalVisible} setVisible={setAddModalVisibility}>
+				<Modal
+					title="Add Launch"
+					visible={isAddModalVisible}
+					setVisible={setAddModalVisibility}
+				>
 					<LaunchForm onSubmit={onSubmitAddForm} />
 				</Modal>
 			</DataDiv>
 		</ContentDiv>
 	);
-}
+};

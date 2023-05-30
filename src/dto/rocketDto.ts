@@ -1,18 +1,14 @@
-interface IRocketDto {
+type IRocketDto = {
 	id: number;
 	name: string;
-}
-
-interface ICreateRocketDto {
-	name: string;
-}
-
-interface IUpdateRocketDto {
-	name: string;
-}
-
-export type {
-	IRocketDto,
-	ICreateRocketDto,
-	IUpdateRocketDto
 };
+
+type ICreateRocketDto = {
+	name: string;
+};
+
+type IUpdateRocketDto = {
+	name: string;
+};
+
+export type { IRocketDto, ICreateRocketDto, IUpdateRocketDto };

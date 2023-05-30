@@ -9,4 +9,4 @@ export const NotFoundPage = () => {
 			<h2>There's nothing to see here!</h2>
 		</NotFoundDiv>
 	);
-}
+};

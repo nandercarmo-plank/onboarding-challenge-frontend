@@ -14,26 +14,32 @@ export type INotificationContext = {
 
 type INotificationProviderProps = {
 	children: ReactNode;
-}
+};
 
 export const NotificationContext = createContext({} as INotificationContext);
 
-export const NotificationProvider = ({ children }: INotificationProviderProps) => {
-
+export const NotificationProvider = ({
+	children,
+}: INotificationProviderProps) => {
 	const [show, setShow] = useState(false);
 	const [type, setType] = useState(SUCCESS_NOTIFICATION);
 	const [message, setMessage] = useState("");
 	const [id, setId] = useState<number>();
 
-
 	return (
-		<NotificationContext.Provider value={{
-			show, setShow,
-			type, setType,
-			message, setMessage,
-			id, setId
-		}}>
+		<NotificationContext.Provider
+			value={{
+				show,
+				setShow,
+				type,
+				setType,
+				message,
+				setMessage,
+				id,
+				setId,
+			}}
+		>
 			{children}
 		</NotificationContext.Provider>
 	);
-}
+};

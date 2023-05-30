@@ -42,7 +42,7 @@
 	margin-bottom: 20px;
 	font-size: 18px;
 	padding: 10px;
-	border: 1px solid #AAA;
+	border: 1px solid #aaa;
 	border-radius: 10px;
 }
 
@@ -50,7 +50,7 @@
 	margin-bottom: 20px;
 	font-size: 18px;
 	padding: 10px 30px 10px 10px;
-	border: 1px solid #AAA;
+	border: 1px solid #aaa;
 	border-radius: 10px;
 	-webkit-appearance: none;
 	-moz-appearance: none;
@@ -80,7 +80,7 @@
 
 .modal-content form button:hover {
 	cursor: pointer;
-	background-color: #47b155 ;
+	background-color: #47b155;
 }
 
 .close {

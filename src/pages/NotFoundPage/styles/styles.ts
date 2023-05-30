@@ -7,8 +7,9 @@ export const NotFoundDiv = styled.div`
 	justify-content: center;
 	align-items: center;
 	text-align: center;
-	
-	h1, h2 {
+
+	h1,
+	h2 {
 		align-self: center;
 		height: auto;
 	}

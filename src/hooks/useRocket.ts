@@ -1,9 +1,18 @@
 import { useState } from "react";
-import { ICreateRocketDto, IRocketDto, IUpdateRocketDto } from "../dto/RocketDto";
-import { getRockets, sendCreateRocket, sendDeleteRocket, sendUpdateRocket } from "../services/rocketService";
+import {
+	ICreateRocketDto,
+	IRocketDto,
+	IUpdateRocketDto,
+} from "../dto/RocketDto";
+import {
+	getRockets,
+	sendCreateRocket,
+	sendDeleteRocket,
+	sendUpdateRocket,
+} from "../services/rocketService";
 import { useNotification } from "./useNotification";
 
-export interface IUseRocket {
+export type IUseRocket = {
 	fetchRockets: () => Promise<void>;
 	addRocket: (createRocketDto: ICreateRocketDto) => Promise<void>;
 	editRocket: (id: number, updateRocketDto: IUpdateRocketDto) => Promise<void>;
@@ -11,8 +20,9 @@ export interface IUseRocket {
 	isDataLoaded: () => boolean;
 };
 
-export const useRocket = (initState: IRocketDto[] = []): [IRocketDto[], IUseRocket] => {
-
+export const useRocket = (
+	initState: IRocketDto[] = []
+): [IRocketDto[], IUseRocket] => {
 	const [dataIsLoad, setDataIsLoad] = useState(false);
 	const [rockets, setRockets] = useState(initState);
 	const [, setNotification] = useNotification();
@@ -25,34 +35,40 @@ export const useRocket = (initState: IRocketDto[] = []): [IRocketDto[], IUseRock
 		} catch (err) {
 			setNotification.showNotification(`${err}`, false);
 		}
-	}
+	};
 
 	const addRocket = async (createRocketDto: ICreateRocketDto) => {
 		const requestSucceed = await sendCreateRocket(createRocketDto);
 		setNotification.showNotification(
-			requestSucceed ? "Rocket created!" : "Sorry, rocket could not be created!",
+			requestSucceed
+				? "Rocket created!"
+				: "Sorry, rocket could not be created!",
 			requestSucceed
 		);
 		fetchRockets();
-	}
+	};
 
 	const editRocket = async (id: number, updateRocketDto: IUpdateRocketDto) => {
 		const requestSucceed = await sendUpdateRocket(id, updateRocketDto);
 		setNotification.showNotification(
-			requestSucceed ? "Rocket updated!" : "Sorry, rocket could not be updated!",
+			requestSucceed
+				? "Rocket updated!"
+				: "Sorry, rocket could not be updated!",
 			requestSucceed
 		);
 		fetchRockets();
-	}
+	};
 
 	const deleteRocket = async (id: number) => {
 		const requestSucceed = await sendDeleteRocket(id);
 		setNotification.showNotification(
-			requestSucceed ? "Rocket deleted!" : "Sorry, rocket could not be deleted!",
+			requestSucceed
+				? "Rocket deleted!"
+				: "Sorry, rocket could not be deleted!",
 			requestSucceed
 		);
 		fetchRockets();
-	}
+	};
 
 	const isDataLoaded = () => dataIsLoad;
 
@@ -64,6 +80,6 @@ export const useRocket = (initState: IRocketDto[] = []): [IRocketDto[], IUseRock
 			editRocket,
 			deleteRocket,
 			isDataLoaded,
-		}
-	]
-}
+		},
+	];
+};

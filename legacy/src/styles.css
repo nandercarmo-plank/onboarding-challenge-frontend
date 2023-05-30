@@ -1,8 +1,9 @@
 * {
-	font-family:'Courier New', Courier, monospace;
+	font-family: "Courier New", Courier, monospace;
 }
 
-html, body {
+html,
+body {
 	display: flex;
 	flex-direction: column;
 	height: 100%;

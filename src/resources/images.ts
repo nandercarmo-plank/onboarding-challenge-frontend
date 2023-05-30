@@ -15,5 +15,5 @@ export {
 	crewButton,
 	launchButton,
 	editButton,
-	deleteButton
+	deleteButton,
 };

@@ -1,18 +1,26 @@
 import { useState } from "react";
-import { ICreateCrewDto, ICrewDto, IUpdateCrewDto } from "../dto/CrewDto";
-import { getCrews, sendCreateCrew, sendDeleteCrew, sendUpdateCrew } from "../services/crewService";
+import {
+	type ICreateCrewDto,
+	type ICrewDto,
+	type IUpdateCrewDto,
+} from "../dto/CrewDto";
+import {
+	getCrews,
+	sendCreateCrew,
+	sendDeleteCrew,
+	sendUpdateCrew,
+} from "../services/crewService";
 import { useNotification } from "./useNotification";
 
-export interface IUseCrew {
-	fetchCrews: () => Promise<void>;
+export type IUseCrew = {
+	fetchCrews: () => void;
 	addCrew: (createCrewDto: ICreateCrewDto) => Promise<void>;
 	editCrew: (id: number, updateCrewDto: IUpdateCrewDto) => Promise<void>;
-	deleteCrew: (id: number) => Promise<void>;
+	deleteCrew: (id: number) => void;
 	isDataLoaded: () => boolean;
 };
 
 export const useCrew = (initState: ICrewDto[] = []): [ICrewDto[], IUseCrew] => {
-
 	const [dataIsLoad, setDataIsLoad] = useState(false);
 	const [crews, setCrews] = useState(initState);
 	const [, setNotification] = useNotification();
@@ -21,13 +29,15 @@ export const useCrew = (initState: ICrewDto[] = []): [ICrewDto[], IUseCrew] => {
 		try {
 			setDataIsLoad(false);
 			const fetchedCrews = (await getCrews()).sort((a, b) => a.id - b.id);
-			fetchedCrews.forEach(crew => crew.crewmans?.sort((a, b) => a.id - b.id));
+			fetchedCrews.forEach((crew) =>
+				crew.crewmans?.sort((a, b) => a.id - b.id)
+			);
 			setCrews(fetchedCrews);
 			setDataIsLoad(true);
 		} catch (err) {
-			setNotification.showNotification(`${err}`, false);
+			setNotification.showNotification("Could not fetch data", false);
 		}
-	}
+	};
 
 	const addCrew = async (createCrewDto: ICreateCrewDto) => {
 		const requestSucceed = await sendCreateCrew(createCrewDto);
@@ -36,7 +46,7 @@ export const useCrew = (initState: ICrewDto[] = []): [ICrewDto[], IUseCrew] => {
 			requestSucceed
 		);
 		fetchCrews();
-	}
+	};
 
 	const editCrew = async (id: number, updateCrewDto: IUpdateCrewDto) => {
 		const requestSucceed = await sendUpdateCrew(id, updateCrewDto);
@@ -45,7 +55,7 @@ export const useCrew = (initState: ICrewDto[] = []): [ICrewDto[], IUseCrew] => {
 			requestSucceed
 		);
 		fetchCrews();
-	}
+	};
 
 	const deleteCrew = async (id: number) => {
 		const requestSucceed = await sendDeleteCrew(id);
@@ -53,8 +63,8 @@ export const useCrew = (initState: ICrewDto[] = []): [ICrewDto[], IUseCrew] => {
 			requestSucceed ? "Crew deleted!" : "Sorry, crew could not be deleted!",
 			requestSucceed
 		);
-		fetchCrews();
-	}
+		return await fetchCrews();
+	};
 
 	const isDataLoaded = () => dataIsLoad;
 
@@ -66,6 +76,6 @@ export const useCrew = (initState: ICrewDto[] = []): [ICrewDto[], IUseCrew] => {
 			editCrew,
 			deleteCrew,
 			isDataLoaded,
-		}
-	]
-}
+		},
+	];
+};

@@ -1,21 +1,17 @@
-interface ICrewmanDto {
+type ICrewmanDto = {
 	id: number;
 	name: string;
 	patent: string;
-}
-
-interface ICreateCrewmanDto {
-	name: string;
-	patent: string;
-}
-
-interface IUpdateCrewmanDto {
-	name: string;
-	patent: string;
-}
-
-export type {
-	ICrewmanDto,
-	ICreateCrewmanDto,
-	IUpdateCrewmanDto
 };
+
+type ICreateCrewmanDto = {
+	name: string;
+	patent: string;
+};
+
+type IUpdateCrewmanDto = {
+	name: string;
+	patent: string;
+};
+
+export type { ICrewmanDto, ICreateCrewmanDto, IUpdateCrewmanDto };

@@ -1,8 +1,8 @@
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
+import { Link } from "react-router-dom";
+import styled from "styled-components";
 
 export const Header = styled.header`
-	background-color: ${props => props.theme.backgroundSecondary};
+	background-color: ${(props) => props.theme.backgroundSecondary};
 	padding: 5px 15px;
 	border-radius: 10px;
 	margin-bottom: 10px;
@@ -39,42 +39,42 @@ export const StyledLogoImage = styled(Link)`
 `;
 
 export const StyledLink = styled(Link)`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-radius: 10px;
-  background-color: ${props => props.theme.backgroundPrimary};
-  width: 100%;
-  height: 50px;
-  padding: 15px 30px;
-  text-decoration: none;
-  color: ${props => props.theme.fontColor};
-  font-size: 18px;
-  font-family: 'Press Start 2P';
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	border-radius: 10px;
+	background-color: ${(props) => props.theme.backgroundPrimary};
+	width: 100%;
+	height: 50px;
+	padding: 15px 30px;
+	text-decoration: none;
+	color: ${(props) => props.theme.fontColor};
+	font-size: 18px;
+	font-family: "Press Start 2P";
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
 `;
 
 export const StyledImage = styled.img`
-  display: flex;
-  justify-self: center;
-  height: 30px;
-  width: 35px;
-  margin: 0;
+	display: flex;
+	justify-self: center;
+	height: 30px;
+	width: 35px;
+	margin: 0;
 `;
 
 export const StyledNavItem = styled.li`
-  display: flex;
-  margin-bottom: 15px;
+	display: flex;
+	margin-bottom: 15px;
 `;
 
 export const StyledNav = styled.ul`
-  text-align: center;
-  padding: 0;
-  list-style: none;
+	text-align: center;
+	padding: 0;
+	list-style: none;
 `;
 
 export const StyledLinkHover = styled(StyledLink)`
-  &:hover {
-	filter: brightness(85%);
-  }
+	&:hover {
+		filter: brightness(85%);
+	}
 `;

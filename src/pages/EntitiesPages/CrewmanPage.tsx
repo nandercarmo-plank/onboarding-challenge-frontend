@@ -8,16 +8,17 @@ import { useCrewman } from "../../hooks/useCrewman";
 import { ContentDiv, DataDiv, DataHeaderDiv } from "./styles/styles";
 
 export const CrewmanPage = () => {
-
 	const [isAddModalVisible, setAddModalVisibility] = useState(false);
 	const [crewmans, setCrewmans] = useCrewman([]);
 
 	const onSubmitAddForm = async (createCrewmanDto: ICreateCrewmanDto) => {
 		setAddModalVisibility(false);
 		setCrewmans.addCrewman(createCrewmanDto);
-	}
+	};
 
-	useEffect(() => { setCrewmans.fetchCrewmans(); }, []);
+	useEffect(() => {
+		setCrewmans.fetchCrewmans();
+	}, []);
 
 	return (
 		<ContentDiv>
@@ -30,10 +31,14 @@ export const CrewmanPage = () => {
 					</a>
 				</DataHeaderDiv>
 				<Crewman crewmans={crewmans} setCrewmans={setCrewmans} />
-				<Modal title="Add Crewman" visible={isAddModalVisible} setVisible={setAddModalVisibility}>
+				<Modal
+					title="Add Crewman"
+					visible={isAddModalVisible}
+					setVisible={setAddModalVisibility}
+				>
 					<CrewmanForm onSubmit={onSubmitAddForm} />
 				</Modal>
 			</DataDiv>
 		</ContentDiv>
 	);
-}
+};

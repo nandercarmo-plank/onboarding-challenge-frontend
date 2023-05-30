@@ -9,7 +9,7 @@ import { LaunchPage } from "./pages/EntitiesPages/LaunchPage";
 import { RocketPage } from "./pages/EntitiesPages/RocketPage";
 import { HomePage } from "./pages/HomePage/HomePage";
 import { NotFoundPage } from "./pages/NotFoundPage/NotFoundPage";
-import { GlobalStyle } from './styles/styles';
+import { GlobalStyle } from "./styles/styles";
 import { theme } from "./styles/theme";
 
 function App() {

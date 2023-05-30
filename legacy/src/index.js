@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", () => {
-
 	var rocketList = document.getElementById("rocketListHome");
 	var crewmanList = document.getElementById("crewmanListHome");
 	var crewList = document.getElementById("crewListHome");

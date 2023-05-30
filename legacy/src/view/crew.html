@@ -1,116 +1,145 @@
 <!DOCTYPE html>
 <html>
+	<head>
+		<title>Crew</title>
+		<link rel="stylesheet" href="../styles.css" />
+		<link rel="stylesheet" href="../styles/main.css" />
+		<link rel="stylesheet" href="../styles/data.css" />
+		<link rel="stylesheet" href="../styles/nav.css" />
+		<link rel="stylesheet" href="../styles/modal.css" />
+		<link rel="stylesheet" href="../styles/notification.css" />
+		<link
+			rel="icon"
+			href="../../assets/pixel-rocket.png"
+			type="image/x-icon"
+		/>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+			rel="stylesheet"
+		/>
+	</head>
 
-<head>
-	<title>Crew</title>
-	<link rel="stylesheet" href="../styles.css">
-	<link rel="stylesheet" href="../styles/main.css">
-	<link rel="stylesheet" href="../styles/data.css">
-	<link rel="stylesheet" href="../styles/nav.css">
-	<link rel="stylesheet" href="../styles/modal.css">
-	<link rel="stylesheet" href="../styles/notification.css">
-	<link rel="icon" href="../../assets/pixel-rocket.png" type="image/x-icon">
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-</head>
-
-<body>
-	<div class="content-div">
-		<header>
-			<a href="../index.html">
-				<img src="../../assets/pixel-rocket.png">
-			</a>
-			<h2>Onboarding<br>Challenge</h2>
-			<nav>
-				<ul>
-					<li>
-						<a href="../index.html">
-							<img src="../../assets/home-button.svg">
-							<h3>Home</h3>
-						</a>
-					</li>
-					<li>
-						<a href="rocket.html">
-							<img src="../../assets/rocket-button.svg">
-							<h3>Rocket</h3>
-						</a>
-					</li>
-					<li>
-						<a href="crewman.html">
-							<img src="../../assets/crewman-button.svg">
-							<h3>Crewman</h3>
-						</a>
-					</li>
-					<li>
-						<a href="crew.html">
-							<img src="../../assets/crew-button.svg">
-							<h3>Crew</h3>
-						</a>
-					</li>
-					<li>
-						<a href="launch.html">
-							<img src="../../assets/launch-button.svg">
-							<h3>Launch</h3>
-						</a>
-					</li>
-				</ul>
-			</nav>
-		</header>
-		<div class="data-div">
-			<div class="data-header-div">
-				<h1>Crew</h1>
-				<a href="#" id="add-crew-button">
-					<h4>Add</h4>
-					<img src="../../assets/add-circle-button-fill.svg">
+	<body>
+		<div class="content-div">
+			<header>
+				<a href="../index.html">
+					<img src="../../assets/pixel-rocket.png" />
 				</a>
+				<h2>Onboarding<br />Challenge</h2>
+				<nav>
+					<ul>
+						<li>
+							<a href="../index.html">
+								<img src="../../assets/home-button.svg" />
+								<h3>Home</h3>
+							</a>
+						</li>
+						<li>
+							<a href="rocket.html">
+								<img src="../../assets/rocket-button.svg" />
+								<h3>Rocket</h3>
+							</a>
+						</li>
+						<li>
+							<a href="crewman.html">
+								<img src="../../assets/crewman-button.svg" />
+								<h3>Crewman</h3>
+							</a>
+						</li>
+						<li>
+							<a href="crew.html">
+								<img src="../../assets/crew-button.svg" />
+								<h3>Crew</h3>
+							</a>
+						</li>
+						<li>
+							<a href="launch.html">
+								<img src="../../assets/launch-button.svg" />
+								<h3>Launch</h3>
+							</a>
+						</li>
+					</ul>
+				</nav>
+			</header>
+			<div class="data-div">
+				<div class="data-header-div">
+					<h1>Crew</h1>
+					<a href="#" id="add-crew-button">
+						<h4>Add</h4>
+						<img src="../../assets/add-circle-button-fill.svg" />
+					</a>
+				</div>
+				<div id="crewList"></div>
 			</div>
-			<div id="crewList"></div>
 		</div>
-	</div>
-	<div class="modal" id="add-crew-modal">
-		<div class="modal-content">
-			<span class="close" id="add-crew-modal-close-button">&times;</span>
-			<h2>Add Crew</h2>
-			<form id="add-crew-modal-form">
-				<label for="name">Name:</label>
-				<input type="text" id="add-crew-form-name" name="name" required>
-				<label for="crewmans">Crewmans:</label>
-				<input type="text" id="add-crew-form-crewmans" name="crewmans" required>
-				<button type="submit">
-					<h4>Add</h4>
-				</button>
-			</form>
+		<div class="modal" id="add-crew-modal">
+			<div class="modal-content">
+				<span class="close" id="add-crew-modal-close-button">&times;</span>
+				<h2>Add Crew</h2>
+				<form id="add-crew-modal-form">
+					<label for="name">Name:</label>
+					<input
+						type="text"
+						id="add-crew-form-name"
+						name="name"
+						required
+					/>
+					<label for="crewmans">Crewmans:</label>
+					<input
+						type="text"
+						id="add-crew-form-crewmans"
+						name="crewmans"
+						required
+					/>
+					<button type="submit">
+						<h4>Add</h4>
+					</button>
+				</form>
+			</div>
 		</div>
-	</div>
-	<div class="modal" id="update-crew-modal">
-		<div class="modal-content">
-			<span class="close" id="update-crew-modal-close-button">&times;</span>
-			<h2>Update Crew</h2>
-			<form id="update-crew-modal-form">
-				<label for="name">Name:</label>
-				<input type="text" id="update-crew-form-name" name="name" required>
-				<label for="crewmans">Crewmans:</label>
-				<input type="text" id="update-crew-form-crewmans" name="crewmans" required>
-				<button type="submit">
-					<h4>Update</h4>
-				</button>
-			</form>
+		<div class="modal" id="update-crew-modal">
+			<div class="modal-content">
+				<span class="close" id="update-crew-modal-close-button"
+					>&times;</span
+				>
+				<h2>Update Crew</h2>
+				<form id="update-crew-modal-form">
+					<label for="name">Name:</label>
+					<input
+						type="text"
+						id="update-crew-form-name"
+						name="name"
+						required
+					/>
+					<label for="crewmans">Crewmans:</label>
+					<input
+						type="text"
+						id="update-crew-form-crewmans"
+						name="crewmans"
+						required
+					/>
+					<button type="submit">
+						<h4>Update</h4>
+					</button>
+				</form>
+			</div>
 		</div>
-	</div>
-	<div class="notification error-notification" id="crew-notification">
-		<p id="crew-notification-text"></p>
-	</div>
-</body>
+		<div class="notification error-notification" id="crew-notification">
+			<p id="crew-notification-text"></p>
+		</div>
+	</body>
 
-<footer>
-	<h5>
-		Made with ❤️ in the
-		<a href="https://www.joinplank.com/fellowship" target="_blank">Plank Fellowship Programa</a>
-	</h5>
-</footer>
-<script src="../scripts/notification.js"></script>
-<script src="../scripts/crewman.js"></script>
-<script src="../scripts/crew.js"></script>
-
+	<footer>
+		<h5>
+			Made with ❤️ in the
+			<a href="https://www.joinplank.com/fellowship" target="_blank"
+				>Plank Fellowship Programa</a
+			>
+		</h5>
+	</footer>
+	<script src="../scripts/notification.js"></script>
+	<script src="../scripts/crewman.js"></script>
+	<script src="../scripts/crew.js"></script>
 </html>

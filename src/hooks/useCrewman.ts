@@ -1,18 +1,31 @@
 import { useState } from "react";
-import { ICreateCrewmanDto, ICrewmanDto, IUpdateCrewmanDto } from "../dto/CrewmanDto";
-import { getCrewmans, sendCreateCrewman, sendDeleteCrewman, sendUpdateCrewman } from "../services/crewmanService";
+import {
+	ICreateCrewmanDto,
+	ICrewmanDto,
+	IUpdateCrewmanDto,
+} from "../dto/CrewmanDto";
+import {
+	getCrewmans,
+	sendCreateCrewman,
+	sendDeleteCrewman,
+	sendUpdateCrewman,
+} from "../services/crewmanService";
 import { useNotification } from "./useNotification";
 
-export interface IUseCrewman {
+export type IUseCrewman = {
 	fetchCrewmans: () => Promise<void>;
 	addCrewman: (createCrewmanDto: ICreateCrewmanDto) => Promise<void>;
-	editCrewman: (id: number, updateCrewmanDto: IUpdateCrewmanDto) => Promise<void>;
+	editCrewman: (
+		id: number,
+		updateCrewmanDto: IUpdateCrewmanDto
+	) => Promise<void>;
 	deleteCrewman: (id: number) => Promise<void>;
 	isDataLoaded: () => boolean;
 };
 
-export const useCrewman = (initState: ICrewmanDto[] = []): [ICrewmanDto[], IUseCrewman] => {
-
+export const useCrewman = (
+	initState: ICrewmanDto[] = []
+): [ICrewmanDto[], IUseCrewman] => {
 	const [dataIsLoad, setDataIsLoad] = useState(false);
 	const [crewmans, setCrewmans] = useState(initState);
 	const [, setNotification] = useNotification();
@@ -25,34 +38,43 @@ export const useCrewman = (initState: ICrewmanDto[] = []): [ICrewmanDto[], IUseC
 		} catch (err) {
 			setNotification.showNotification(`${err}`, false);
 		}
-	}
+	};
 
 	const addCrewman = async (createCrewmanDto: ICreateCrewmanDto) => {
 		const requestSucceed = await sendCreateCrewman(createCrewmanDto);
 		setNotification.showNotification(
-			requestSucceed ? "Crewman created!" : "Sorry, crewman could not be created!",
+			requestSucceed
+				? "Crewman created!"
+				: "Sorry, crewman could not be created!",
 			requestSucceed
 		);
 		fetchCrewmans();
-	}
+	};
 
-	const editCrewman = async (id: number, updateCrewmanDto: IUpdateCrewmanDto) => {
+	const editCrewman = async (
+		id: number,
+		updateCrewmanDto: IUpdateCrewmanDto
+	) => {
 		const requestSucceed = await sendUpdateCrewman(id, updateCrewmanDto);
 		setNotification.showNotification(
-			requestSucceed ? "Crewman updated!" : "Sorry, crewman could not be updated!",
+			requestSucceed
+				? "Crewman updated!"
+				: "Sorry, crewman could not be updated!",
 			requestSucceed
 		);
 		fetchCrewmans();
-	}
+	};
 
 	const deleteCrewman = async (id: number) => {
 		const requestSucceed = await sendDeleteCrewman(id);
 		setNotification.showNotification(
-			requestSucceed ? "Crewman deleted!" : "Sorry, crewman could not be deleted!",
+			requestSucceed
+				? "Crewman deleted!"
+				: "Sorry, crewman could not be deleted!",
 			requestSucceed
 		);
 		fetchCrewmans();
-	}
+	};
 
 	const isDataLoaded = () => dataIsLoad;
 
@@ -64,6 +86,6 @@ export const useCrewman = (initState: ICrewmanDto[] = []): [ICrewmanDto[], IUseC
 			editCrewman,
 			deleteCrewman,
 			isDataLoaded,
-		}
-	]
-}
+		},
+	];
+};

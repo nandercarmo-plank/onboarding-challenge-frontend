@@ -1,24 +1,37 @@
 import { ReactNode, SetStateAction } from "react";
-import { ModalContentDiv, ModalDiv, ModalHeaderDiv, StyledSpan } from "./styles/styles";
+import {
+	ModalContentDiv,
+	ModalDiv,
+	ModalHeaderDiv,
+	StyledSpan,
+} from "./styles/styles";
 
 type ModalProps = {
 	children: ReactNode;
 	visible?: boolean;
 	setVisible: React.Dispatch<SetStateAction<boolean>>;
 	title: string;
-	className?: string,
+	className?: string;
 };
 
-export const Modal = ({ children, visible, setVisible, title, className }: ModalProps) => {
+export const Modal = ({
+	children,
+	visible,
+	setVisible,
+	title,
+	className,
+}: ModalProps) => {
 	return (
 		<ModalDiv style={{ visibility: visible ? "visible" : "hidden" }}>
 			<ModalContentDiv className={className}>
 				<ModalHeaderDiv>
 					<h2>{title}</h2>
-					<StyledSpan onClick={() => setVisible(false)}>&times;</StyledSpan>
+					<StyledSpan onClick={() => setVisible(false)}>
+						&times;
+					</StyledSpan>
 				</ModalHeaderDiv>
 				{children}
 			</ModalContentDiv>
 		</ModalDiv>
 	);
-}
+};

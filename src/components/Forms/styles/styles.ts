@@ -2,7 +2,7 @@ import { styled } from "styled-components";
 
 export const StyledForm = styled.form`
 	display: flex;
-	flex-direction: column;	
+	flex-direction: column;
 `;
 
 export const StyledLabel = styled.label`
@@ -15,7 +15,7 @@ export const StyledInput = styled.input`
 	margin-bottom: 20px;
 	font-size: 18px;
 	padding: 10px;
-	border: 1px solid #AAA;
+	border: 1px solid #aaa;
 	border-radius: 10px;
 `;
 
@@ -23,7 +23,7 @@ export const StyledSelect = styled.select`
 	margin-bottom: 20px;
 	font-size: 18px;
 	padding: 10px 30px 10px 10px;
-	border: 1px solid #AAA;
+	border: 1px solid #aaa;
 	border-radius: 10px;
 	-webkit-appearance: none;
 	-moz-appearance: none;
@@ -40,8 +40,8 @@ export const StyledButton = styled.button`
 	height: 50px;
 	border: none;
 	border-radius: 10px;
-	background-color: ${props => props.theme.buttonColor};
-	color: ${props => props.theme.buttonTextColor};
+	background-color: ${(props) => props.theme.buttonColor};
+	color: ${(props) => props.theme.buttonTextColor};
 	margin-top: 20px;
 	padding: 5px 15px 5px 15px;
 	text-align: center;

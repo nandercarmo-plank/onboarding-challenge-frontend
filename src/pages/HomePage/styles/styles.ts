@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import { styled } from "styled-components";
 
 export const HomeContentDiv = styled.div`
@@ -18,7 +18,7 @@ export const HomeLogoDiv = styled.div`
 	align-items: center;
 	text-align: center;
 	margin: 50px 0px 0px 0px;
-	background-image: url('src/resources/assets/pixel-rocket-opacity.png');
+	background-image: url("src/resources/assets/pixel-rocket-opacity.png");
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: contain;
@@ -31,7 +31,7 @@ export const HomeLogoDiv = styled.div`
 		transition: top 1s ease;
 		opacity: 0;
 	}
-	
+
 	h1.loaded {
 		top: 300px;
 		opacity: 1;
@@ -41,7 +41,7 @@ export const HomeLogoDiv = styled.div`
 export const HomeCardsContainerDiv = styled.div`
 	display: flex;
 	justify-content: space-evenly;
-	align-items:center;
+	align-items: center;
 	flex-wrap: wrap;
 	margin: 100px 0px;
 `;
@@ -53,8 +53,8 @@ export const StyledLink = styled(Link)`
 	justify-content: space-evenly;
 	text-align: center;
 	text-decoration: none;
-	color: ${props => props.theme.fontColor};
-	background-color: ${props => props.theme.backgroundSecondary};
+	color: ${(props) => props.theme.fontColor};
+	background-color: ${(props) => props.theme.backgroundSecondary};
 	width: 250px;
 	height: 150px;
 	padding: 15px;
@@ -73,8 +73,8 @@ export const StyledLink = styled(Link)`
 `;
 
 export const HomeCard = styled(StyledLink)`
-  &:hover {
-	cursor: pointer;
-	filter: brightness(85%);
-  }
+	&:hover {
+		cursor: pointer;
+		filter: brightness(85%);
+	}
 `;

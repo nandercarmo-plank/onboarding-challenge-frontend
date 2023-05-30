@@ -49,12 +49,12 @@ export const DataHeaderDiv = styled.div`
 		width: 140px;
 		height: 40px;
 		border-radius: 10px;
-		background-color: ${props => props.theme.buttonColor};
+		background-color: ${(props) => props.theme.buttonColor};
 		padding: 5px 15px 5px 15px;
 		text-decoration: none;
-		color: ${props => props.theme.buttonTextColor};
+		color: ${(props) => props.theme.buttonTextColor};
 		font-size: 18px;
-		font-family: 'Press Start 2P';
+		font-family: "Press Start 2P";
 		box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
 	}
 

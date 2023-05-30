@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from "axios";
+import axios, { type AxiosResponse } from "axios";
 
 const API_URL = "https://onboarding-challenge-seven.vercel.app";
 
@@ -12,7 +12,7 @@ export const get = async <T>(path: string): Promise<T[]> => {
 		console.error(`Error while making GET request to ${url}: `, error);
 		throw error;
 	}
-}
+};
 
 export const post = async <T>(path: string, createDto: T): Promise<boolean> => {
 	const url = API_URL + (path.startsWith("/") ? path : "/" + path);
@@ -24,9 +24,13 @@ export const post = async <T>(path: string, createDto: T): Promise<boolean> => {
 		console.error(`Error while making POST request to ${url}: `, error);
 		return false;
 	}
-}
+};
 
-export const put = async <T>(path: string, id: number, updateDto: T): Promise<boolean> => {
+export const put = async <T>(
+	path: string,
+	id: number,
+	updateDto: T
+): Promise<boolean> => {
 	const url = API_URL + (path.startsWith("/") ? path : "/" + path);
 
 	try {
@@ -36,7 +40,7 @@ export const put = async <T>(path: string, id: number, updateDto: T): Promise<bo
 		console.error(`Error while making PUT request to ${url}: `, error);
 		return false;
 	}
-}
+};
 
 export const del = async (path: string, id: number): Promise<boolean> => {
 	const url = API_URL + (path.startsWith("/") ? path : "/" + path);
@@ -48,4 +52,4 @@ export const del = async (path: string, id: number): Promise<boolean> => {
 		console.error(`Error while making DELETE request to ${url}: `, error);
 		return false;
 	}
-}
+};

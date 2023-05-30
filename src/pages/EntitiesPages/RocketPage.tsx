@@ -8,16 +8,17 @@ import { useRocket } from "../../hooks/useRocket";
 import { ContentDiv, DataDiv, DataHeaderDiv } from "./styles/styles";
 
 export const RocketPage = () => {
-
 	const [isAddModalVisible, setAddModalVisibility] = useState(false);
 	const [rockets, setRockets] = useRocket([]);
 
 	const onSubmitAddForm = async (createRocketDto: ICreateRocketDto) => {
 		setAddModalVisibility(false);
 		setRockets.addRocket(createRocketDto);
-	}
+	};
 
-	useEffect(() => { setRockets.fetchRockets(); }, []);
+	useEffect(() => {
+		setRockets.fetchRockets();
+	}, []);
 
 	return (
 		<ContentDiv>
@@ -30,10 +31,14 @@ export const RocketPage = () => {
 					</a>
 				</DataHeaderDiv>
 				<Rocket rockets={rockets} setRockets={setRockets} />
-				<Modal title="Add Rocket" visible={isAddModalVisible} setVisible={setAddModalVisibility}>
+				<Modal
+					title="Add Rocket"
+					visible={isAddModalVisible}
+					setVisible={setAddModalVisibility}
+				>
 					<RocketForm onSubmit={onSubmitAddForm} />
 				</Modal>
 			</DataDiv>
 		</ContentDiv>
 	);
-}
+};

@@ -1,6 +1,15 @@
 import { useEffect, useState } from "react";
-import { crewmanButton, launchButton, rocketButton } from "../../resources/images";
-import { HomeCard, HomeCardsContainerDiv, HomeContentDiv, HomeLogoDiv } from "./styles/styles";
+import {
+	crewmanButton,
+	launchButton,
+	rocketButton,
+} from "../../resources/images";
+import {
+	HomeCard,
+	HomeCardsContainerDiv,
+	HomeContentDiv,
+	HomeLogoDiv,
+} from "./styles/styles";
 
 export const HomePage = () => {
 	const [isLoaded, setIsLoaded] = useState(false);
@@ -16,8 +25,12 @@ export const HomePage = () => {
 	return (
 		<HomeContentDiv>
 			<HomeLogoDiv>
-				<h1 className={isLoaded ? 'loaded' : ''}>
-					Plank<br />Onboarding<br />Challenge
+				<h1 className={isLoaded ? "loaded" : ""}>
+					Plank
+					<br />
+					Onboarding
+					<br />
+					Challenge
 				</h1>
 			</HomeLogoDiv>
 			<HomeCardsContainerDiv>
@@ -40,4 +53,4 @@ export const HomePage = () => {
 			</HomeCardsContainerDiv>
 		</HomeContentDiv>
 	);
-}
+};
