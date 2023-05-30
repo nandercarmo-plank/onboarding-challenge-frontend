@@ -13,12 +13,12 @@ import {
 	ListItemImage,
 } from "../styles/styles";
 
-interface IRocketProps {
+type IRocketProps = {
 	isSubItem?: boolean;
 	renderButtons?: boolean;
 	rockets: IRocketDto[];
 	setRockets?: IUseRocket;
-}
+};
 
 export const Rocket = ({
 	isSubItem = false,

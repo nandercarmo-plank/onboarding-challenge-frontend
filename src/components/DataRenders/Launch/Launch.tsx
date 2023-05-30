@@ -15,12 +15,12 @@ import {
 	ListItemImage,
 } from "../styles/styles";
 
-interface ILaunchProps {
+type ILaunchProps = {
 	isSubItem?: boolean;
 	renderButtons?: boolean;
 	launchs: ILaunchDto[];
 	setLaunchs?: IUseLaunch;
-}
+};
 
 export const Launch = ({
 	isSubItem = false,
