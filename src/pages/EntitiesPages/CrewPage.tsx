@@ -1,4 +1,4 @@
-import { useEffect, useState, type ReactNode } from "react";
+import { useEffect, useState } from "react";
 
 import { Crew } from "../../components/DataRenders/Crew/Crew";
 import { CrewForm } from "../../components/Forms/Crew/CrewForm";
@@ -8,7 +8,7 @@ import { type ICreateCrewDto } from "../../dto/CrewDto";
 import { useCrew } from "../../hooks/useCrew";
 import { ContentDiv, DataDiv, DataHeaderDiv } from "./styles/styles";
 
-export const CrewPage = (): ReactNode => {
+export const CrewPage = () => {
 	const [isAddModalVisible, setAddModalVisibility] = useState(false);
 	const [crews, setCrews] = useCrew([]);
 
