@@ -37,7 +37,7 @@
 		"react-hooks/exhaustive-deps": "off",
 		"react-hooks/rules-of-hooks": "error",
 		"react/button-has-type": "error",
-		"react/prop-types": ["off"],
+		"react/prop-types": ["error"],
 		"react/no-array-index-key": "error"
 	},
 	"settings": {
