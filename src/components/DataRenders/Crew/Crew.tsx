@@ -1,5 +1,6 @@
 import { useState, type MouseEvent } from "react";
 
+import { useTranslation } from "react-i18next";
 import { type ICrewDto, type IUpdateCrewDto } from "../../../dto/CrewDto";
 import { type IUseCrew } from "../../../hooks/useCrew";
 import { LoadingPage } from "../../../pages/LoadingPage/LoadingPage";
@@ -28,6 +29,8 @@ export const Crew = ({
 	crews,
 	setCrews,
 }: ICrewProps) => {
+	const { t } = useTranslation();
+
 	const [isUpdateModalVisible, setUpdateModalVisibility] = useState(false);
 	const [isDataViewModalVisible, setDataViewModalVisible] = useState(false);
 	const [clickedCrew, setClickedCrew] = useState<ICrewDto>();
@@ -76,9 +79,15 @@ export const Crew = ({
 								}}
 							>
 								<ListItemData>
-									<strong>ID:</strong> {crew.id}
+									<strong>
+										{t("components.data_renders.crew.id")}:
+									</strong>{" "}
+									{crew.id}
 									<br />
-									<strong>Name:</strong> {crew.name}
+									<strong>
+										{t("components.data_renders.crew.name")}:
+									</strong>{" "}
+									{crew.name}
 								</ListItemData>
 								<ListItemImage>
 									{renderButtons && (
@@ -103,7 +112,7 @@ export const Crew = ({
 					);
 				})}
 				<Modal
-					title="Update Crew"
+					title={t("components.data_renders.crew.update_modal_title")}
 					visible={isUpdateModalVisible}
 					setVisible={setUpdateModalVisibility}
 				>
@@ -111,19 +120,23 @@ export const Crew = ({
 				</Modal>
 			</ListDiv>
 			<Modal
-				title="Crew"
+				title={t("components.data_renders.crew.data_view_modal_title")}
 				visible={isDataViewModalVisible}
 				setVisible={setDataViewModalVisible}
 				className="crew-modal"
 			>
 				<ListItemData>
-					<strong>ID:</strong> {clickedCrew?.id}
+					<strong>{t("components.data_renders.crew.id")}:</strong>{" "}
+					{clickedCrew?.id}
 					<br />
-					<strong>Name:</strong> {clickedCrew?.name}
+					<strong>{t("components.data_renders.crew.name")}:</strong>{" "}
+					{clickedCrew?.name}
 					<br />
 					{clickedCrew?.crewmans?.length != null ? (
 						<>
-							<strong>Crewmans:</strong>
+							<strong>
+								{t("components.data_renders.crew.crewmans")}:
+							</strong>
 							<br />
 							<Crewman
 								isSubItem={true}

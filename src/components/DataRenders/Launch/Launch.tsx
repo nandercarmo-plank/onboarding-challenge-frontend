@@ -1,4 +1,5 @@
 import { MouseEvent, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { ILaunchDto, IUpdateLaunchDto } from "../../../dto/LaunchDto";
 import { IUseLaunch } from "../../../hooks/useLaunch";
 import { LoadingPage } from "../../../pages/LoadingPage/LoadingPage";
@@ -28,6 +29,8 @@ export const Launch = ({
 	launchs,
 	setLaunchs,
 }: ILaunchProps) => {
+	const { t } = useTranslation();
+
 	const [isUpdateModalVisible, setUpdateModalVisibility] = useState(false);
 	const [isDataViewModalVisible, setDataViewModalVisible] = useState(false);
 	const [clickedLaunch, setClickedLaunch] = useState<ILaunchDto>();
@@ -74,13 +77,25 @@ export const Launch = ({
 								onClick={() => openDataViewModal(launch)}
 							>
 								<ListItemData>
-									<strong>ID:</strong> {launch.id}
+									<strong>
+										{t("components.data_renders.launch.id")}:
+									</strong>{" "}
+									{launch.id}
 									<br />
-									<strong>Launch code:</strong> {launch.launchCode}
+									<strong>
+										{t("components.data_renders.launch.launch_code")}:
+									</strong>{" "}
+									{launch.launchCode}
 									<br />
-									<strong>Date:</strong> {launch.date}
+									<strong>
+										{t("components.data_renders.launch.date")}:
+									</strong>{" "}
+									{launch.date}
 									<br />
-									<strong>Success:</strong> {`${launch.success}`}
+									<strong>
+										{t("components.data_renders.launch.success")}:
+									</strong>{" "}
+									{`${launch.success}`}
 								</ListItemData>
 								<ListItemImage>
 									{renderButtons && (
@@ -103,7 +118,7 @@ export const Launch = ({
 					);
 				})}
 				<Modal
-					title="Update Launch"
+					title={t("components.data_renders.launch.update_modal_title")}
 					visible={isUpdateModalVisible}
 					setVisible={setUpdateModalVisibility}
 				>
@@ -114,21 +129,29 @@ export const Launch = ({
 				</Modal>
 			</ListDiv>
 			<Modal
-				title="Launch"
+				title={t("components.data_renders.launch.data_view_modal_title")}
 				visible={isDataViewModalVisible}
 				setVisible={setDataViewModalVisible}
 				className="launch-modal"
 			>
 				<ListItemData>
-					<strong>ID:</strong> {clickedLaunch?.id}
+					<strong>{t("components.data_renders.launch.id")}:</strong>{" "}
+					{clickedLaunch?.id}
 					<br />
-					<strong>Launch code:</strong> {clickedLaunch?.launchCode}
+					<strong>
+						{t("components.data_renders.launch.launch_code")}:
+					</strong>{" "}
+					{clickedLaunch?.launchCode}
 					<br />
-					<strong>Date:</strong> {clickedLaunch?.date}
+					<strong>{t("components.data_renders.launch.date")}:</strong>{" "}
+					{clickedLaunch?.date}
 					<br />
-					<strong>Success:</strong> {`${clickedLaunch?.success}`}
+					<strong>
+						{t("components.data_renders.launch.success")}:
+					</strong>{" "}
+					{`${clickedLaunch?.success}`}
 					<br />
-					<strong>Rocket:</strong>
+					<strong>{t("components.data_renders.launch.rocket")}:</strong>
 					<Rocket
 						isSubItem={true}
 						renderButtons={false}
@@ -137,7 +160,9 @@ export const Launch = ({
 					{clickedLaunch?.crew && (
 						<>
 							<br />
-							<strong>Crew:</strong>
+							<strong>
+								{t("components.data_renders.launch.crew")}:
+							</strong>
 							<Crew
 								isSubItem={true}
 								renderButtons={false}

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import {
 	ICreateLaunchDto,
 	ILaunchDto,
@@ -23,6 +24,8 @@ export type IUseLaunch = {
 export const useLaunch = (
 	initState: ILaunchDto[] = []
 ): [ILaunchDto[], IUseLaunch] => {
+	const { t } = useTranslation();
+
 	const [dataIsLoad, setDataIsLoad] = useState(false);
 	const [launchs, setLaunchs] = useState(initState);
 	const [, setNotification] = useNotification();
@@ -39,7 +42,10 @@ export const useLaunch = (
 			setLaunchs(fetchedLaunchs);
 			setDataIsLoad(true);
 		} catch (err) {
-			setNotification.showNotification(`${err}`, false);
+			setNotification.showNotification(
+				t("hooks.use_launch.not_fetched"),
+				false
+			);
 		}
 	};
 
@@ -47,8 +53,8 @@ export const useLaunch = (
 		const requestSucceed = await sendCreateLaunch(createLaunchDto);
 		setNotification.showNotification(
 			requestSucceed
-				? "Launch created!"
-				: "Sorry, launch could not be created!",
+				? t("hooks.use_launch.created")
+				: t("hooks.use_launch.not_created"),
 			requestSucceed
 		);
 		fetchLaunchs();
@@ -58,8 +64,8 @@ export const useLaunch = (
 		const requestSucceed = await sendUpdateLaunch(id, updateLaunchDto);
 		setNotification.showNotification(
 			requestSucceed
-				? "Launch updated!"
-				: "Sorry, launch could not be updated!",
+				? t("hooks.use_launch.updated")
+				: t("hooks.use_launch.not_updated"),
 			requestSucceed
 		);
 		fetchLaunchs();
@@ -69,8 +75,8 @@ export const useLaunch = (
 		const requestSucceed = await sendDeleteLaunch(id);
 		setNotification.showNotification(
 			requestSucceed
-				? "Launch deleted!"
-				: "Sorry, launch could not be deleted!",
+				? t("hooks.use_launch.deleted")
+				: t("hooks.use_launch.deleted"),
 			requestSucceed
 		);
 		fetchLaunchs();

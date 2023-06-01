@@ -1,0 +1,139 @@
+{
+	"translation": {
+		"pages": {
+			"home": {
+				"rocketCard": "Foguetes",
+				"crewmanCard": "Tripulantes",
+				"crewCard": "Tripulações",
+				"launchCard": "Lançamentos"
+			},
+			"entities_pages": {
+				"add_button": "Adicionar",
+				"rockets": {
+					"title": "Foguetes",
+					"add_modal_title": "Adicionar Foguete"
+				},
+				"crewmans": {
+					"title": "Tripulantes",
+					"add_modal_title": "Adicionar Tripulante"
+				},
+				"crews": {
+					"title": "Tripulações",
+					"add_modal_title": "Adicionar Tripulação"
+				},
+				"launchs": {
+					"title": "Lançamentos",
+					"add_modal_title": "Adicionar Lançamento"
+				}
+			},
+			"not_found": {
+				"text_h1": "Eita!!!",
+				"text_h2": "Não tem nada pra ver aqui!"
+			}
+		},
+		"components": {
+			"footer": {
+				"fellowship": "Programa de Fellowship da Plank"
+			},
+			"navbar": {
+				"homeButton": "Início",
+				"rocketButton": "Foguetes",
+				"crewmanButton": "Tripulantes",
+				"crewButton": "Tripulações",
+				"launchButton": "Lançamentos"
+			},
+			"data_renders": {
+				"rocket": {
+					"id": "ID",
+					"name": "Nome",
+					"update_modal_title": "Atualizar Foguete",
+					"data_view_modal_title": "Foguete"
+				},
+				"crewman": {
+					"id": "ID",
+					"name": "Nome",
+					"patent": "Patente",
+					"update_modal_title": "Atualizar Tripulante",
+					"data_view_modal_title": "Tripulante"
+				},
+				"crew": {
+					"id": "ID",
+					"name": "Nome",
+					"crewmans": "Tripulantes",
+					"update_modal_title": "Atualizar Tripulação",
+					"data_view_modal_title": "Tripulação"
+				},
+				"launch": {
+					"id": "ID",
+					"launch_code": "Lançamento code",
+					"date": "Data",
+					"success": "Successo",
+					"rocket": "Foguete",
+					"crew": "Tripulação",
+					"update_modal_title": "Atualizar Lançamento",
+					"data_view_modal_title": "Lançamento"
+				}
+			},
+			"forms": {
+				"rocket": {
+					"name": "Nome"
+				},
+				"crewman": {
+					"name": "Nome",
+					"patent": "Patente"
+				},
+				"crew": {
+					"name": "Nome",
+					"crewmans": "Tripulantes"
+				},
+				"launch": {
+					"launch_code": "Código de lançamento",
+					"date": "Data",
+					"success": "Status de sucesso",
+					"launch_succeed": "Bem sucedido",
+					"launch_failed": "Falhou",
+					"rocket": "ID do Foguete",
+					"crew": "ID da Tripulação (optional)"
+				}
+			}
+		},
+		"hooks": {
+			"use_rocket": {
+				"not_fetched": "Desculpa, os foguetes não puderam ser carregados!",
+				"created": "Foguete criado!",
+				"not_created": "Desculpa, o foguete não pode ser criado!",
+				"updated": "Foguete atualizado!",
+				"not_updated": "Desculpa, o foguete não pode ser atualizado!",
+				"deleted": "Foguete removido!",
+				"not_deleted": "Desculpa, o foguete não pode ser removido!"
+			},
+			"use_crewman": {
+				"not_fetched": "Desculpa, os tripulantes não puderam ser carregados!",
+				"created": "Tripulante criado!",
+				"not_created": "Desculpa, o tripulante não pode ser criado!",
+				"updated": "Tripulante atualizado!",
+				"not_updated": "Desculpa, o tripulante não pode ser atualizado!",
+				"deleted": "Tripulante removido!",
+				"not_deleted": "Desculpa, o tripulante não pode ser removido!"
+			},
+			"use_crew": {
+				"not_fetched": "Desculpa, as tripualações não puderam ser carregadas!",
+				"created": "Tripulação criado!",
+				"not_created": "Desculpa, a tripulação não pode ser criada!",
+				"updated": "Tripulação atualizado!",
+				"not_updated": "Desculpa, a tripulação não pode ser atualizada!",
+				"deleted": "Tripulação removido!",
+				"not_deleted": "Desculpa, a tripulação não pode ser removida!"
+			},
+			"use_launch": {
+				"not_fetched": "Desculpa, os lançamentos não puderam ser carregados!",
+				"created": "Lançamento criado!",
+				"not_created": "Desculpa, o lançamento não pode ser criado!",
+				"updated": "Lançamento atualizado!",
+				"not_updated": "Desculpa, o lançamento não pode ser atualizado!",
+				"deleted": "Lançamento removido!",
+				"not_deleted": "Desculpa, o lançamento não pode ser removido!"
+			}
+		}
+	}
+}

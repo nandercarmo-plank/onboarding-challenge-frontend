@@ -1,4 +1,5 @@
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { ICreateRocketDto, IRocketDto } from "../../../dto/RocketDto";
 import {
 	StyledButton,
@@ -13,6 +14,8 @@ type RocketFormProps = {
 };
 
 export const RocketForm = ({ onSubmit, rocket }: RocketFormProps) => {
+	const { t } = useTranslation();
+
 	const [name, setName] = useState<string>(rocket?.name ?? "");
 
 	const handleOnChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -32,7 +35,7 @@ export const RocketForm = ({ onSubmit, rocket }: RocketFormProps) => {
 
 	return (
 		<StyledForm onSubmit={handleOnSubmit}>
-			<StyledLabel>Name:</StyledLabel>
+			<StyledLabel>{t("components.forms.rocket.name")}:</StyledLabel>
 			<StyledInput
 				type="text"
 				placeholder="Ex: Rocket I"

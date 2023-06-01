@@ -1,4 +1,5 @@
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { ICreateLaunchDto, ILaunchDto } from "../../../dto/LaunchDto";
 import {
 	StyledButton,
@@ -14,6 +15,8 @@ type LaunchFormProps = {
 };
 
 export const LaunchForm = ({ onSubmit, launch }: LaunchFormProps) => {
+	const { t } = useTranslation();
+
 	const [launchCode, setLaunchCode] = useState<string>(
 		launch?.launchCode ?? ""
 	);
@@ -66,7 +69,7 @@ export const LaunchForm = ({ onSubmit, launch }: LaunchFormProps) => {
 
 	return (
 		<StyledForm onSubmit={handleOnSubmit}>
-			<StyledLabel>Launch Code:</StyledLabel>
+			<StyledLabel>{t("components.forms.launch.launch_code")}:</StyledLabel>
 			<StyledInput
 				type="text"
 				placeholder="Ex: Launch IV"
@@ -74,23 +77,27 @@ export const LaunchForm = ({ onSubmit, launch }: LaunchFormProps) => {
 				onChange={handleOnChangeLaunchCode}
 				required
 			/>
-			<StyledLabel>Date:</StyledLabel>
+			<StyledLabel>{t("components.forms.launch.date")}:</StyledLabel>
 			<StyledInput
 				type="date"
 				value={date}
 				onChange={handleOnChangeDate}
 				required
 			/>
-			<StyledLabel>Success status:</StyledLabel>
+			<StyledLabel>{t("components.forms.launch.success")}:</StyledLabel>
 			<StyledSelect
 				required
 				value={success ? "true" : "false"}
 				onChange={handleOnChangeSuccess}
 			>
-				<option value="true">Succeed</option>
-				<option value="false">Failed</option>
+				<option value="true">
+					{t("components.forms.launch.launch_succeed")}
+				</option>
+				<option value="false">
+					{t("components.forms.launch.launch_failed")}
+				</option>
 			</StyledSelect>
-			<StyledLabel>Rocket Id:</StyledLabel>
+			<StyledLabel>{t("components.forms.launch.rocket")}:</StyledLabel>
 			<StyledInput
 				type="number"
 				placeholder="Ex: 1"
@@ -98,7 +105,7 @@ export const LaunchForm = ({ onSubmit, launch }: LaunchFormProps) => {
 				onChange={handleOnChangeRocketId}
 				required
 			/>
-			<StyledLabel>Crew Id (optional):</StyledLabel>
+			<StyledLabel>{t("components.forms.launch.crew")}:</StyledLabel>
 			<StyledInput
 				type="number"
 				placeholder="Ex: 2"

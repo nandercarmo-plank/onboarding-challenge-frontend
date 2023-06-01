@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import {
 	type ICreateCrewDto,
 	type ICrewDto,
@@ -21,6 +22,8 @@ export type IUseCrew = {
 };
 
 export const useCrew = (initState: ICrewDto[] = []): [ICrewDto[], IUseCrew] => {
+	const { t } = useTranslation();
+
 	const [dataIsLoad, setDataIsLoad] = useState(false);
 	const [crews, setCrews] = useState(initState);
 	const [, setNotification] = useNotification();
@@ -35,14 +38,19 @@ export const useCrew = (initState: ICrewDto[] = []): [ICrewDto[], IUseCrew] => {
 			setCrews(fetchedCrews);
 			setDataIsLoad(true);
 		} catch (err) {
-			setNotification.showNotification("Could not fetch data", false);
+			setNotification.showNotification(
+				t("hooks.use_crew.not_fetched"),
+				false
+			);
 		}
 	};
 
 	const addCrew = async (createCrewDto: ICreateCrewDto) => {
 		const requestSucceed = await sendCreateCrew(createCrewDto);
 		setNotification.showNotification(
-			requestSucceed ? "Crew created!" : "Sorry, crew could not be created!",
+			requestSucceed
+				? t("hooks.use_crew.created")
+				: t("hooks.use_crew.not_created"),
 			requestSucceed
 		);
 		fetchCrews();
@@ -51,7 +59,9 @@ export const useCrew = (initState: ICrewDto[] = []): [ICrewDto[], IUseCrew] => {
 	const editCrew = async (id: number, updateCrewDto: IUpdateCrewDto) => {
 		const requestSucceed = await sendUpdateCrew(id, updateCrewDto);
 		setNotification.showNotification(
-			requestSucceed ? "Crew updated!" : "Sorry, crew could not be updated!",
+			requestSucceed
+				? t("hooks.use_crew.updated")
+				: t("hooks.use_crew.not_updated"),
 			requestSucceed
 		);
 		fetchCrews();
@@ -60,7 +70,9 @@ export const useCrew = (initState: ICrewDto[] = []): [ICrewDto[], IUseCrew] => {
 	const deleteCrew = async (id: number) => {
 		const requestSucceed = await sendDeleteCrew(id);
 		setNotification.showNotification(
-			requestSucceed ? "Crew deleted!" : "Sorry, crew could not be deleted!",
+			requestSucceed
+				? t("hooks.use_crew.deleted")
+				: t("hooks.use_crew.not_deleted"),
 			requestSucceed
 		);
 		return await fetchCrews();

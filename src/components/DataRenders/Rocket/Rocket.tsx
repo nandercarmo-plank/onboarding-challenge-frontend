@@ -1,4 +1,5 @@
 import { MouseEvent, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { IRocketDto, IUpdateRocketDto } from "../../../dto/RocketDto";
 import { IUseRocket } from "../../../hooks/useRocket";
 import { LoadingPage } from "../../../pages/LoadingPage/LoadingPage";
@@ -26,6 +27,8 @@ export const Rocket = ({
 	rockets,
 	setRockets,
 }: IRocketProps) => {
+	const { t } = useTranslation();
+
 	const [isUpdateModalVisible, setUpdateModalVisibility] = useState(false);
 	const [isDataViewModalVisible, setDataViewModalVisible] = useState(false);
 	const [clickedRocket, setClickedRocket] = useState<IRocketDto>();
@@ -72,9 +75,15 @@ export const Rocket = ({
 								onClick={() => openDataViewModal(rocket)}
 							>
 								<ListItemData>
-									<strong>ID:</strong> {rocket.id}
+									<strong>
+										{t("components.data_renders.rocket.id")}:
+									</strong>{" "}
+									{rocket.id}
 									<br />
-									<strong>Name:</strong> {rocket.name}
+									<strong>
+										{t("components.data_renders.rocket.name")}:
+									</strong>{" "}
+									{rocket.name}
 								</ListItemData>
 								<ListItemImage>
 									{renderButtons && (
@@ -97,7 +106,7 @@ export const Rocket = ({
 					);
 				})}
 				<Modal
-					title="Update Rocket"
+					title={t("components.data_renders.rocket.update_modal_title")}
 					visible={isUpdateModalVisible}
 					setVisible={setUpdateModalVisibility}
 				>
@@ -108,15 +117,17 @@ export const Rocket = ({
 				</Modal>
 			</ListDiv>
 			<Modal
-				title="Rocket"
+				title={t("components.data_renders.rocket.data_view_modal_title")}
 				visible={isDataViewModalVisible}
 				setVisible={setDataViewModalVisible}
 				className="rocket-modal"
 			>
 				<ListItemData>
-					<strong>ID:</strong> {clickedRocket?.id}
+					<strong>{t("components.data_renders.rocket.id")}:</strong>{" "}
+					{clickedRocket?.id}
 					<br />
-					<strong>Name:</strong> {clickedRocket?.name}
+					<strong>{t("components.data_renders.rocket.name")}:</strong>{" "}
+					{clickedRocket?.name}
 				</ListItemData>
 			</Modal>
 		</ListItemContainerDiv>

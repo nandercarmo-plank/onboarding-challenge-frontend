@@ -1,4 +1,5 @@
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { ICreateCrewmanDto, ICrewmanDto } from "../../../dto/CrewmanDto";
 import {
 	StyledButton,
@@ -13,6 +14,8 @@ type CrewmanFormProps = {
 };
 
 export const CrewmanForm = ({ onSubmit, crewman }: CrewmanFormProps) => {
+	const { t } = useTranslation();
+
 	const [name, setName] = useState<string>(crewman?.name ?? "");
 	const [patent, setPatent] = useState<string>(crewman?.patent ?? "");
 
@@ -41,7 +44,7 @@ export const CrewmanForm = ({ onSubmit, crewman }: CrewmanFormProps) => {
 
 	return (
 		<StyledForm onSubmit={handleOnSubmit}>
-			<StyledLabel>Name:</StyledLabel>
+			<StyledLabel>{t("components.forms.crewman.name")}:</StyledLabel>
 			<StyledInput
 				type="text"
 				placeholder="Ex: Crewman II"
@@ -49,7 +52,7 @@ export const CrewmanForm = ({ onSubmit, crewman }: CrewmanFormProps) => {
 				onChange={handleOnChangeName}
 				required
 			></StyledInput>
-			<StyledLabel>Patent:</StyledLabel>
+			<StyledLabel>{t("components.forms.crewman.patent")}:</StyledLabel>
 			<StyledInput
 				type="text"
 				placeholder="Ex: Captain"

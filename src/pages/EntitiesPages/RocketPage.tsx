@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Rocket } from "../../components/DataRenders/Rocket/Rocket";
 import { RocketForm } from "../../components/Forms/Rocket/RocketForm";
 import { Modal } from "../../components/Modal/Modal";
@@ -8,6 +9,8 @@ import { useRocket } from "../../hooks/useRocket";
 import { ContentDiv, DataDiv, DataHeaderDiv } from "./styles/styles";
 
 export const RocketPage = () => {
+	const { t } = useTranslation();
+
 	const [isAddModalVisible, setAddModalVisibility] = useState(false);
 	const [rockets, setRockets] = useRocket([]);
 
@@ -25,14 +28,14 @@ export const RocketPage = () => {
 			<Navbar />
 			<DataDiv>
 				<DataHeaderDiv>
-					<h1>Rockets</h1>
+					<h1>{t("pages.entities_pages.rockets.title")}</h1>
 					<a href="#" onClick={() => setAddModalVisibility(true)}>
-						<h4>Add</h4>
+						<h4>{t("pages.entities_pages.add_button")}</h4>
 					</a>
 				</DataHeaderDiv>
 				<Rocket rockets={rockets} setRockets={setRockets} />
 				<Modal
-					title="Add Rocket"
+					title={t("pages.entities_pages.rockets.add_modal_title")}
 					visible={isAddModalVisible}
 					setVisible={setAddModalVisibility}
 				>

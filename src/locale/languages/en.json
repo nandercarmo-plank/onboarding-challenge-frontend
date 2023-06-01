@@ -1,0 +1,139 @@
+{
+	"translation": {
+		"pages": {
+			"home": {
+				"rocketCard": "Rockets",
+				"crewmanCard": "Crewmans",
+				"crewCard": "Crews",
+				"launchCard": "Launchs"
+			},
+			"entities_pages": {
+				"add_button": "Add",
+				"rockets": {
+					"title": "Rockets",
+					"add_modal_title": "Add Rocket"
+				},
+				"crewmans": {
+					"title": "Crewmans",
+					"add_modal_title": "Add Crewman"
+				},
+				"crews": {
+					"title": "Crews",
+					"add_modal_title": "Add Crew"
+				},
+				"launchs": {
+					"title": "Launchs",
+					"add_modal_title": "Add Launch"
+				}
+			},
+			"not_found": {
+				"text_h1": "Ooops!!!",
+				"text_h2": "There's nothing to see here!"
+			}
+		},
+		"components": {
+			"footer": {
+				"fellowship": "Plank Fellowship Program"
+			},
+			"navbar": {
+				"homeButton": "Home",
+				"rocketButton": "Rockets",
+				"crewmanButton": "Crewmans",
+				"crewButton": "Crews",
+				"launchButton": "Launchs"
+			},
+			"data_renders": {
+				"rocket": {
+					"id": "ID",
+					"name": "Name",
+					"update_modal_title": "Update Rocket",
+					"data_view_modal_title": "Rocket"
+				},
+				"crewman": {
+					"id": "ID",
+					"name": "Name",
+					"patent": "Patent",
+					"update_modal_title": "Update Crewman",
+					"data_view_modal_title": "Crewman"
+				},
+				"crew": {
+					"id": "ID",
+					"name": "Name",
+					"crewmans": "Crewmans",
+					"update_modal_title": "Update Crew",
+					"data_view_modal_title": "Crew"
+				},
+				"launch": {
+					"id": "ID",
+					"launch_code": "Launch code",
+					"date": "Date",
+					"success": "Success",
+					"rocket": "Rocket",
+					"crew": "Crew",
+					"update_modal_title": "Update Launch",
+					"data_view_modal_title": "Launch"
+				}
+			},
+			"forms": {
+				"rocket": {
+					"name": "Name"
+				},
+				"crewman": {
+					"name": "Name",
+					"patent": "Patent"
+				},
+				"crew": {
+					"name": "Name",
+					"crewmans": "Crewmans"
+				},
+				"launch": {
+					"launch_code": "Launch code",
+					"date": "Date",
+					"success": "Success status",
+					"launch_succeed": "Succeed",
+					"launch_failed": "Failed",
+					"rocket": "Rocket ID",
+					"crew": "Crew ID (optional)"
+				}
+			}
+		},
+		"hooks": {
+			"use_rocket": {
+				"not_fetched": "Sorry, could not load rockets!",
+				"created": "Rocket created!",
+				"not_created": "Sorry, rocket could not be created!",
+				"updated": "Rocket updated!",
+				"not_updated": "Sorry, rocket could not be updated!",
+				"deleted": "Rocket deleted!",
+				"not_deleted": "Sorry, rocket could not be deleted!"
+			},
+			"use_crewman": {
+				"not_fetched": "Sorry, could not load crewmans!",
+				"created": "Crewman created!",
+				"not_created": "Sorry, crewman could not be created!",
+				"updated": "Crewman updated!",
+				"not_updated": "Sorry, crewman could not be updated!",
+				"deleted": "Crewman deleted!",
+				"not_deleted": "Sorry, crewman could not be deleted!"
+			},
+			"use_crew": {
+				"not_fetched": "Sorry, could not load crews!",
+				"created": "Crew created!",
+				"not_created": "Sorry, crew could not be created!",
+				"updated": "Crew updated!",
+				"not_updated": "Sorry, crew could not be updated!",
+				"deleted": "Crew deleted!",
+				"not_deleted": "Sorry, crew could not be deleted!"
+			},
+			"use_launch": {
+				"not_fetched": "Sorry, could not load launchs!",
+				"created": "Launch created!",
+				"not_created": "Sorry, launch could not be created!",
+				"updated": "Launch updated!",
+				"not_updated": "Sorry, launch could not be updated!",
+				"deleted": "Launch deleted!",
+				"not_deleted": "Sorry, launch could not be deleted!"
+			}
+		}
+	}
+}

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import {
 	ICreateRocketDto,
 	IRocketDto,
@@ -23,6 +24,8 @@ export type IUseRocket = {
 export const useRocket = (
 	initState: IRocketDto[] = []
 ): [IRocketDto[], IUseRocket] => {
+	const { t } = useTranslation();
+
 	const [dataIsLoad, setDataIsLoad] = useState(false);
 	const [rockets, setRockets] = useState(initState);
 	const [, setNotification] = useNotification();
@@ -33,7 +36,10 @@ export const useRocket = (
 			setRockets((await getRockets()).sort((a, b) => a.id - b.id));
 			setDataIsLoad(true);
 		} catch (err) {
-			setNotification.showNotification(`${err}`, false);
+			setNotification.showNotification(
+				t("hooks.use_rocket.not_fetched"),
+				false
+			);
 		}
 	};
 
@@ -41,8 +47,8 @@ export const useRocket = (
 		const requestSucceed = await sendCreateRocket(createRocketDto);
 		setNotification.showNotification(
 			requestSucceed
-				? "Rocket created!"
-				: "Sorry, rocket could not be created!",
+				? t("hooks.use_rocket.created")
+				: t("hooks.use_rocket.not_created"),
 			requestSucceed
 		);
 		fetchRockets();
@@ -52,8 +58,8 @@ export const useRocket = (
 		const requestSucceed = await sendUpdateRocket(id, updateRocketDto);
 		setNotification.showNotification(
 			requestSucceed
-				? "Rocket updated!"
-				: "Sorry, rocket could not be updated!",
+				? t("hooks.use_rocket.updated")
+				: t("hooks.use_rocket.not_updated"),
 			requestSucceed
 		);
 		fetchRockets();
@@ -63,8 +69,8 @@ export const useRocket = (
 		const requestSucceed = await sendDeleteRocket(id);
 		setNotification.showNotification(
 			requestSucceed
-				? "Rocket deleted!"
-				: "Sorry, rocket could not be deleted!",
+				? t("hooks.use_rocket.deleted")
+				: t("hooks.use_rocket.not_deleted"),
 			requestSucceed
 		);
 		fetchRockets();

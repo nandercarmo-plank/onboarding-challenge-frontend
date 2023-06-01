@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 
+import { useTranslation } from "react-i18next";
 import { Crew } from "../../components/DataRenders/Crew/Crew";
 import { CrewForm } from "../../components/Forms/Crew/CrewForm";
 import { Modal } from "../../components/Modal/Modal";
@@ -9,6 +10,8 @@ import { useCrew } from "../../hooks/useCrew";
 import { ContentDiv, DataDiv, DataHeaderDiv } from "./styles/styles";
 
 export const CrewPage = () => {
+	const { t } = useTranslation();
+
 	const [isAddModalVisible, setAddModalVisibility] = useState(false);
 	const [crews, setCrews] = useCrew([]);
 
@@ -26,19 +29,19 @@ export const CrewPage = () => {
 			<Navbar />
 			<DataDiv>
 				<DataHeaderDiv>
-					<h1>Crews</h1>
+					<h1>{t("pages.entities_pages.crews.title")}</h1>
 					<a
 						href="#"
 						onClick={() => {
 							setAddModalVisibility(true);
 						}}
 					>
-						<h4>Add</h4>
+						<h4>{t("pages.entities_pages.add_button")}</h4>
 					</a>
 				</DataHeaderDiv>
 				<Crew crews={crews} setCrews={setCrews} />
 				<Modal
-					title="Add Crew"
+					title={t("pages.entities_pages.crews.add_modal_title")}
 					visible={isAddModalVisible}
 					setVisible={setAddModalVisibility}
 				>

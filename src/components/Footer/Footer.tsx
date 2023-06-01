@@ -1,4 +1,4 @@
-import { GitHub, LinkedIn, Wysiwyg } from "@mui/icons-material";
+import { GitHub, Language, LinkedIn, Wysiwyg } from "@mui/icons-material";
 import {
 	Box,
 	Container,
@@ -7,9 +7,15 @@ import {
 	Link,
 	Typography,
 } from "@mui/material";
+import { useTranslation } from "react-i18next";
 import { theme } from "../../styles/theme";
 
 export const Footer = () => {
+	const {
+		t,
+		i18n: { language, changeLanguage },
+	} = useTranslation();
+
 	return (
 		<Box
 			sx={{
@@ -32,7 +38,9 @@ export const Footer = () => {
 							}}
 							variant="subtitle1"
 						>
-							{`${new Date().getFullYear()} | Onboarding Challenge | Plank Fellowship Program`}
+							{`${new Date().getFullYear()} | Onboarding Challenge | ${t(
+								"components.footer.fellowship"
+							)}`}
 						</Typography>
 					</Grid>
 				</Grid>
@@ -68,6 +76,17 @@ export const Footer = () => {
 						rel="noopener noreferrer"
 					>
 						<LinkedIn />
+					</IconButton>
+					<IconButton
+						sx={{ color: theme.fontColor }}
+						component={Link}
+						href="#"
+						rel="noopener noreferrer"
+						onClick={() =>
+							changeLanguage(language === "en" ? "pt" : "en")
+						}
+					>
+						<Language />
 					</IconButton>
 				</Grid>
 			</Container>

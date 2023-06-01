@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import {
 	ICreateCrewmanDto,
 	ICrewmanDto,
@@ -26,6 +27,8 @@ export type IUseCrewman = {
 export const useCrewman = (
 	initState: ICrewmanDto[] = []
 ): [ICrewmanDto[], IUseCrewman] => {
+	const { t } = useTranslation();
+
 	const [dataIsLoad, setDataIsLoad] = useState(false);
 	const [crewmans, setCrewmans] = useState(initState);
 	const [, setNotification] = useNotification();
@@ -36,7 +39,10 @@ export const useCrewman = (
 			setCrewmans((await getCrewmans()).sort((a, b) => a.id - b.id));
 			setDataIsLoad(true);
 		} catch (err) {
-			setNotification.showNotification(`${err}`, false);
+			setNotification.showNotification(
+				t("hooks.use_crewman.not_fetched"),
+				false
+			);
 		}
 	};
 
@@ -44,8 +50,8 @@ export const useCrewman = (
 		const requestSucceed = await sendCreateCrewman(createCrewmanDto);
 		setNotification.showNotification(
 			requestSucceed
-				? "Crewman created!"
-				: "Sorry, crewman could not be created!",
+				? t("hooks.use_crewman.created")
+				: t("hooks.use_crewman.not_created"),
 			requestSucceed
 		);
 		fetchCrewmans();
@@ -58,8 +64,8 @@ export const useCrewman = (
 		const requestSucceed = await sendUpdateCrewman(id, updateCrewmanDto);
 		setNotification.showNotification(
 			requestSucceed
-				? "Crewman updated!"
-				: "Sorry, crewman could not be updated!",
+				? t("hooks.use_crewman.updated")
+				: t("hooks.use_crewman.not_updated"),
 			requestSucceed
 		);
 		fetchCrewmans();
@@ -69,8 +75,8 @@ export const useCrewman = (
 		const requestSucceed = await sendDeleteCrewman(id);
 		setNotification.showNotification(
 			requestSucceed
-				? "Crewman deleted!"
-				: "Sorry, crewman could not be deleted!",
+				? t("hooks.use_crewman.deleted")
+				: t("hooks.use_crewman.not_deleted"),
 			requestSucceed
 		);
 		fetchCrewmans();

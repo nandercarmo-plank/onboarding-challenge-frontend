@@ -1,4 +1,5 @@
 import { MouseEvent, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { ICrewmanDto, IUpdateCrewmanDto } from "../../../dto/CrewmanDto";
 import { IUseCrewman } from "../../../hooks/useCrewman";
 import { LoadingPage } from "../../../pages/LoadingPage/LoadingPage";
@@ -26,6 +27,8 @@ export const Crewman = ({
 	crewmans,
 	setCrewmans,
 }: ICrewmanProps) => {
+	const { t } = useTranslation();
+
 	const [isUpdateModalVisible, setUpdateModalVisibility] = useState(false);
 	const [isDataViewModalVisible, setDataViewModalVisible] = useState(false);
 	const [clickedCrewman, setClickedCrewman] = useState<ICrewmanDto>();
@@ -72,11 +75,20 @@ export const Crewman = ({
 								onClick={() => openDataViewModal(crewman)}
 							>
 								<ListItemData>
-									<strong>ID:</strong> {crewman.id}
+									<strong>
+										{t("components.data_renders.crewman.id")}:
+									</strong>{" "}
+									{crewman.id}
 									<br />
-									<strong>Name:</strong> {crewman.name}
+									<strong>
+										{t("components.data_renders.crewman.name")}:
+									</strong>{" "}
+									{crewman.name}
 									<br />
-									<strong>Patent:</strong> {crewman.patent}
+									<strong>
+										{t("components.data_renders.crewman.patent")}:
+									</strong>{" "}
+									{crewman.patent}
 								</ListItemData>
 								<ListItemImage>
 									{renderButtons && (
@@ -99,7 +111,7 @@ export const Crewman = ({
 					);
 				})}
 				<Modal
-					title="Update Crewman"
+					title={t("components.data_renders.crewman.update_modal_title")}
 					visible={isUpdateModalVisible}
 					setVisible={setUpdateModalVisibility}
 				>
@@ -110,17 +122,24 @@ export const Crewman = ({
 				</Modal>
 			</ListDiv>
 			<Modal
-				title="Crewman"
+				title={t("components.data_renders.crewman.data_view_modal_title")}
 				visible={isDataViewModalVisible}
 				setVisible={setDataViewModalVisible}
 				className="crewman-modal"
 			>
 				<ListItemData>
-					<strong>ID:</strong> {clickedCrewman?.id}
+					<strong>{t("components.data_renders.crewman.id")}:</strong>{" "}
+					{clickedCrewman?.id}
 					<br />
-					<strong>Name:</strong> {clickedCrewman?.name}
+					<strong>
+						{t("components.data_renders.crewman.name")}:
+					</strong>{" "}
+					{clickedCrewman?.name}
 					<br />
-					<strong>Patent:</strong> {clickedCrewman?.patent}
+					<strong>
+						{t("components.data_renders.crewman.patent")}:
+					</strong>{" "}
+					{clickedCrewman?.patent}
 				</ListItemData>
 			</Modal>
 		</ListItemContainerDiv>

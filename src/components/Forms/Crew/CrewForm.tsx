@@ -1,4 +1,5 @@
 import { useEffect, useState, type ChangeEvent, type FormEvent } from "react";
+import { useTranslation } from "react-i18next";
 import { type ICreateCrewDto, type ICrewDto } from "../../../dto/CrewDto";
 import {
 	StyledButton,
@@ -13,6 +14,8 @@ type CrewFormProps = {
 };
 
 export const CrewForm = ({ onSubmit, crew }: CrewFormProps) => {
+	const { t } = useTranslation();
+
 	const [name, setName] = useState<string>(crew?.name ?? "");
 	const [crewmans, setCrewmans] = useState<string>(
 		crew?.crewmans?.map((crewman) => crewman.id).join(", ") ?? ""
@@ -45,7 +48,7 @@ export const CrewForm = ({ onSubmit, crew }: CrewFormProps) => {
 
 	return (
 		<StyledForm onSubmit={handleOnSubmit}>
-			<StyledLabel>Name:</StyledLabel>
+			<StyledLabel>{t("components.forms.crew.name")}:</StyledLabel>
 			<StyledInput
 				type="text"
 				placeholder="Ex: Crew III"
@@ -53,7 +56,7 @@ export const CrewForm = ({ onSubmit, crew }: CrewFormProps) => {
 				onChange={handleOnChangeName}
 				required
 			/>
-			<StyledLabel>Crewmans:</StyledLabel>
+			<StyledLabel>{t("components.forms.crew.crewmans")}:</StyledLabel>
 			<StyledInput
 				type="text"
 				placeholder="Ex: 1, 2, 3"

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Crewman } from "../../components/DataRenders/Crewman/Crewman";
 import { CrewmanForm } from "../../components/Forms/Crewman/CrewmanForm";
 import { Modal } from "../../components/Modal/Modal";
@@ -8,6 +9,8 @@ import { useCrewman } from "../../hooks/useCrewman";
 import { ContentDiv, DataDiv, DataHeaderDiv } from "./styles/styles";
 
 export const CrewmanPage = () => {
+	const { t } = useTranslation();
+
 	const [isAddModalVisible, setAddModalVisibility] = useState(false);
 	const [crewmans, setCrewmans] = useCrewman([]);
 
@@ -25,14 +28,14 @@ export const CrewmanPage = () => {
 			<Navbar />
 			<DataDiv>
 				<DataHeaderDiv>
-					<h1>Crewmans</h1>
+					<h1>{t("pages.entities_pages.crewmans.title")}</h1>
 					<a href="#" onClick={() => setAddModalVisibility(true)}>
-						<h4>Add</h4>
+						<h4>{t("pages.entities_pages.add_button")}</h4>
 					</a>
 				</DataHeaderDiv>
 				<Crewman crewmans={crewmans} setCrewmans={setCrewmans} />
 				<Modal
-					title="Add Crewman"
+					title={t("pages.entities_pages.crewmans.add_modal_title")}
 					visible={isAddModalVisible}
 					setVisible={setAddModalVisibility}
 				>
