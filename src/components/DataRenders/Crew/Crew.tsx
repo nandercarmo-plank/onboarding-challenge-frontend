@@ -4,17 +4,11 @@ import { useTranslation } from "react-i18next";
 import { type ICrewDto, type IUpdateCrewDto } from "../../../dto/CrewDto";
 import { type IUseCrew } from "../../../hooks/useCrew";
 import { LoadingPage } from "../../../pages/LoadingPage/LoadingPage";
-import { deleteButton, editButton } from "../../../resources/images";
+import { deleteButton } from "../../../resources/images";
 import { CrewForm } from "../../Forms/Crew/CrewForm";
 import { Modal } from "../../Modal/Modal";
-import { Crewman } from "../Crewman/Crewman";
-import {
-	ListDiv,
-	ListItem,
-	ListItemContainerDiv,
-	ListItemData,
-	ListItemImage,
-} from "../styles/styles";
+import { ListDiv, ListItem, ListItemContainerDiv } from "../styles/styles";
+import { CrewData } from "./CrewData";
 
 type ICrewProps = {
 	isSubItem?: boolean;
@@ -33,7 +27,7 @@ export const Crew = ({
 
 	const [isUpdateModalVisible, setUpdateModalVisibility] = useState(false);
 	const [isDataViewModalVisible, setDataViewModalVisible] = useState(false);
-	const [clickedCrew, setClickedCrew] = useState<ICrewDto>();
+	const [clickedCrew, setClickedCrew] = useState<ICrewDto>(crews[0]);
 
 	const onSubmitUpdateForm = (updateCrewDto: IUpdateCrewDto) => {
 		if (setCrews != null) {
@@ -78,27 +72,11 @@ export const Crew = ({
 									openDataViewModal(crew);
 								}}
 							>
-								<ListItemData>
-									<strong>
-										{t("components.data_renders.crew.id")}:
-									</strong>{" "}
-									{crew.id}
-									<br />
-									<strong>
-										{t("components.data_renders.crew.name")}:
-									</strong>{" "}
-									{crew.name}
-								</ListItemData>
-								<ListItemImage>
-									{renderButtons && (
-										<img
-											src={editButton}
-											onClick={(event) => {
-												openUpdateCrewModal(event, crew);
-											}}
-										/>
-									)}
-								</ListItemImage>
+								<CrewData
+									crew={crew}
+									renderButtons={!isSubItem}
+									openUpdateCrewModal={openUpdateCrewModal}
+								/>
 							</ListItem>
 							{renderButtons && (
 								<img
@@ -125,29 +103,11 @@ export const Crew = ({
 				setVisible={setDataViewModalVisible}
 				className="crew-modal"
 			>
-				<ListItemData>
-					<strong>{t("components.data_renders.crew.id")}:</strong>{" "}
-					{clickedCrew?.id}
-					<br />
-					<strong>{t("components.data_renders.crew.name")}:</strong>{" "}
-					{clickedCrew?.name}
-					<br />
-					{clickedCrew?.crewmans?.length != null ? (
-						<>
-							<strong>
-								{t("components.data_renders.crew.crewmans")}:
-							</strong>
-							<br />
-							<Crewman
-								isSubItem={true}
-								renderButtons={false}
-								crewmans={clickedCrew?.crewmans}
-							/>
-						</>
-					) : (
-						<></>
-					)}
-				</ListItemData>
+				<CrewData
+					crew={clickedCrew}
+					renderButtons={false}
+					renderNestedData={true}
+				/>
 			</Modal>
 		</ListItemContainerDiv>
 	) : (

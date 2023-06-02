@@ -1,0 +1,66 @@
+import { MouseEvent } from "react";
+import { useTranslation } from "react-i18next";
+import { ICrewDto } from "../../../dto/CrewDto";
+import { editButton } from "../../../resources/images";
+import { Crewman } from "../Crewman/Crewman";
+import { ListItemData, ListItemImage } from "../styles/styles";
+
+type ICrewDataProps = {
+	crew: ICrewDto;
+	renderButtons: boolean;
+	renderNestedData?: boolean;
+	openUpdateCrewModal?: (
+		event: MouseEvent<HTMLImageElement>,
+		crew: ICrewDto
+	) => void;
+};
+
+export const CrewData = ({
+	crew,
+	renderButtons,
+	renderNestedData = false,
+	openUpdateCrewModal,
+}: ICrewDataProps) => {
+	const { t } = useTranslation();
+
+	const openModal = (event: MouseEvent<HTMLImageElement>, crew: ICrewDto) => {
+		if (openUpdateCrewModal) {
+			openUpdateCrewModal(event, crew);
+		}
+	};
+
+	return crew !== undefined ? (
+		<>
+			<ListItemData>
+				<strong>{t("components.data_renders.crew.id")}:</strong> {crew.id}
+				<br />
+				<strong>{t("components.data_renders.crew.name")}:</strong>{" "}
+				{crew.name}
+				{renderNestedData && crew?.crewmans?.length != null ? (
+					<>
+						<br />
+						<strong>{t("components.data_renders.crew.crewmans")}:</strong>
+						<br />
+						<Crewman
+							isSubItem={true}
+							renderButtons={false}
+							crewmans={crew?.crewmans}
+						/>
+					</>
+				) : (
+					<></>
+				)}
+			</ListItemData>
+			{renderButtons && (
+				<ListItemImage>
+					<img
+						src={editButton}
+						onClick={(event) => openModal(event, crew)}
+					/>
+				</ListItemImage>
+			)}
+		</>
+	) : (
+		<></>
+	);
+};

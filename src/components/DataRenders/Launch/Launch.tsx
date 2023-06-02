@@ -3,18 +3,11 @@ import { useTranslation } from "react-i18next";
 import { ILaunchDto, IUpdateLaunchDto } from "../../../dto/LaunchDto";
 import { IUseLaunch } from "../../../hooks/useLaunch";
 import { LoadingPage } from "../../../pages/LoadingPage/LoadingPage";
-import { deleteButton, editButton } from "../../../resources/images";
+import { deleteButton } from "../../../resources/images";
 import { LaunchForm } from "../../Forms/Launch/LaunchForm";
 import { Modal } from "../../Modal/Modal";
-import { Crew } from "../Crew/Crew";
-import { Rocket } from "../Rocket/Rocket";
-import {
-	ListDiv,
-	ListItem,
-	ListItemContainerDiv,
-	ListItemData,
-	ListItemImage,
-} from "../styles/styles";
+import { ListDiv, ListItem, ListItemContainerDiv } from "../styles/styles";
+import { LaunchData } from "./LaunchData";
 
 type ILaunchProps = {
 	isSubItem?: boolean;
@@ -33,7 +26,7 @@ export const Launch = ({
 
 	const [isUpdateModalVisible, setUpdateModalVisibility] = useState(false);
 	const [isDataViewModalVisible, setDataViewModalVisible] = useState(false);
-	const [clickedLaunch, setClickedLaunch] = useState<ILaunchDto>();
+	const [clickedLaunch, setClickedLaunch] = useState<ILaunchDto>(launchs[0]);
 
 	const onSubmitUpdateForm = async (updateLaunchDto: IUpdateLaunchDto) => {
 		if (setLaunchs) {
@@ -76,37 +69,11 @@ export const Launch = ({
 								}
 								onClick={() => openDataViewModal(launch)}
 							>
-								<ListItemData>
-									<strong>
-										{t("components.data_renders.launch.id")}:
-									</strong>{" "}
-									{launch.id}
-									<br />
-									<strong>
-										{t("components.data_renders.launch.launch_code")}:
-									</strong>{" "}
-									{launch.launchCode}
-									<br />
-									<strong>
-										{t("components.data_renders.launch.date")}:
-									</strong>{" "}
-									{launch.date}
-									<br />
-									<strong>
-										{t("components.data_renders.launch.success")}:
-									</strong>{" "}
-									{`${launch.success}`}
-								</ListItemData>
-								<ListItemImage>
-									{renderButtons && (
-										<img
-											src={editButton}
-											onClick={(event) =>
-												openUpdateLaunchModal(event, launch)
-											}
-										/>
-									)}
-								</ListItemImage>
+								<LaunchData
+									launch={launch}
+									renderButtons={!isSubItem}
+									openUpdateLaunchModal={openUpdateLaunchModal}
+								/>
 							</ListItem>
 							{renderButtons && (
 								<img
@@ -134,43 +101,11 @@ export const Launch = ({
 				setVisible={setDataViewModalVisible}
 				className="launch-modal"
 			>
-				<ListItemData>
-					<strong>{t("components.data_renders.launch.id")}:</strong>{" "}
-					{clickedLaunch?.id}
-					<br />
-					<strong>
-						{t("components.data_renders.launch.launch_code")}:
-					</strong>{" "}
-					{clickedLaunch?.launchCode}
-					<br />
-					<strong>{t("components.data_renders.launch.date")}:</strong>{" "}
-					{clickedLaunch?.date}
-					<br />
-					<strong>
-						{t("components.data_renders.launch.success")}:
-					</strong>{" "}
-					{`${clickedLaunch?.success}`}
-					<br />
-					<strong>{t("components.data_renders.launch.rocket")}:</strong>
-					<Rocket
-						isSubItem={true}
-						renderButtons={false}
-						rockets={clickedLaunch?.rocket ? [clickedLaunch?.rocket] : []}
-					/>
-					{clickedLaunch?.crew && (
-						<>
-							<br />
-							<strong>
-								{t("components.data_renders.launch.crew")}:
-							</strong>
-							<Crew
-								isSubItem={true}
-								renderButtons={false}
-								crews={[clickedLaunch?.crew]}
-							/>
-						</>
-					)}
-				</ListItemData>
+				<LaunchData
+					launch={clickedLaunch}
+					renderNestedData={true}
+					renderButtons={false}
+				/>
 			</Modal>
 		</ListItemContainerDiv>
 	) : (

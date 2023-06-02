@@ -3,16 +3,11 @@ import { useTranslation } from "react-i18next";
 import { ICrewmanDto, IUpdateCrewmanDto } from "../../../dto/CrewmanDto";
 import { IUseCrewman } from "../../../hooks/useCrewman";
 import { LoadingPage } from "../../../pages/LoadingPage/LoadingPage";
-import { deleteButton, editButton } from "../../../resources/images";
+import { deleteButton } from "../../../resources/images";
 import { CrewmanForm } from "../../Forms/Crewman/CrewmanForm";
 import { Modal } from "../../Modal/Modal";
-import {
-	ListDiv,
-	ListItem,
-	ListItemContainerDiv,
-	ListItemData,
-	ListItemImage,
-} from "../styles/styles";
+import { ListDiv, ListItem, ListItemContainerDiv } from "../styles/styles";
+import { CrewmanData } from "./CrewmanData";
 
 type ICrewmanProps = {
 	isSubItem?: boolean;
@@ -31,7 +26,9 @@ export const Crewman = ({
 
 	const [isUpdateModalVisible, setUpdateModalVisibility] = useState(false);
 	const [isDataViewModalVisible, setDataViewModalVisible] = useState(false);
-	const [clickedCrewman, setClickedCrewman] = useState<ICrewmanDto>();
+	const [clickedCrewman, setClickedCrewman] = useState<ICrewmanDto>(
+		crewmans[0]
+	);
 
 	const onSubmitUpdateForm = async (updateCrewmanDto: IUpdateCrewmanDto) => {
 		if (setCrewmans) {
@@ -74,32 +71,11 @@ export const Crewman = ({
 								}
 								onClick={() => openDataViewModal(crewman)}
 							>
-								<ListItemData>
-									<strong>
-										{t("components.data_renders.crewman.id")}:
-									</strong>{" "}
-									{crewman.id}
-									<br />
-									<strong>
-										{t("components.data_renders.crewman.name")}:
-									</strong>{" "}
-									{crewman.name}
-									<br />
-									<strong>
-										{t("components.data_renders.crewman.patent")}:
-									</strong>{" "}
-									{crewman.patent}
-								</ListItemData>
-								<ListItemImage>
-									{renderButtons && (
-										<img
-											src={editButton}
-											onClick={(event) =>
-												openUpdateCrewmanModal(event, crewman)
-											}
-										/>
-									)}
-								</ListItemImage>
+								<CrewmanData
+									crewman={crewman}
+									renderButtons={!isSubItem}
+									openUpdateCrewmanModal={openUpdateCrewmanModal}
+								/>
 							</ListItem>
 							{renderButtons && (
 								<img
@@ -127,20 +103,7 @@ export const Crewman = ({
 				setVisible={setDataViewModalVisible}
 				className="crewman-modal"
 			>
-				<ListItemData>
-					<strong>{t("components.data_renders.crewman.id")}:</strong>{" "}
-					{clickedCrewman?.id}
-					<br />
-					<strong>
-						{t("components.data_renders.crewman.name")}:
-					</strong>{" "}
-					{clickedCrewman?.name}
-					<br />
-					<strong>
-						{t("components.data_renders.crewman.patent")}:
-					</strong>{" "}
-					{clickedCrewman?.patent}
-				</ListItemData>
+				<CrewmanData crewman={clickedCrewman} renderButtons={false} />
 			</Modal>
 		</ListItemContainerDiv>
 	) : (
