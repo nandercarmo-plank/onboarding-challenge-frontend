@@ -31,7 +31,7 @@ export const RocketData = ({
 
 	return rocket !== undefined ? (
 		<>
-			<ListItemData>
+			<ListItemData className="rocket-data-div">
 				<strong>{t("components.data_renders.rocket.id")}:</strong>{" "}
 				{rocket.id}
 				<br />
@@ -41,6 +41,7 @@ export const RocketData = ({
 			{renderButtons && (
 				<ListItemImage>
 					<img
+						className="edit-button"
 						src={editButton}
 						onClick={(event) => openModal(event, rocket)}
 					/>

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
+	crewButton,
 	crewmanButton,
 	launchButton,
 	rocketButton,
@@ -32,19 +33,19 @@ export const HomePage = () => {
 				</h1>
 			</HomeLogoDiv>
 			<HomeCardsContainerDiv>
-				<HomeCard to="/rocket">
+				<HomeCard id="rocket-card" to="/rocket">
 					<img src={rocketButton} />
 					<h4>{t("pages.home.rocketCard")}</h4>
 				</HomeCard>
-				<HomeCard to="/crewman">
+				<HomeCard id="crewman-card" to="/crewman">
 					<img src={crewmanButton} />
 					<h4>{t("pages.home.crewmanCard")}</h4>
 				</HomeCard>
-				<HomeCard to="/crewman">
-					<img src={crewmanButton} />
+				<HomeCard id="crew-card" to="/crew">
+					<img src={crewButton} />
 					<h4>{t("pages.home.crewCard")}</h4>
 				</HomeCard>
-				<HomeCard to="/launch">
+				<HomeCard id="launch-card" to="/launch">
 					<img src={launchButton} />
 					<h4>{t("pages.home.launchCard")}</h4>
 				</HomeCard>

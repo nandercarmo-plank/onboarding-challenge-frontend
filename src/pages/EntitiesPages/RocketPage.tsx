@@ -29,7 +29,11 @@ export const RocketPage = () => {
 			<DataDiv>
 				<DataHeaderDiv>
 					<h1>{t("pages.entities_pages.rockets.title")}</h1>
-					<a href="#" onClick={() => setAddModalVisibility(true)}>
+					<a
+						className="add-rocket-btn"
+						href="#"
+						onClick={() => setAddModalVisibility(true)}
+					>
 						<h4>{t("pages.entities_pages.add_button")}</h4>
 					</a>
 				</DataHeaderDiv>

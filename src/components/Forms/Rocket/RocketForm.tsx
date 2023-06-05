@@ -34,16 +34,17 @@ export const RocketForm = ({ onSubmit, rocket }: RocketFormProps) => {
 	}, [rocket]);
 
 	return (
-		<StyledForm onSubmit={handleOnSubmit}>
+		<StyledForm className="rocket-form" onSubmit={handleOnSubmit}>
 			<StyledLabel>{t("components.forms.rocket.name")}:</StyledLabel>
 			<StyledInput
+				className="input-name"
 				type="text"
 				placeholder="Ex: Rocket I"
 				value={name}
 				onChange={handleOnChange}
 				required
 			/>
-			<StyledButton type="submit">
+			<StyledButton className="button-rocket-form" type="submit">
 				<h4>Ok</h4>
 			</StyledButton>
 		</StyledForm>

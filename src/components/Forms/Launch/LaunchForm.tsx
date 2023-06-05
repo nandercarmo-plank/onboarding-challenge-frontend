@@ -68,9 +68,10 @@ export const LaunchForm = ({ onSubmit, launch }: LaunchFormProps) => {
 	}, [launch]);
 
 	return (
-		<StyledForm onSubmit={handleOnSubmit}>
+		<StyledForm className="launch-form" onSubmit={handleOnSubmit}>
 			<StyledLabel>{t("components.forms.launch.launch_code")}:</StyledLabel>
 			<StyledInput
+				className="input-launch_code"
 				type="text"
 				placeholder="Ex: Launch IV"
 				value={launchCode}
@@ -79,6 +80,7 @@ export const LaunchForm = ({ onSubmit, launch }: LaunchFormProps) => {
 			/>
 			<StyledLabel>{t("components.forms.launch.date")}:</StyledLabel>
 			<StyledInput
+				className="input-date"
 				type="date"
 				value={date}
 				onChange={handleOnChangeDate}
@@ -86,6 +88,7 @@ export const LaunchForm = ({ onSubmit, launch }: LaunchFormProps) => {
 			/>
 			<StyledLabel>{t("components.forms.launch.success")}:</StyledLabel>
 			<StyledSelect
+				className="input-success"
 				required
 				value={success ? "true" : "false"}
 				onChange={handleOnChangeSuccess}
@@ -99,6 +102,7 @@ export const LaunchForm = ({ onSubmit, launch }: LaunchFormProps) => {
 			</StyledSelect>
 			<StyledLabel>{t("components.forms.launch.rocket")}:</StyledLabel>
 			<StyledInput
+				className="input-rocket_id"
 				type="number"
 				placeholder="Ex: 1"
 				value={rocketId}
@@ -107,12 +111,13 @@ export const LaunchForm = ({ onSubmit, launch }: LaunchFormProps) => {
 			/>
 			<StyledLabel>{t("components.forms.launch.crew")}:</StyledLabel>
 			<StyledInput
+				className="input-crew_id"
 				type="number"
 				placeholder="Ex: 2"
 				value={crewId}
 				onChange={handleOnChangeCrewId}
 			/>
-			<StyledButton type="submit">
+			<StyledButton className="button-launch-form" type="submit">
 				<h4>Ok</h4>
 			</StyledButton>
 		</StyledForm>

@@ -43,9 +43,10 @@ export const CrewmanForm = ({ onSubmit, crewman }: CrewmanFormProps) => {
 	}, [crewman]);
 
 	return (
-		<StyledForm onSubmit={handleOnSubmit}>
+		<StyledForm className="crewman-form" onSubmit={handleOnSubmit}>
 			<StyledLabel>{t("components.forms.crewman.name")}:</StyledLabel>
 			<StyledInput
+				className="input-name"
 				type="text"
 				placeholder="Ex: Crewman II"
 				value={name}
@@ -54,13 +55,14 @@ export const CrewmanForm = ({ onSubmit, crewman }: CrewmanFormProps) => {
 			></StyledInput>
 			<StyledLabel>{t("components.forms.crewman.patent")}:</StyledLabel>
 			<StyledInput
+				className="input-patent"
 				type="text"
 				placeholder="Ex: Captain"
 				value={patent}
 				onChange={handleOnChangePatent}
 				required
 			></StyledInput>
-			<StyledButton type="submit">
+			<StyledButton className="button-crewman-form" type="submit">
 				<h4>Ok</h4>
 			</StyledButton>
 		</StyledForm>

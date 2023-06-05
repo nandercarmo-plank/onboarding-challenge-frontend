@@ -21,9 +21,13 @@ function App() {
 					<Routes>
 						<Route path="/" Component={HomePage} />
 						<Route path="/rocket" Component={RocketPage} />
+						<Route path="/rockets" Component={RocketPage} />
 						<Route path="/crewman" Component={CrewmanPage} />
+						<Route path="/crewmans" Component={CrewmanPage} />
 						<Route path="/crew" Component={CrewPage} />
+						<Route path="/crews" Component={CrewPage} />
 						<Route path="/launch" Component={LaunchPage} />
+						<Route path="/launchs" Component={LaunchPage} />
 						<Route path="*" Component={NotFoundPage} />
 					</Routes>
 					<Footer />

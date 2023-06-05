@@ -59,10 +59,13 @@ export const Rocket = ({
 
 	return setRockets == undefined || setRockets.isDataLoaded() ? (
 		<ListItemContainerDiv>
-			<ListDiv>
+			<ListDiv className="div-data-list">
 				{rockets.map((rocket) => {
 					return (
-						<ListItemContainerDiv key={rocket.id}>
+						<ListItemContainerDiv
+							className="div-list-item"
+							key={rocket.id}
+						>
 							<ListItem
 								className={
 									isSubItem ? "sub-list-item" : "rocket list-item"
@@ -77,6 +80,7 @@ export const Rocket = ({
 							</ListItem>
 							{renderButtons && (
 								<img
+									className="delete-button"
 									src={deleteButton}
 									onClick={() => onDeleteRocket(rocket.id)}
 								/>
@@ -99,7 +103,6 @@ export const Rocket = ({
 				title={t("components.data_renders.rocket.data_view_modal_title")}
 				visible={isDataViewModalVisible}
 				setVisible={setDataViewModalVisible}
-				className="rocket-modal"
 			>
 				<RocketData rocket={clickedRocket} renderButtons={false} />
 			</Modal>

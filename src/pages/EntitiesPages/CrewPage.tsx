@@ -31,6 +31,7 @@ export const CrewPage = () => {
 				<DataHeaderDiv>
 					<h1>{t("pages.entities_pages.crews.title")}</h1>
 					<a
+						className="add-crew-btn"
 						href="#"
 						onClick={() => {
 							setAddModalVisibility(true);

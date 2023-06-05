@@ -1,4 +1,7 @@
 /*.js
+/*.config.ts
 node_modules
 public
 dist
+test
+cypress

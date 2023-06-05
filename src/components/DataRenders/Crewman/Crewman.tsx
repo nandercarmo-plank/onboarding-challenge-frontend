@@ -61,10 +61,13 @@ export const Crewman = ({
 
 	return setCrewmans == undefined || setCrewmans.isDataLoaded() ? (
 		<ListItemContainerDiv>
-			<ListDiv>
+			<ListDiv className="div-data-list">
 				{crewmans.map((crewman) => {
 					return (
-						<ListItemContainerDiv key={crewman.id}>
+						<ListItemContainerDiv
+							className="div-list-item"
+							key={crewman.id}
+						>
 							<ListItem
 								className={
 									isSubItem ? "sub-list-item" : "crewman list-item"
@@ -79,6 +82,7 @@ export const Crewman = ({
 							</ListItem>
 							{renderButtons && (
 								<img
+									className="delete-button"
 									src={deleteButton}
 									onClick={() => onDeleteCrewman(crewman.id)}
 								/>

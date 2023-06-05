@@ -59,10 +59,13 @@ export const Launch = ({
 
 	return setLaunchs == undefined || setLaunchs.isDataLoaded() ? (
 		<ListItemContainerDiv>
-			<ListDiv>
+			<ListDiv className="div-data-list">
 				{launchs.map((launch) => {
 					return (
-						<ListItemContainerDiv key={launch.id}>
+						<ListItemContainerDiv
+							className="div-list-item"
+							key={launch.id}
+						>
 							<ListItem
 								className={
 									isSubItem ? "sub-list-item" : "launch list-item"
@@ -77,6 +80,7 @@ export const Launch = ({
 							</ListItem>
 							{renderButtons && (
 								<img
+									className="delete-button"
 									src={deleteButton}
 									onClick={() => onDeleteLaunch(launch.id)}
 								/>

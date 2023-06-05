@@ -31,7 +31,7 @@ export const CrewmanData = ({
 
 	return crewman !== undefined ? (
 		<>
-			<ListItemData>
+			<ListItemData className="crewman-data-div">
 				<strong>{t("components.data_renders.crewman.id")}:</strong>{" "}
 				{crewman.id}
 				<br />
@@ -44,6 +44,7 @@ export const CrewmanData = ({
 			{renderButtons && (
 				<ListItemImage>
 					<img
+						className="edit-button"
 						src={editButton}
 						onClick={(event) => openModal(event, crewman)}
 					/>

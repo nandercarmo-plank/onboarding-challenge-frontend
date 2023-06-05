@@ -21,8 +21,8 @@ export const Modal = ({
 	title,
 	className,
 }: ModalProps) => {
-	return (
-		<ModalDiv style={{ visibility: visible ? "visible" : "hidden" }}>
+	return visible ? (
+		<ModalDiv className="modal-div">
 			<ModalContentDiv className={className}>
 				<ModalHeaderDiv>
 					<h2>{title}</h2>
@@ -33,5 +33,7 @@ export const Modal = ({
 				{children}
 			</ModalContentDiv>
 		</ModalDiv>
+	) : (
+		<></>
 	);
 };

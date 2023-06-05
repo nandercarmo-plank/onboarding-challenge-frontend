@@ -35,7 +35,7 @@ export const LaunchData = ({
 
 	return launch !== undefined ? (
 		<>
-			<ListItemData>
+			<ListItemData className="launch-data-div">
 				<strong>{t("components.data_renders.launch.id")}:</strong>{" "}
 				{launch.id}
 				<br />
@@ -50,13 +50,15 @@ export const LaunchData = ({
 				<strong>{t("components.data_renders.launch.success")}:</strong>{" "}
 				{`${launch.success}`}
 				<br />
-				<strong>{t("components.data_renders.launch.rocket")}:</strong>
 				{renderNestedData && (
-					<Rocket
-						isSubItem={true}
-						renderButtons={false}
-						rockets={launch?.rocket ? [launch?.rocket] : []}
-					/>
+					<>
+						<strong>{t("components.data_renders.launch.rocket")}:</strong>
+						<Rocket
+							isSubItem={true}
+							renderButtons={false}
+							rockets={launch?.rocket ? [launch?.rocket] : []}
+						/>
+					</>
 				)}
 				{renderNestedData && launch?.crew && (
 					<>
@@ -73,6 +75,7 @@ export const LaunchData = ({
 			{renderButtons && (
 				<ListItemImage>
 					<img
+						className="edit-button"
 						src={editButton}
 						onClick={(event) => openModal(event, launch)}
 					/>
