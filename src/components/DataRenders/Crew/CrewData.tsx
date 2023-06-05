@@ -29,6 +29,11 @@ export const CrewData = ({
 		}
 	};
 
+	const shouldRenderCrewmans =
+		renderNestedData &&
+		crew?.crewmans?.length != null &&
+		crew.crewmans.length > 0;
+
 	return crew !== undefined ? (
 		<>
 			<ListItemData className="crew-data-div">
@@ -36,7 +41,7 @@ export const CrewData = ({
 				<br />
 				<strong>{t("components.data_renders.crew.name")}:</strong>{" "}
 				{crew.name}
-				{renderNestedData && crew?.crewmans?.length != null ? (
+				{shouldRenderCrewmans ? (
 					<>
 						<br />
 						<strong>{t("components.data_renders.crew.crewmans")}:</strong>
@@ -44,7 +49,7 @@ export const CrewData = ({
 						<Crewman
 							isSubItem={true}
 							renderButtons={false}
-							crewmans={crew?.crewmans}
+							crewmans={crew?.crewmans ?? []}
 						/>
 					</>
 				) : (

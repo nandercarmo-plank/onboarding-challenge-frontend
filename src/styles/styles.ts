@@ -2,6 +2,8 @@ import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyle = createGlobalStyle`
 
+	@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
 	* {
 		font-family: 'Courier New', Courier, monospace;
 	}
@@ -46,5 +48,4 @@ export const GlobalStyle = createGlobalStyle`
 		font-size: 14px;
 		width: 100%;
 	}
-
 `;

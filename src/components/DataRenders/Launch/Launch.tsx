@@ -9,7 +9,7 @@ import { Modal } from "../../Modal/Modal";
 import { ListDiv, ListItem, ListItemContainerDiv } from "../styles/styles";
 import { LaunchData } from "./LaunchData";
 
-type ILaunchProps = {
+export type LaunchProps = {
 	isSubItem?: boolean;
 	renderButtons?: boolean;
 	launchs: ILaunchDto[];
@@ -21,7 +21,7 @@ export const Launch = ({
 	renderButtons = true,
 	launchs,
 	setLaunchs,
-}: ILaunchProps) => {
+}: LaunchProps) => {
 	const { t } = useTranslation();
 
 	const [isUpdateModalVisible, setUpdateModalVisibility] = useState(false);
@@ -74,11 +74,11 @@ export const Launch = ({
 							>
 								<LaunchData
 									launch={launch}
-									renderButtons={!isSubItem}
+									renderButtons={!isSubItem && renderButtons}
 									openUpdateLaunchModal={openUpdateLaunchModal}
 								/>
 							</ListItem>
-							{renderButtons && (
+							{!isSubItem && renderButtons && (
 								<img
 									className="delete-button"
 									src={deleteButton}

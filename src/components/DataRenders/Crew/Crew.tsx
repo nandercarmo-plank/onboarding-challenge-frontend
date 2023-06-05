@@ -10,7 +10,7 @@ import { Modal } from "../../Modal/Modal";
 import { ListDiv, ListItem, ListItemContainerDiv } from "../styles/styles";
 import { CrewData } from "./CrewData";
 
-type ICrewProps = {
+export type CrewProps = {
 	isSubItem?: boolean;
 	renderButtons?: boolean;
 	crews: ICrewDto[];
@@ -22,7 +22,7 @@ export const Crew = ({
 	renderButtons = true,
 	crews,
 	setCrews,
-}: ICrewProps) => {
+}: CrewProps) => {
 	const { t } = useTranslation();
 
 	const [isUpdateModalVisible, setUpdateModalVisibility] = useState(false);
@@ -74,11 +74,11 @@ export const Crew = ({
 							>
 								<CrewData
 									crew={crew}
-									renderButtons={!isSubItem}
+									renderButtons={!isSubItem && renderButtons}
 									openUpdateCrewModal={openUpdateCrewModal}
 								/>
 							</ListItem>
-							{renderButtons && (
+							{!isSubItem && renderButtons && (
 								<img
 									className="delete-button"
 									src={deleteButton}

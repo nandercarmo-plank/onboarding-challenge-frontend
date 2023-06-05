@@ -1,20 +1,26 @@
-import { useNotification } from "../../hooks/useNotification";
 import { NotificationDiv } from "./styles/styles";
 
-export const Notification = () => {
-	const [notification, notificationActions] = useNotification();
+export type NotificationProps = {
+	visible: boolean;
+	type: string;
+	message: string;
+	hideFunction: () => void;
+};
+
+export const Notification = ({
+	visible,
+	type,
+	message,
+	hideFunction,
+}: NotificationProps) => {
 	const style = {
-		visible: notification.show ? "visible" : "hidden",
-		top: notification.show ? "0px" : "-100%",
+		visible: visible ? "visible" : "hidden",
+		top: visible ? "0px" : "-100%",
 	};
 
 	return (
-		<NotificationDiv
-			className={notification.type}
-			style={style}
-			onClick={notificationActions.hideNotification}
-		>
-			{notification.message}
+		<NotificationDiv className={type} style={style} onClick={hideFunction}>
+			{message}
 		</NotificationDiv>
 	);
 };

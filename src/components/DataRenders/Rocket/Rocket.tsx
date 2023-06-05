@@ -9,7 +9,7 @@ import { Modal } from "../../Modal/Modal";
 import { ListDiv, ListItem, ListItemContainerDiv } from "../styles/styles";
 import { RocketData } from "./RocketData";
 
-type IRocketProps = {
+export type RocketProps = {
 	isSubItem?: boolean;
 	renderButtons?: boolean;
 	rockets: IRocketDto[];
@@ -21,7 +21,7 @@ export const Rocket = ({
 	renderButtons = true,
 	rockets,
 	setRockets,
-}: IRocketProps) => {
+}: RocketProps) => {
 	const { t } = useTranslation();
 
 	const [isUpdateModalVisible, setUpdateModalVisibility] = useState(false);
@@ -74,11 +74,11 @@ export const Rocket = ({
 							>
 								<RocketData
 									rocket={rocket}
-									renderButtons={!isSubItem}
+									renderButtons={!isSubItem && renderButtons}
 									openUpdateRocketModal={openUpdateRocketModal}
 								/>
 							</ListItem>
-							{renderButtons && (
+							{!isSubItem && renderButtons && (
 								<img
 									className="delete-button"
 									src={deleteButton}
@@ -103,6 +103,7 @@ export const Rocket = ({
 				title={t("components.data_renders.rocket.data_view_modal_title")}
 				visible={isDataViewModalVisible}
 				setVisible={setDataViewModalVisible}
+				className="rocket-modal"
 			>
 				<RocketData rocket={clickedRocket} renderButtons={false} />
 			</Modal>

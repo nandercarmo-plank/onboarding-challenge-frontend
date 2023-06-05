@@ -6,7 +6,7 @@ import {
 	StyledSpan,
 } from "./styles/styles";
 
-type ModalProps = {
+export type ModalProps = {
 	children: ReactNode;
 	visible?: boolean;
 	setVisible: React.Dispatch<SetStateAction<boolean>>;
