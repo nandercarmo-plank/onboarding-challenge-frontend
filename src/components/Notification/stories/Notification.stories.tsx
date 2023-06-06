@@ -39,7 +39,7 @@ export const SuccessNotification = {
 		type: SUCCESS_NOTIFICATION,
 		message: "Success notification",
 		hideFunction: () => {
-			console.log("Success notification");
+			return;
 		},
 	},
 };
@@ -50,7 +50,7 @@ export const ErrorNotification = {
 		type: ERROR_NOTIFICATION,
 		message: "Error notification",
 		hideFunction: () => {
-			console.log("Error notification");
+			return;
 		},
 	},
 };

@@ -44,7 +44,7 @@ export const Rocket: StoryObj<ModalProps> = {
 		children: (
 			<RocketForm
 				onSubmit={() => {
-					console.log("RocketModal");
+					return;
 				}}
 			/>
 		),
@@ -58,7 +58,7 @@ export const Crew: StoryObj<ModalProps> = {
 		children: (
 			<CrewForm
 				onSubmit={() => {
-					console.log("CrewModal");
+					return;
 				}}
 			/>
 		),
@@ -72,7 +72,7 @@ export const Crewman: StoryObj<ModalProps> = {
 		children: (
 			<CrewmanForm
 				onSubmit={() => {
-					console.log("CrewmanModal");
+					return;
 				}}
 			/>
 		),
@@ -86,7 +86,7 @@ export const Launch: StoryObj<ModalProps> = {
 		children: (
 			<LaunchForm
 				onSubmit={() => {
-					console.log("LaunchModal");
+					return;
 				}}
 			/>
 		),
