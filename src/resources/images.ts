@@ -4,11 +4,13 @@ import deleteButton from "./assets/delete-button.svg";
 import editButton from "./assets/edit-button.svg";
 import homeButton from "./assets/home-button.svg";
 import launchButton from "./assets/launch-button.svg";
+import logoOpacity from "./assets/pixel-rocket-opacity.png";
 import logo from "./assets/pixel-rocket.png";
 import rocketButton from "./assets/rocket-button.svg";
 
 export {
 	logo,
+	logoOpacity,
 	homeButton,
 	rocketButton,
 	crewmanButton,

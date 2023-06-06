@@ -75,6 +75,8 @@ To use the Rocket Launch Control System, follow the steps outlined below:
 
 The project includes several scripts that you can use during development:
 
+- `build`: Build the project to production using Vite.
+
 - `dev`: Starts the development server using Vite.
 
 - `tests`: Runs tests using Jest.

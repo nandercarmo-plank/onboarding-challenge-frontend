@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { styled } from "styled-components";
+import { logoOpacity } from "../../../resources/images";
 
 export const HomeContentDiv = styled.div`
 	display: flex;
@@ -18,7 +19,7 @@ export const HomeLogoDiv = styled.div`
 	align-items: center;
 	text-align: center;
 	margin: 50px 0px 0px 0px;
-	background-image: url("src/resources/assets/pixel-rocket-opacity.png");
+	background-image: url(${logoOpacity});
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: contain;
