@@ -13,7 +13,9 @@
 
 The Rocket Launch Control System is a project designed during the Plank Fellowship Program to emulate the control and management of rocket launches. It provides functionality for handling rockets, launches, crews, and crew members. This system aims to simulate the various aspects involved in preparing and executing a rocket launch.
 
-![Gif exemplifying the rocket launch system](./docs/gif.gif)
+You can try it here: [Onboarding Challenge](https://onboarding-challenge-frontend.vercel.app)
+
+[![Gif exemplifying the rocket launch system](./docs/gif.gif)](https://onboarding-challenge-frontend.vercel.app)
 
 ## Features
 
