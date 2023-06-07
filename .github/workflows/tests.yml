@@ -1,7 +1,7 @@
-name: End-to-end tests
+name: Run tests
 on: push
 jobs:
-   cypress-run:
+   deploy-prod:
       runs-on: ubuntu-22.04
       steps:
          - name: Checkout
@@ -12,11 +12,14 @@ jobs:
            with:
               node-version: 18
 
-         - name: Install dependencies
+         - name: Install Dependencies
            run: npm cache clean --force && rm -rf node_modules && npm install
 
-         - name: Build production
+         - name: Build Production
            run: npm run build
+
+         - name: Unit Tests
+           run: npm run tests
 
          - name: E2E Tests
            run: npm run cypress:dev
