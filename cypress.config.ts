@@ -13,4 +13,7 @@ export default defineConfig({
 			bundler: "vite",
 		},
 	},
+	requestTimeout: 60000,
+	responseTimeout: 60000,
+	defaultCommandTimeout: 60000,
 });
