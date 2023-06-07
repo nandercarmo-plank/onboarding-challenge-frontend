@@ -5,12 +5,13 @@
 	"type": "module",
 	"scripts": {
 		"build": "vite build",
+		"prod": "vite ",
 		"dev": "vite",
 		"tests": "jest",
 		"tests-watch": "jest --watchAll",
 		"lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
 		"storybook": "storybook dev -p 6006",
-		"cypress:dev": "concurrently --kill-others --success \"last\" \"vite\" \"cypress run\"",
+		"cypress:dev": "vite build && concurrently --kill-others --kill-signal SIGTERM --success \"last\" \"vite preview\" \"cypress run --env baseUrl=\"http://localhost:4173\"\"",
 		"cypress:prod": "npm run cypress:run -- --env baseUrl=\"https://onboarding-challenge-frontend.vercel.app\" --spec \"cypress/e2e/**/*.cy.tsx\""
 	},
 	"dependencies": {
