@@ -18,8 +18,5 @@ jobs:
          - name: Build production
            run: npm run build
 
-         - name: Launch Application
-           run: npm run preview
-
          - name: E2E Tests
            run: npm run cypress:dev
