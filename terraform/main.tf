@@ -11,6 +11,6 @@ resource "vercel_project" "frontend_vercel_deploy" {
   name      = "onboarding-challenge-frontend"
   git_repository = {
     type = "github"
-    repo = "nandercarmo-plank/onboarding-challenge-frontend" 
+    repo = "nandercarmo-plank/onboarding-challenge-frontend"  
   }
 }
