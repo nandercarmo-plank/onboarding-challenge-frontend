@@ -9,7 +9,9 @@
 		"tests": "jest",
 		"tests-watch": "jest --watchAll",
 		"lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-		"storybook": "storybook dev -p 6006"
+		"storybook": "storybook dev -p 6006",
+		"cypress:dev": "concurrently --kill-others --success \"last\" \"vite\" \"cypress run\"",
+		"cypress:prod": "npm run cypress:run -- --env baseUrl=\"https://onboarding-challenge-frontend.vercel.app\" --spec \"cypress/e2e/**/*.cy.tsx\""
 	},
 	"dependencies": {
 		"@mui/icons-material": "^5.11.16",
@@ -41,6 +43,7 @@
 		"@typescript-eslint/eslint-plugin": "^5.59.8",
 		"@typescript-eslint/parser": "^5.59.8",
 		"@vitejs/plugin-react": "^4.0.0",
+		"concurrently": "^8.1.0",
 		"cypress": "^12.13.0",
 		"eslint": "^8.41.0",
 		"eslint-config-prettier": "^8.8.0",
