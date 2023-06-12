@@ -1,6 +1,6 @@
 export const theme = {
 	fontColor: "#333",
-	backgroundPrimary: "#fff",
+	backgroundPrimary: "#f4f",
 	backgroundSecondary: "#eee",
 	borderRadius: "10px",
 	rocketColor: "#bbddff",
